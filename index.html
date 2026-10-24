@@ -1,0 +1,1890 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Durchschaut! – Wie funktioniert Werbung?</title>
+<meta name="description" content="Interaktive Lernplattform für die Sekundarstufe II: Vom Marketing-Mix zu den Mechanismen der Werbung – Preispsychologie, Supermarkt-Tricks, Dark Patterns und Nudging.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F1EA; --surface:#FFFFFF; --surface-2:#EDE7DC; --ink:#1B1A1F; --muted:#5D5866; --line:#D9D1C3;
+  --red:#D7261E; --red-soft:#FBE3DF; --yellow:#FFD23F; --yellow-soft:#FFF4CC;
+  --teal:#176B73; --teal-soft:#DDF0EF; --green:#2E7D32; --green-soft:#E3F2E1; --violet:#5B3FA8; --violet-soft:#ECE6FA;
+  --shadow:0 1px 2px rgba(27,26,31,.06),0 6px 20px rgba(27,26,31,.07);
+  --radius:14px; --font-head:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#141318; --surface:#1E1D24; --surface-2:#2A2832; --ink:#EEEAF3; --muted:#A9A3B4; --line:#3A3744;
+    --red:#FF5A4E; --red-soft:#3A1F1E; --yellow:#FFD23F; --yellow-soft:#3A3318;
+    --teal:#5BC3C9; --teal-soft:#16302F; --green:#7CCB80; --green-soft:#1B2E1C; --violet:#A893F0; --violet-soft:#29233F;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 20px rgba(0,0,0,.35); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141318; --surface:#1E1D24; --surface-2:#2A2832; --ink:#EEEAF3; --muted:#A9A3B4; --line:#3A3744;
+  --red:#FF5A4E; --red-soft:#3A1F1E; --yellow:#FFD23F; --yellow-soft:#3A3318;
+  --teal:#5BC3C9; --teal-soft:#16302F; --green:#7CCB80; --green-soft:#1B2E1C; --violet:#A893F0; --violet-soft:#29233F;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 20px rgba(0,0,0,.35); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--font-head);line-height:1.15;margin:0 0 .5em;letter-spacing:-.01em}
+h2{font-size:clamp(1.7rem,3.6vw,2.5rem);font-weight:900}
+h3{font-size:1.35rem;font-weight:800;margin-top:1.8em}
+h4{font-size:1.05rem;font-weight:700}
+p{margin:0 0 1em}
+a{color:var(--teal)}
+button{font:inherit;cursor:pointer}
+input,select,textarea{font:inherit;color:inherit}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ---------- Header ---------- */
+.topbar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:10px 16px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-family:var(--font-head);font-weight:900;font-size:1.15rem;white-space:nowrap}
+.brand-tag{display:inline-block;background:var(--red);color:#fff;padding:2px 10px 2px 14px;border-radius:4px 10px 10px 4px;position:relative;transform:rotate(-3deg)}
+.brand-tag:before{content:"";position:absolute;left:5px;top:50%;width:5px;height:5px;margin-top:-2.5px;border-radius:50%;background:var(--paper)}
+.brand small{font-weight:600;color:var(--muted);font-family:var(--font-body);font-size:.85rem}
+.progress-wrap{flex:1;display:flex;align-items:center;gap:10px;min-width:0}
+.progress{flex:1;height:8px;background:var(--surface-2);border-radius:99px;overflow:hidden}
+.progress>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--green));transition:width .5s}
+.progress-label{font-size:.85rem;color:var(--muted);white-space:nowrap}
+.icon-btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:6px 10px;font-size:.9rem}
+.menu-btn{display:none}
+
+/* ---------- Layout ---------- */
+.layout{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:280px minmax(0,1fr);gap:32px;padding:0 16px}
+.sidebar{position:sticky;top:64px;align-self:start;max-height:calc(100vh - 70px);overflow:auto;padding:22px 0 30px}
+.sidebar ol{list-style:none;margin:0;padding:0}
+.sidebar a{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border-radius:10px;text-decoration:none;color:var(--ink);font-size:.97rem;line-height:1.3}
+.sidebar a:hover{background:var(--surface-2)}
+.sidebar a.active{background:var(--surface);box-shadow:var(--shadow)}
+.sidebar .num{font-family:var(--font-head);font-weight:900;color:var(--red);min-width:22px}
+.sidebar .meta{display:block;font-size:.78rem;color:var(--muted);margin-top:2px}
+.sidebar .chk{margin-left:auto;font-size:.8rem;color:var(--green);font-weight:700}
+.side-group{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:16px 12px 6px;font-weight:700}
+main{padding:28px 0 80px;min-width:0}
+.chapter{display:none;max-width:960px}
+.chapter.active{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-head);font-weight:800;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:10px}
+.lead{font-size:1.18rem;color:var(--muted);max-width:60ch}
+
+/* ---------- Boxes ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);margin:20px 0}
+.card h3:first-child,.card h4:first-child{margin-top:0}
+.box{border-radius:var(--radius);padding:16px 20px;margin:20px 0;border-left:5px solid}
+.box.info{background:var(--teal-soft);border-color:var(--teal)}
+.box.warn{background:var(--red-soft);border-color:var(--red)}
+.box.task{background:var(--yellow-soft);border-color:var(--yellow)}
+.box.merke{background:var(--violet-soft);border-color:var(--violet)}
+.box>strong:first-child,.box .box-title{display:block;font-family:var(--font-head);font-weight:800;margin-bottom:6px}
+.box ol,.box ul{margin:.3em 0 0;padding-left:1.3em}
+.box li{margin:.25em 0}
+.op{font-weight:700;text-transform:uppercase;font-size:.85em;letter-spacing:.04em}
+.ia-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.ia-badge{font-family:var(--font-head);font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:3px 9px;border-radius:6px}
+.ia-head h3{margin:0;font-size:1.2rem}
+.ia-done{margin-left:auto;font-size:.82rem;color:var(--green);font-weight:700;display:none}
+.card.is-done .ia-done{display:inline}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.pill{display:inline-block;padding:2px 10px;border-radius:99px;font-size:.8rem;font-weight:700;background:var(--surface-2);color:var(--muted)}
+.muted{color:var(--muted)}
+.small{font-size:.88rem}
+.center{text-align:center}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);padding:9px 18px;border-radius:10px;font-weight:700;transition:transform .1s}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.red{background:var(--red);border-color:var(--red);color:#fff}
+.btn.small{padding:5px 12px;font-size:.9rem}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.opt{border:2px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 14px;border-radius:10px;font-weight:600;text-align:left;transition:border-color .15s,background .15s}
+.opt:hover{border-color:var(--ink)}
+.opt.sel{border-color:var(--ink);background:var(--surface-2)}
+.opt.right{border-color:var(--green);background:var(--green-soft)}
+.opt.wrong{border-color:var(--red);background:var(--red-soft)}
+.opt[disabled]{cursor:default}
+
+/* ---------- Quiz list ---------- */
+.q-item{border-top:1px solid var(--line);padding:16px 0}
+.q-item:first-of-type{border-top:0}
+.q-text{font-weight:600;margin-bottom:10px}
+.q-opts{display:flex;flex-wrap:wrap;gap:8px}
+.q-fb{margin-top:10px;padding:10px 14px;border-radius:10px;font-size:.95rem;display:none}
+.q-fb.show{display:block}
+.q-fb.ok{background:var(--green-soft)}
+.q-fb.no{background:var(--red-soft)}
+.q-fb.neutral{background:var(--teal-soft)}
+.score{font-family:var(--font-head);font-weight:800;font-size:1rem;padding:6px 12px;background:var(--surface-2);border-radius:8px;display:inline-block}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;padding:34px 30px;border-radius:22px;background:var(--ink);color:var(--paper);overflow:hidden;margin-bottom:26px}
+.hero h1{font-size:clamp(2.2rem,6vw,4.2rem);font-weight:900;line-height:1;margin:6px 0 14px;letter-spacing:-.03em}
+.hero h1 em{font-style:normal;color:var(--yellow)}
+.hero p{color:color-mix(in srgb,var(--paper) 80%,transparent);max-width:56ch;font-size:1.12rem}
+.hero .stamp{position:absolute;right:26px;top:22px;border:3px solid var(--red);color:var(--red);font-family:var(--font-head);font-weight:900;padding:6px 14px;border-radius:8px;transform:rotate(8deg);font-size:1.1rem;letter-spacing:.06em;background:color-mix(in srgb,var(--ink) 70%,transparent)}
+:root[data-theme="dark"] .hero, :root:not([data-theme="light"]) .hero{}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.hero-tags span{border:1px solid color-mix(in srgb,var(--paper) 30%,transparent);border-radius:99px;padding:3px 12px;font-size:.85rem}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hero{background:#2A2832;color:#EEEAF3}}
+:root[data-theme="dark"] .hero{background:#2A2832;color:#EEEAF3}
+
+.roadmap{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin:18px 0}
+.road{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;text-decoration:none;color:var(--ink);transition:transform .15s,box-shadow .15s}
+.road:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.road b{font-family:var(--font-head);color:var(--red);font-size:1.4rem;display:block}
+.road span{font-weight:700;display:block;line-height:1.25}
+.road small{color:var(--muted);font-size:.82rem}
+
+/* ---------- Chapter nav ---------- */
+.chap-nav{display:flex;justify-content:space-between;gap:12px;margin-top:40px;padding-top:20px;border-top:2px solid var(--line)}
+.chap-nav a{text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);padding:12px 16px;border-radius:12px;max-width:48%}
+.chap-nav a small{display:block;color:var(--muted);font-size:.8rem}
+.chap-nav a b{font-family:var(--font-head)}
+.chap-nav .next{margin-left:auto;text-align:right}
+
+/* ---------- Marketing flow ---------- */
+.flow{display:grid;gap:10px;margin:18px 0}
+.flow-step{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:stretch}
+.flow-label{font-family:var(--font-head);font-weight:800;font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;display:flex;align-items:center;justify-content:center;text-align:center;border-radius:10px;padding:10px;color:#fff}
+.flow-body{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+.flow-body b{font-family:var(--font-head)}
+.mix{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.mix div{background:var(--teal-soft);border-radius:8px;padding:10px;font-size:.92rem}
+.mix div b{display:block;font-family:var(--font-head);color:var(--teal);hyphens:auto;overflow-wrap:anywhere}
+.mix div.hl{background:var(--red-soft)}
+.mix div.hl b{color:var(--red)}
+
+/* ---------- Four-question check ---------- */
+.check4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0}
+.check4 div{background:var(--surface);border:2px solid var(--ink);border-radius:12px;padding:14px;position:relative}
+.check4 div b{font-family:var(--font-head);font-size:1.6rem;color:var(--red);display:block;line-height:1}
+.check4 div strong{display:block;font-family:var(--font-head);margin:6px 0 4px}
+.check4 div span{font-size:.9rem;color:var(--muted)}
+
+/* ---------- Selbsttest ---------- */
+.st-wrap{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow)}
+.st-step{font-size:.85rem;color:var(--muted);font-weight:700}
+.st-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0}
+.prod{position:relative;border:2px solid var(--line);border-radius:14px;padding:16px 14px 14px;background:var(--surface);text-align:left;color:var(--ink);transition:border-color .15s,transform .15s}
+.prod:hover{border-color:var(--ink);transform:translateY(-2px)}
+.prod.sel{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-soft)}
+.prod .p-name{font-weight:700;display:block;margin-top:4px}
+.prod .p-spec{font-size:.88rem;color:var(--muted);display:block}
+.prod .p-price{font-family:var(--font-head);font-weight:900;font-size:1.4rem;display:block;margin-top:6px}
+.prod .p-badge{position:absolute;top:-11px;left:12px;background:var(--red);color:#fff;font-size:.75rem;font-weight:800;padding:2px 9px;border-radius:6px;letter-spacing:.03em}
+.prod .p-radio{position:absolute;right:12px;top:14px;width:20px;height:20px;border-radius:50%;border:2px solid var(--line)}
+.prod.sel .p-radio{border-color:var(--teal);background:radial-gradient(circle,var(--teal) 45%,transparent 50%)}
+.prod .p-art{height:58px;display:flex;align-items:center;justify-content:flex-start}
+.reveal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.reveal-col{border-radius:12px;padding:12px;border:2px dashed var(--line)}
+.reveal-col.mine{border:2px solid var(--teal);background:var(--teal-soft)}
+.reveal-col h4{margin-bottom:8px}
+.mini-prod{display:flex;justify-content:space-between;gap:8px;font-size:.92rem;padding:6px 8px;border-radius:8px;background:var(--surface);margin:4px 0;border:1px solid var(--line)}
+.mini-prod.chosen{outline:2px solid var(--teal)}
+.mini-prod em{font-style:normal;background:var(--red);color:#fff;font-size:.72rem;padding:1px 6px;border-radius:5px;margin-left:6px;font-weight:700}
+
+/* ---------- AIDA poster ---------- */
+.aida-wrap{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:22px;align-items:start}
+.poster{position:relative;aspect-ratio:3/4.2;border-radius:12px;overflow:hidden;background:radial-gradient(circle at 70% 20%,#3a1c71 0%,#0d0b1f 60%);color:#fff;font-family:var(--font-head);box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.poster .hs{position:absolute;background:transparent;border:2px dashed transparent;border-radius:8px;color:inherit;padding:0;text-align:inherit;transition:border-color .2s,background .2s}
+.poster .hs:hover,.poster .hs.on{border-color:var(--yellow);background:rgba(255,210,63,.12)}
+.poster .hs .tagno{position:absolute;top:-10px;right:-10px;width:24px;height:24px;border-radius:50%;background:var(--yellow);color:#111;font-size:.8rem;font-weight:900;display:flex;align-items:center;justify-content:center;font-family:var(--font-body)}
+.aida-row{display:grid;grid-template-columns:28px 1fr 150px;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;border:1px solid var(--line);margin-bottom:8px;background:var(--surface)}
+.aida-row.on{border-color:var(--yellow);box-shadow:0 0 0 3px var(--yellow-soft)}
+.aida-row .n{width:26px;height:26px;border-radius:50%;background:var(--yellow);color:#111;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:.85rem}
+.aida-row select{padding:6px;border-radius:8px;border:1px solid var(--line);background:var(--surface)}
+.aida-row .ex{grid-column:2/4;font-size:.9rem;display:none;padding:8px 10px;border-radius:8px}
+.aida-row.checked .ex{display:block}
+.aida-row.ok .ex{background:var(--green-soft)}
+.aida-row.no .ex{background:var(--red-soft)}
+.aida-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0 18px}
+.aida-steps div{border-radius:10px;padding:10px;color:#fff;font-size:.88rem}
+.aida-steps div b{display:block;font-family:var(--font-head);font-size:1.6rem;line-height:1}
+
+/* ---------- Feed ---------- */
+.feed{display:grid;gap:14px}
+.post{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.post-head{display:flex;align-items:center;gap:10px;padding:10px 14px}
+.avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:.9rem;flex-shrink:0}
+.post-user{font-weight:700;line-height:1.1}
+.post-user small{display:block;font-weight:400;color:var(--muted);font-size:.8rem}
+.post-img{height:150px;display:flex;align-items:center;justify-content:center;font-size:3.4rem;position:relative}
+.post-body{padding:10px 14px;font-size:.95rem}
+.post-actions{display:flex;gap:8px;flex-wrap:wrap;padding:0 14px 12px}
+
+/* ---------- Glossar ---------- */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.filters input{flex:1;min-width:180px;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface)}
+.flip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.flip{perspective:900px;height:170px;border:0;background:none;padding:0;text-align:left;color:var(--ink)}
+.flip-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flip.on .flip-in{transform:rotateY(180deg)}
+.flip-f,.flip-b{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:14px;border:1px solid var(--line);overflow:auto}
+.flip-f{background:var(--surface);display:flex;flex-direction:column;justify-content:space-between}
+.flip-f b{font-family:var(--font-head);font-size:1.15rem}
+.flip-b{background:var(--ink);color:var(--paper);transform:rotateY(180deg);font-size:.86rem;line-height:1.45}
+
+/* ---------- Supermarkt ---------- */
+.market-wrap{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:18px;align-items:start}
+.market svg{width:100%;height:auto;display:block;border-radius:14px;background:var(--surface);border:1px solid var(--line)}
+.hot{cursor:pointer}
+.hot circle{fill:var(--red);stroke:var(--surface);stroke-width:3;transition:r .15s}
+.hot text{fill:#fff;font-family:var(--font-head);font-weight:900;font-size:16px;pointer-events:none}
+.hot:hover circle,.hot:focus circle{r:19}
+.hot.found circle{fill:var(--green)}
+.hot.cur circle{fill:var(--yellow)}
+.hot.cur text{fill:#111}
+.hot:focus{outline:none}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow);position:sticky;top:80px}
+.panel .pz{font-family:var(--font-head);color:var(--red);font-weight:900}
+.tip{background:var(--teal-soft);border-radius:10px;padding:8px 12px;font-size:.92rem;margin-top:10px}
+.princ{display:inline-block;background:var(--violet-soft);color:var(--violet);font-weight:700;font-size:.8rem;padding:2px 10px;border-radius:99px;margin-top:6px}
+
+/* ---------- Regal ---------- */
+.shelf{background:var(--surface-2);border-radius:12px;padding:10px;border:1px solid var(--line)}
+.shelf-row{display:grid;grid-template-columns:110px repeat(3,minmax(0,1fr));gap:8px;align-items:stretch;padding:8px 0;border-bottom:6px solid #8a6d4a}
+.shelf-row:last-child{border-bottom-width:10px}
+.zone{font-size:.78rem;font-weight:700;color:var(--muted);display:flex;align-items:center;line-height:1.2;opacity:0;transition:opacity .4s}
+.shelf.revealed .zone{opacity:1}
+.box-prod{border:2px solid transparent;border-radius:8px;padding:8px;color:#fff;text-align:left;min-height:84px;display:flex;flex-direction:column;justify-content:space-between;font-size:.85rem;line-height:1.2;transition:transform .15s}
+.box-prod:hover{transform:translateY(-3px)}
+.box-prod b{font-family:var(--font-head);font-size:.95rem}
+.box-prod .gp{display:none;background:rgba(255,255,255,.92);color:#111;border-radius:5px;padding:2px 5px;font-weight:700;font-size:.78rem;margin-top:4px}
+.shelf.revealed .box-prod .gp{display:block}
+.box-prod.picked{border-color:var(--yellow);box-shadow:0 0 0 3px var(--yellow)}
+
+/* ---------- Preisschilder ---------- */
+.tag-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.ptag{background:#fff;color:#111;border-radius:6px 16px 16px 6px;padding:14px 16px 14px 26px;position:relative;border:1px solid #ddd;box-shadow:var(--shadow)}
+.ptag:before{content:"";position:absolute;left:9px;top:50%;width:8px;height:8px;margin-top:-4px;border-radius:50%;background:var(--paper);border:1px solid #ccc}
+.ptag.red{background:#E8261C;color:#fff;border-color:#E8261C}
+.ptag.yel{background:#FFD23F;border-color:#FFD23F}
+.ptag .big{font-family:var(--font-head);font-weight:900;font-size:2rem;line-height:1}
+.ptag s{opacity:.8}
+.ptag .tiny{font-size:.7rem;opacity:.85}
+.calc{display:grid;gap:12px}
+.calc-row{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.calc-row input{width:110px;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface-2)}
+.calc-row .res{grid-column:1/-1;font-size:.92rem;display:none;padding:8px 10px;border-radius:8px}
+.calc-row.done .res{display:block}
+
+/* ---------- Range & sliders ---------- */
+input[type=range]{width:100%;accent-color:var(--red)}
+.big-num{font-family:var(--font-head);font-weight:900;font-size:2.2rem}
+
+/* ---------- Shop (Dark Patterns) ---------- */
+.shop{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;color:#111;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.4}
+.shop-top{display:flex;justify-content:space-between;align-items:center;background:#111;color:#fff;padding:10px 16px;font-weight:800;letter-spacing:.06em}
+.shop-banner{background:#E8261C;color:#fff;text-align:center;padding:6px;font-weight:700;font-size:14px}
+.shop-main{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:18px}
+.shoe{background:linear-gradient(135deg,#eef2f7,#dfe6ef);border-radius:12px;display:flex;align-items:center;justify-content:center;min-height:240px;position:relative}
+.dp{position:relative;border-radius:6px;transition:outline-color .15s, background .15s;outline:2px dashed transparent;outline-offset:2px;cursor:pointer}
+.shop.flagmode .dp:hover{outline-color:#999}
+.dp.flagged{outline:3px solid #E8261C !important}
+.dp.missed{outline:3px dashed #f0a000 !important}
+.dp.wrongflag{outline:3px solid #777 !important}
+.dp .flagno{position:absolute;top:-12px;right:-10px;background:#E8261C;color:#fff;font-size:11px;font-weight:800;border-radius:99px;padding:1px 7px;display:none;font-family:Arial}
+.dp.flagged .flagno{display:block}
+.shop .row{margin:8px 0}
+.shop .buy{width:100%;background:#111;color:#fff;border:0;padding:12px;border-radius:10px;font-weight:800;font-size:16px}
+.shop .bnpl{width:100%;background:#FFB3C7;color:#111;border:0;padding:10px;border-radius:10px;font-weight:800;margin-top:8px}
+.shop label{display:flex;gap:8px;align-items:flex-start;font-size:14px}
+.modal-back{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:100;padding:16px}
+.modal-back.show{display:flex}
+.modal{background:#fff;color:#111;border-radius:16px;max-width:420px;width:100%;padding:24px;font-family:Arial,Helvetica,sans-serif;text-align:center}
+.modal .yes{background:#E8261C;color:#fff;border:0;padding:12px 18px;border-radius:10px;font-weight:800;width:100%;font-size:16px}
+.modal .no{background:none;border:0;color:#999;font-size:12px;margin-top:10px;text-decoration:underline}
+.dp-list{display:grid;gap:8px;margin-top:12px}
+.dp-item{border-radius:10px;padding:10px 12px;border:1px solid var(--line);background:var(--surface);font-size:.95rem}
+.dp-item.found{border-color:var(--green);background:var(--green-soft)}
+.dp-item.miss{border-color:#f0a000;background:var(--yellow-soft)}
+
+/* ---------- Matrix ---------- */
+.matrix{position:relative;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:6px;aspect-ratio:1.5/1;margin:16px 0 30px 34px}
+.mq{border-radius:12px;padding:10px;font-size:.82rem;position:relative}
+.mq h5{margin:0 0 6px;font-family:var(--font-head);font-size:.9rem}
+.mq .dots{display:flex;flex-wrap:wrap;gap:5px}
+.mq .dot{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:2px 6px;font-size:.75rem}
+.ax-x{position:absolute;bottom:-26px;left:0;right:0;display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);font-weight:700}
+.ax-y{position:absolute;left:-34px;top:0;bottom:0;writing-mode:vertical-rl;transform:rotate(180deg);display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);font-weight:700}
+
+/* ---------- Sorter ---------- */
+.sort-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.sort-col{border-radius:12px;padding:12px;min-height:80px}
+.sort-col h4{margin:0 0 8px}
+.chip{display:block;background:var(--surface);border:1px solid var(--line);padding:8px 10px;border-radius:8px;margin:6px 0;font-size:.92rem}
+
+/* ---------- Tally ---------- */
+.tally{display:grid;grid-template-columns:1fr auto auto auto;gap:8px;align-items:center;padding:8px 10px;border-bottom:1px solid var(--line)}
+.tally .cnt{font-family:var(--font-head);font-weight:900;min-width:28px;text-align:center}
+.tally button{width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-weight:800}
+
+/* ---------- Analyse form ---------- */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-grid label{display:block;font-weight:700;font-size:.92rem}
+.form-grid input,.form-grid textarea,.form-grid select{width:100%;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--surface);margin-top:4px}
+.form-grid .full{grid-column:1/-1}
+.checks{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.checks label{font-weight:500;display:inline-flex;gap:6px;align-items:center;background:var(--surface-2);padding:4px 10px;border-radius:99px;font-size:.88rem;cursor:pointer}
+.checks input{width:auto;margin:0}
+
+/* ---------- Burger slider ---------- */
+.ba{position:relative;max-width:520px;margin:0 auto;aspect-ratio:13/8;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.ba svg{position:absolute;inset:0;width:100%;height:100%}
+.ba .lbl{position:absolute;top:10px;font-family:var(--font-head);font-weight:800;font-size:.8rem;padding:3px 9px;border-radius:6px;background:rgba(0,0,0,.65);color:#fff;z-index:3}
+
+/* ---------- Bat-ball ---------- */
+.inline-in{padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--surface);width:120px}
+
+/* ---------- Quiz stepper ---------- */
+.qs-progress{display:flex;gap:4px;margin-bottom:14px}
+.qs-progress i{flex:1;height:6px;border-radius:3px;background:var(--surface-2)}
+.qs-progress i.ok{background:var(--green)}
+.qs-progress i.no{background:var(--red)}
+.qs-progress i.cur{background:var(--ink)}
+
+/* ---------- Teacher ---------- */
+details.teacher{background:var(--surface);border:1px dashed var(--muted);border-radius:12px;padding:12px 16px;margin:20px 0}
+details.teacher summary{cursor:pointer;font-weight:700}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+th{font-family:var(--font-head)}
+
+/* ---------- Footer ---------- */
+footer{max-width:1280px;margin:0 auto;padding:24px 16px 40px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+
+/* ---------- Responsive ---------- */
+@media (max-width:980px){
+  .layout{grid-template-columns:1fr;gap:0}
+  .sidebar{position:fixed;top:56px;left:0;bottom:0;width:300px;max-height:none;background:var(--paper);z-index:60;padding:16px;transform:translateX(-105%);transition:transform .25s;border-right:1px solid var(--line);box-shadow:var(--shadow)}
+  .sidebar.open{transform:none}
+  .menu-btn{display:inline-block}
+  .aida-wrap,.market-wrap{grid-template-columns:1fr}
+  .panel{position:static}
+  .progress-label{display:none}
+}
+@media (max-width:720px){
+  body{font-size:17px}
+  .grid2,.grid3,.reveal-grid,.sort-cols,.form-grid{grid-template-columns:1fr}
+  .grid4,.check4,.mix,.aida-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flow-step{grid-template-columns:1fr}
+  .shop-main{grid-template-columns:1fr}
+  .shelf-row{grid-template-columns:62px repeat(3,minmax(0,1fr))}
+  .zone{font-size:.66rem}
+  .box-prod{font-size:.74rem;min-height:92px;padding:6px}
+  .box-prod b{font-size:.8rem}
+  .hero{padding:26px 20px}
+  .hero .stamp{display:none}
+  .brand small{display:none}
+  .aida-row{grid-template-columns:28px 1fr}
+  .aida-row select{grid-column:1/-1}
+  .aida-row .ex{grid-column:1/-1}
+  .matrix{aspect-ratio:auto;grid-template-rows:auto auto}
+  .card{padding:16px}
+  .chap-nav a{max-width:100%}
+  .calc-row{grid-template-columns:1fr}
+}
+
+/* ---------- Print ---------- */
+#printArea{display:none}
+@media print{
+  body.printing > *:not(#printArea){display:none !important}
+  body.printing #printArea{display:block !important;color:#000;font-size:12pt}
+  body:not(.printing) .topbar, body:not(.printing) .sidebar, body:not(.printing) .chap-nav{display:none}
+  body:not(.printing) .chapter{display:block !important}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-in">
+    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Kapitelmenü öffnen">☰ Kapitel</button>
+    <a class="brand" href="#k0"><span class="brand-tag">Durchschaut!</span><small>Wie funktioniert Werbung?</small></a>
+    <div class="progress-wrap" title="Dein Fortschritt: erledigte Übungen">
+      <div class="progress"><i id="progBar"></i></div>
+      <span class="progress-label" id="progLabel">0 von 0 Übungen</span>
+    </div>
+    <button class="icon-btn" id="themeBtn" aria-label="Hell/Dunkel umschalten" title="Hell/Dunkel">🌓</button>
+  </div>
+</header>
+
+<div class="layout">
+<nav class="sidebar" id="sidebar" aria-label="Kapitel">
+  <div id="navList"></div>
+  <div style="padding:16px 12px">
+    <button class="btn ghost small" id="resetBtn">Fortschritt zurücksetzen</button>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ================= K0 ================= -->
+<section class="chapter" id="k0" data-title="Start & Selbsttest" data-meta="Experiment vorab" data-group="Einstieg">
+  <div class="hero">
+    <div class="stamp">DURCHSCHAUT?</div>
+    <div class="kicker" style="color:var(--yellow)">Lernplattform · Wirtschaft &amp; Recht · Sek. II</div>
+    <h1>Wie funktioniert <em>Werbung?</em></h1>
+    <p>Rund um die Uhr wollen Unternehmen deine Entscheidungen beeinflussen – im Supermarkt, auf Instagram, im Onlineshop. Hier lernst du, mit welchen Mechanismen sie arbeiten, und testest an Beispielen selbst, ob du darauf hereinfällst.</p>
+    <div class="hero-tags"><span>9 Kapitel</span><span>30+ interaktive Übungen</span><span>ca. 4 Unterrichtsstunden</span></div>
+  </div>
+
+  <div class="box warn">
+    <strong>Bevor du irgendetwas liest: der Selbsttest</strong>
+    Du triffst drei ganz alltägliche Kaufentscheidungen. Entscheide spontan, so wie du es auch im echten Leben tun würdest. Es gibt kein Richtig oder Falsch. Was hinter dem Test steckt, erfährst du erst in Kapitel 7.
+  </div>
+
+  <div class="card" data-ia="selbsttest">
+    <div class="ia-head"><span class="ia-badge">Experiment</span><h3>Drei Entscheidungen</h3><span class="ia-done">✓ erledigt</span></div>
+    <div id="selbsttest"></div>
+  </div>
+
+  <h3>So ist die Plattform aufgebaut</h3>
+  <p>Wir gehen vor wie ein Unternehmen: Am Anfang steht die <b>Marketingstrategie</b>. Die setzt das <b>operative Marketing</b> mit den vier Instrumenten des Marketing-Mix um. Jedes dieser Instrumente kann informieren, aber auch manipulieren. Kapitel für Kapitel nehmen wir uns ein Instrument vor und schauen, welche psychologischen Mechanismen dahinterstecken.</p>
+  <div class="roadmap" id="roadmap"></div>
+
+  <details class="teacher">
+    <summary>Hinweise für Lehrkräfte: Stundenvorschlag und Materialbezug</summary>
+    <table>
+      <tr><th>Stunde</th><th>Kapitel</th><th>Schwerpunkt / Methode</th></tr>
+      <tr><td>1</td><td>0, 1</td><td>Selbsttest „blind“ (analog zum Konsumspiel der Joachim Herz Stiftung), strategisches vs. operatives Marketing, Marketing-Mix. Wichtig: den Begriff „Nudging“ vorher <i>nicht</i> nennen.</td></tr>
+      <tr><td>2</td><td>2, 3</td><td>AIDA-Analyse einer Anzeige, Werbeformen (Werbe-1x1), „Werbung oder Inhalt?“, Psychologie: System 1/2, Emotionen, Slogan-Quiz (Wiederholungseffekt).</td></tr>
+      <tr><td>3</td><td>4, 5</td><td>Preispsychologie (Ankereffekt-Experiment: Ergebnisse der Gruppen Hoch/Niedrig in der Klasse vergleichen), Grundpreis-Rechnung, Supermarkt-Rundgang, Regalzonen.</td></tr>
+      <tr><td>4</td><td>6, 7</td><td>Dark-Pattern-Shop, Auflösung des Selbsttests (Gruppen A/B per Handzeichen auszählen), Nudging-Konzept, Streitgespräch Thaler/Sunstein vs. Beck.</td></tr>
+      <tr><td>HA / Projekt</td><td>8</td><td>Abschlussquiz, eigene Werbeanalyse (druckbar), Forschungsliste für einen Supermarktbesuch.</td></tr>
+    </table>
+    <p class="small muted" style="margin-top:10px">Die Inhalte beruhen auf den Materialien im Ordner: Werbe-1x1, Verkaufstricks im Supermarkt, Jugendwerbung und Marketing, Neuromarketing-Prinzipien im Supermarkt, Einfluss auf das Verbraucherverhalten, Strategisches Marketing (IÖB), Nudging (Joachim Herz Stiftung) und Werbeslogans. Alle Marken in den Übungen außer den Slogans sind frei erfunden. Der Fortschritt wird nur lokal im Browser gespeichert.</p>
+  </details>
+</section>
+
+<!-- ================= K1 ================= -->
+<section class="chapter" id="k1" data-title="Marketing: Strategie & Mix" data-meta="Die vier Instrumente" data-group="Grundlagen">
+  <div class="kicker">Kapitel 1 · Grundlagen</div>
+  <h2>Vom Plan zur Werbung: Marketing verstehen</h2>
+  <p class="lead">Werbung entsteht nicht aus dem Bauch heraus. Sie ist das sichtbare Ende einer langen Planungskette.</p>
+
+  <p><b>Marketing</b> umfasst alle Maßnahmen, mit denen ein Unternehmen seine Produkte und Dienstleistungen auf dem Markt verkauft. Marketingfachleute erforschen den Markt, beobachten das Kaufverhalten und entscheiden, welche Produkte es geben soll, was sie kosten, wo man sie kaufen kann und wie für sie geworben wird.</p>
+
+  <div class="box info">
+    <strong>Die Fahrplan-Metapher</strong>
+    Eine Marketingkonzeption funktioniert wie ein Fahrplan: Die <b>Ziele</b> sind die „Wunschorte“, die <b>Strategien</b> sind die „Routen“ und die <b>Marketinginstrumente</b> sind die „Beförderungsmittel“. <span class="small muted">(nach Gelbrich/Müller 2024)</span>
+  </div>
+
+  <div class="flow">
+    <div class="flow-step"><div class="flow-label" style="background:#5B3FA8">Strategisches Marketing</div>
+      <div class="flow-body"><b>Langfristig · Unternehmensleitung.</b> Auf Grundlage von Analysen (Marktforschung, Marktanalyse, SWOT-Analyse, Portfolioanalyse) werden <b>Marketingziele</b> festgelegt (z. B. „Anteil zufriedener Kunden in zwei Jahren von 60 % auf 80 % erhöhen“) und <b>Strategien</b> gewählt: Für welche Zielgruppe (Segmentierung)? Mit welchem Image (Positionierung)? Wie wollen wir wachsen?</div></div>
+    <div class="flow-step"><div class="flow-label" style="background:#176B73">Operatives Marketing</div>
+      <div class="flow-body"><b>Kurzfristig · konkrete Maßnahmen.</b> Die Strategie wird mit dem <b>Marketing-Mix</b> umgesetzt:
+        <div class="mix" style="margin-top:10px">
+          <div><b>Produktpolitik</b>Was bieten wir an? Qualität, Design, Verpackung, Marke, Service</div>
+          <div><b>Preispolitik</b>Was kostet es? Preis, Rabatte, Zahlungsbedingungen</div>
+          <div><b>Distributionspolitik</b>Wo und wie wird verkauft? Laden, Onlineshop, Platzierung</div>
+          <div class="hl"><b>Kommunikationspolitik</b>Wie erfahren Kunden davon? Werbung, Social Media, Sponsoring</div>
+        </div></div></div>
+    <div class="flow-step"><div class="flow-label" style="background:#5D5866">Marketing&shy;controlling</div>
+      <div class="flow-body">Hat es funktioniert? Werbeerfolg, Umsatz und Gewinn werden kontrolliert. Die Ergebnisse fließen in die nächste Planung ein.</div></div>
+  </div>
+
+  <div class="box merke">
+    <strong>Beispiel: Aldi Süd und „Nur Nur Natur“</strong>
+    Weil viele Kundinnen und Kunden nachhaltige, aber günstige Produkte suchen, positioniert sich Aldi Süd mit der Eigenmarke „Nur Nur Natur“ langfristig als nachhaltiger Discounter. Das ist <b>strategisch</b>. Grüne Verpackungen, Bio-Siegel, Preisaktionen und Werbespots, die diese Positionierung sichtbar machen, sind <b>operativ</b>.
+  </div>
+
+  <div class="box task">
+    <strong>Vertiefung: Strategisches Marketing</strong>
+    Wie Unternehmen mit Marktforschung, Marktanalyse, SWOT- und Portfolioanalyse ihre Strategie entwickeln, übst du auf der Vertiefungsseite <a href="Strategisches_Marketing.html">„Strategisches Marketing – Mit Plan zum Erfolg“</a> (Fallstudie MOVE Motion).
+  </div>
+
+  <div class="card" data-ia="k1-so">
+    <div class="ia-head"><span class="ia-badge">Übung 1.1</span><h3>Strategisch oder operativ?</h3><span class="ia-done">✓ erledigt</span></div>
+    <p class="small muted">Ordne jede Maßnahme zu. Achte auf Zeithorizont und Konkretheit.</p>
+    <div id="k1-so"></div>
+  </div>
+
+  <div class="card" data-ia="k1-4p">
+    <div class="ia-head"><span class="ia-badge">Übung 1.2</span><h3>Welches Instrument des Marketing-Mix?</h3><span class="ia-done">✓ erledigt</span></div>
+    <div id="k1-4p"></div>
+  </div>
+
+  <h3>Informieren, überzeugen oder manipulieren?</h3>
+  <p>Jedes Instrument des Marketing-Mix kann dir nützliche Informationen geben, etwa über Preis, Inhaltsstoffe oder Verfügbarkeit. Es kann dich aber auch so beeinflussen, dass du etwas tust, das du bei klarem Kopf nicht tun würdest. Die Grenze ist fließend. Mit den folgenden <b>vier Prüffragen</b> kannst du sie auf der ganzen Plattform ausloten:</p>
+  <div class="check4">
+    <div><b>1</b><strong>Erkennbar?</strong><span>Merke ich, dass jemand mich beeinflussen will, oder läuft das verdeckt?</span></div>
+    <div><b>2</b><strong>Bewusst?</strong><span>Spricht es meinen Verstand an oder wirkt es unbewusst (Gefühl, Reflex, Gewohnheit)?</span></div>
+    <div><b>3</b><strong>Wem nützt es?</strong><span>Dient es eher meinem Interesse oder nur dem des Anbieters?</span></div>
+    <div><b>4</b><strong>Ausweg?</strong><span>Kann ich leicht anders entscheiden, oder werde ich unter Druck gesetzt?</span></div>
+  </div>
+  <p class="small muted">Je öfter die Antwort „verdeckt – unbewusst – Anbieter – kaum Ausweg“ lautet, desto eher ist eine Maßnahme <b>manipulativ</b>.</p>
+
+  <div class="box task">
+    <strong>Arbeitsaufträge</strong>
+    <ol>
+      <li><span class="op">Grenzen Sie</span> strategisches und operatives Marketing anhand von Zeithorizont, Entscheidungsebene und Konkretheit <span class="op">voneinander ab</span>.</li>
+      <li><span class="op">Erläutern Sie</span> am Beispiel einer Marke Ihrer Wahl, wie die vier Instrumente des Marketing-Mix zusammenwirken.</li>
+      <li><span class="op">Erklären Sie</span> mit eigenen Worten, warum die strategische Planung die Grundlage jeder erfolgreichen Werbekampagne ist.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= K2 ================= -->
+<section class="chapter" id="k2" data-title="Kommunikation: AIDA & Werbeformen" data-meta="Kommunikationspolitik" data-group="Marketing-Mix">
+  <div class="kicker">Kapitel 2 · Kommunikationspolitik</div>
+  <h2>Wie eine Werbebotschaft gebaut ist</h2>
+  <p class="lead">Eine Anzeige wird im Schnitt nur etwa zwei Sekunden betrachtet. In dieser Zeit muss sie dich packen. Dafür gibt es ein bewährtes Bauprinzip.</p>
+
+  <h3>Das AIDA-Modell</h3>
+  <p>Das AIDA-Modell gibt es seit über hundert Jahren. Es beschreibt die Stufen, durch die Werbung potenzielle Käuferinnen und Käufer führen will:</p>
+  <div class="aida-steps">
+    <div style="background:#D7261E"><b>A</b>Attention: Aufmerksamkeit erregen</div>
+    <div style="background:#E87A1E"><b>I</b>Interest: Interesse wecken</div>
+    <div style="background:#5B3FA8"><b>D</b>Desire: Kaufwunsch erzeugen</div>
+    <div style="background:#176B73"><b>A</b>Action: zum Handeln bringen</div>
+  </div>
+
+  <div class="card" data-ia="aida">
+    <div class="ia-head"><span class="ia-badge">Übung 2.1</span><h3>Anzeige analysieren: VOLTA Energy</h3><span class="ia-done">✓ erledigt</span></div>
+    <p class="small muted">Klicke auf die nummerierten Elemente der (erfundenen) Anzeige und ordne jedem Element die AIDA-Stufe zu, der es hauptsächlich dient. Dann prüfen.</p>
+    <div id="aida"></div>
+  </div>
+
+  <h3>Werbemittel, Werbeträger und Werbeformen</h3>
+  <p><b>Werbemittel</b> sind die gestalteten Werbematerialien: Anzeige, Plakat, Spot, Banner. <b>Werbeträger</b> sind die Medien, die sie transportieren: Zeitung, Fernsehen, Website, Bushaltestelle. Welche Kombination ein Unternehmen wählt, hängt von der <b>Zielgruppe</b> ab. Jugendliche sind eine besonders umkämpfte Zielgruppe. Sie haben eigene Kaufkraft, beeinflussen die Käufe ihrer Eltern, und Marken, die man jung lieben lernt, bleiben oft ein Leben lang.</p>
+
+  <div class="card" data-ia="glossar">
+    <div class="ia-head"><span class="ia-badge">Werbe-1x1</span><h3>Werbeformen kennen</h3><span class="ia-done">✓ erledigt</span></div>
+    <p class="small muted">Karten antippen zum Umdrehen. Filtere nach Bereich oder suche einen Begriff. Wenn du mindestens 8 Karten umgedreht hast, gilt die Übung als erledigt.</p>
+    <div id="glossar"></div>
+  </div>
+
+  <h3>Versteckte Werbung</h3>
+  <p>Weil klassische Anzeigen und Plakate immer weniger beachtet werden, entwickelt die Werbeindustrie ständig neue Formen, bei denen man kaum noch erkennt, dass es Werbung ist: Product-Placement, Advertorials, Influencer-Posts, Gewinnspiele. <b>Werbekompetenz</b> heißt, Werbung von redaktionellen Inhalten unterscheiden zu können.</p>
+  <div class="box info">
+    <strong>Rechtlicher Rahmen</strong>
+    In Deutschland muss kommerzielle Kommunikation als solche erkennbar sein (u. a. Gesetz gegen den unlauteren Wettbewerb und Medienstaatsvertrag). Influencer müssen bezahlte Beiträge oder Beiträge mit eigenem kommerziellem Interesse, etwa Rabattcodes oder Affiliate-Links, deutlich mit „Werbung“ oder „Anzeige“ kennzeichnen. Nicht gekennzeichnete Werbung ist <b>Schleichwerbung</b> und unzulässig.
+  </div>
+
+  <div class="card" data-ia="feed">
+    <div class="ia-head"><span class="ia-badge">Übung 2.2</span><h3>Werbung oder Inhalt? Dein Feed</h3><span class="ia-done">✓ erledigt</span></div>
+    <p class="small muted">Scrolle durch den (erfundenen) Feed und entscheide bei jedem Beitrag.</p>
+    <div id="feed"></div>
+  </div>
+
+  <div class="box task">
+    <strong>Arbeitsaufträge</strong>
+    <ol>
+      <li><span class="op">Analysieren Sie</span> eine aktuelle Werbeanzeige aus einer Zeitschrift oder von Social Media mithilfe des AIDA-Modells.</li>
+      <li><span class="op">Erläutern Sie</span>, warum Unternehmen zunehmend auf Werbeformen setzen, die nicht sofort als Werbung erkennbar sind.</li>
+      <li><span class="op">Beurteilen Sie</span>, ob Schulsponsoring durch Unternehmen zulässig sein sollte.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= K3 ================= -->
+<section class="chapter" id="k3" data-title="Psychologie der Werbung" data-meta="Warum Werbung wirkt" data-group="Marketing-Mix">
+  <div class="kicker">Kapitel 3 · Psychologie</div>
+  <h2>Warum Werbung wirkt, obwohl wir sie durchschauen</h2>
+  <p class="lead">„Werbung wirkt bei mir nicht.“ Das glauben fast alle. Das folgende Rätsel zeigt dir, warum diese Selbsteinschätzung trügt.</p>
+
+  <div class="card" data-ia="batball">
+    <div class="ia-head"><span class="ia-badge">Denkfalle</span><h3>Schläger und Ball</h3><span class="ia-done">✓ erledigt</span></div>
+    <p>Ein Schläger und ein Ball kosten zusammen <b>1,10 €</b>. Der Schläger kostet <b>1,00 € mehr</b> als der Ball. Wie viel kostet der Ball?</p>
+    <div id="batball"></div>
+  </div>
+
+  <h3>System 1 und System 2</h3>
+  <div class="grid2">
+    <div class="card" style="margin:0;border-top:5px solid var(--red)"><h4>System 1: schnell</h4><p class="small">Arbeitet automatisch, intuitiv und mühelos. Es nutzt Faustregeln (Heuristiken) und Gefühle. Fast alle Alltagsentscheidungen fallen hier, auch im Supermarkt.</p><p class="small"><b>Hier setzt Werbung an:</b> Farben, Gesichter, Melodien, Knappheitssignale.</p></div>
+    <div class="card" style="margin:0;border-top:5px solid var(--teal)"><h4>System 2: langsam</h4><p class="small">Arbeitet bewusst, logisch und anstrengend. Es rechnet Grundpreise aus, vergleicht Angebote und fragt: Brauche ich das?</p><p class="small"><b>Problem:</b> System 2 ist „faul“ und wird nur aktiv, wenn wir es bewusst einschalten.</p></div>
+  </div>
+  <p class="small muted" style="margin-top:10px">Das Modell stammt vom Psychologen und Nobelpreisträger Daniel Kahneman („Schnelles Denken, langsames Denken“). Die Verhaltensökonomie zeigt damit: Menschen sind keine rein rationalen Nutzenmaximierer (Homo oeconomicus).</p>
+
+  <h3>Gefühle statt Fakten</h3>
+  <p>Werbung informiert oft gar nicht über die sachlichen Eigenschaften eines Produkts. Sie <b>verkauft ein Gefühl</b>. Mit dem Sweatshirt ziehen wir uns „ein Stück Lebensfreude“ über. Dafür nutzt Werbung <b>Schlüsselreize</b>, die fast automatisch Reaktionen auslösen, etwa das <b>Kindchenschema</b> (großer runder Kopf, große Augen weckt den Beschützerinstinkt). Dazu kommen emotionale Reize wie Genuss, Sicherheit, Schönheit, Erfolg, Zugehörigkeit und Freiheit. Sie nutzen sich kaum ab.</p>
+
+  <div class="card" data-ia="emo">
+    <div class="ia-head"><span class="ia-badge">Übung 3.1</span><h3>Welches Gefühl wird verkauft?</h3><span class="ia-done">✓ erledigt</span></div>
+    <div id="emo"></div>
+  </div>
+
+  <h3>Wiederholung: Was man oft hört, mag man mehr</h3>
+  <p>Häufiger Kontakt mit einer Marke erzeugt <b>Vertrautheit</b>, und Vertrautes halten wir für gut und sicher (<b>Wiederholungs- oder Mere-Exposure-Effekt</b>). Deshalb laufen Werbespots immer wieder, deshalb gibt es Jingles und Slogans. Teste selbst, wie viele Slogans dein Gehirn gespeichert hat, ohne dass du sie je gelernt hast.</p>
+
+  <div class="card" data-ia="slogan">
+    <div class="ia-head"><span class="ia-badge">Übung 3.2</span><h3>Slogan-Quiz</h3><span class="ia-done">✓ erledigt</span></div>
+    <div id="slogan"></div>
+  </div>
+
+  <h3>Der Werkzeugkasten der Verkaufspsychologie</h3>
+  <p>Diese Prinzipien begegnen dir in Werbung, im Supermarkt und online immer wieder. Karte antippen: Rückseite mit Beispiel und Gegenstrategie.</p>
+  <div class="flip-grid" id="principles"></div>
+
+  <div class="card" data-ia="princquiz">
+    <div class="ia-head"><span class="ia-badge">Übung 3.3</span><h3>Welches Prinzip steckt dahinter?</h3><span class="ia-done">✓ erledigt</span></div>
+    <div id="princquiz"></div>
+  </div>
+
+  <h3>Bilder lügen (manchmal)</h3>
+  <p>Werbefotos sind fast immer inszeniert und bearbeitet: Food-Styling, Retusche, Filter. Verschiebe den Regler und vergleiche Werbebild und Realität.</p>
+  <div class="card" data-ia="burger">
+    <div class="ia-head"><span class="ia-badge">Vergleich</span><h3>Werbe-Burger vs. echter Burger</h3><span class="ia-done">✓ erledigt</span></div>
+    <div id="burger"></div>
+  </div>
+
+  <div class="box task">
+    <strong>Arbeitsaufträge</strong>
+    <ol>
+      <li><span class="op">Erklären Sie</span> mithilfe des Modells von System 1 und System 2, warum Werbung auch bei Menschen wirkt, die sich für werbe-immun halten.</li>
+      <li><span class="op">Untersuchen Sie</span> drei Werbespots auf die verwendeten Schlüsselreize und emotionalen Botschaften.</li>
+      <li><span class="op">Nehmen Sie Stellung</span>: Wo verläuft die Grenze zwischen normaler Bildbearbeitung und manipulierten „Fake-Fotos“ in der Werbung?</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= K4 ================= -->
+<section class="chapter" id="k4" data-title="Preispolitik" data-meta="Psychologie der Preise" data-group="Marketing-Mix">
+  <div class="kicker">Kapitel 4 · Preispolitik</div>
+  <h2>Der Preis ist nie nur eine Zahl</h2>
+  <p class="lead">Ob uns ein Preis günstig vorkommt, hängt weniger von seiner Höhe ab als davon, womit wir ihn vergleichen.</p>
+
+  <div class="card" data-ia="anker">
+    <div class="ia-head"><span class="ia-badge">Experiment 4.1</span><h3>Was ist ein fairer Preis?</h3><span class="ia-done">✓ erledigt</span></div>
+    <div id="anker"></div>
+  </div>
+
+  <h3>Ankereffekt</h3>
+  <p>Wir orientieren uns stark an der <b>ersten Zahl</b>, die wir sehen, selbst wenn sie willkürlich ist. Ein durchgestrichener „Statt“-Preis oder eine hohe „UVP“ setzt einen Anker. Der tatsächliche Preis wirkt daneben wie ein Schnäppchen.</p>
+  <div class="box info"><strong>Gut zu wissen</strong>Wer in Deutschland mit einer Preisermäßigung wirbt, muss seit 2022 als Vergleich den niedrigsten Preis der letzten 30 Tage angeben (Preisangabenverordnung). Ein künstlich hochgesetzter „Mondpreis“ kurz vor der Aktion ist damit unzulässig. Vergleiche mit der „UVP“ des Herstellers sind aber weiterhin erlaubt, und die UVP verlangt oft kaum ein Händler.</div>
+
+  <div class="card" data-ia="charm">
+    <div class="ia-head"><span class="ia-badge">Schnelltest 4.2</span><h3>Schnell geschätzt</h3><span class="ia-done">✓ erledigt</span></div>
+    <div id="charm"></div>
+  </div>
+
+  <h3>Weitere Preis-Tricks</h3>
+  <div class="grid2">
+    <div class="card" style="margin:0"><h4>Gebrochene Preise</h4><p class="small">9,99 € statt 10,00 €: Wir lesen von links nach rechts, die erste Ziffer prägt den Eindruck. „Neun-irgendwas“ fühlt sich deutlich billiger an als „zehn“.</p></div>
+    <div class="card" style="margin:0"><h4>Lockvogel (Decoy)</h4><p class="small">Eine dritte, kaum attraktive Option lässt eine andere plötzlich wie ein gutes Geschäft aussehen: Popcorn mittel 6,50 €, groß 7,00 €. Wer greift da zur mittleren Größe?</p></div>
+    <div class="card" style="margin:0"><h4>Mengenrabatt</h4><p class="small">„3 für 2“ oder „2 für 3 €“ lohnt sich nur, wenn du die Menge wirklich brauchst. Sonst gibst du mehr aus und wirfst am Ende vielleicht weg.</p></div>
+    <div class="card" style="margin:0"><h4>Verknappung &amp; Verlustaversion</h4><p class="small">„Nur heute!“, „Solange der Vorrat reicht“: Verluste schmerzen uns etwa doppelt so stark, wie Gewinne uns freuen. Die Angst, etwas zu verpassen (FOMO), lässt uns vorschnell zugreifen.</p></div>
+  </div>
+
+  <div class="card" data-ia="tags">
+    <div class="ia-head"><span class="ia-badge">Übung 4.3</span><h3>Preisschild-Detektiv: Rechne nach!</h3><span class="ia-done">✓ erledigt</span></div>
+    <p class="small muted">Berechne den <b>Grundpreis</b> (Preis pro Kilogramm). Der steht klein auf jedem Regalschild und ist der einzige faire Vergleichsmaßstab. Formel: Preis ÷ Menge in kg. Antworte auf zwei Nachkommastellen, Komma oder Punkt ist egal.</p>
+    <div id="tags"></div>
+  </div>
+
+  <div class="card" data-ia="decoy">
+    <div class="ia-head"><span class="ia-badge">Übung 4.4</span><h3>Im Kino: Welche Popcorn-Größe?</h3><span class="ia-done">✓ erledigt</span></div>
+    <div id="decoy"></div>
+  </div>
+
+  <div class="box task">
+    <strong>Arbeitsaufträge</strong>
+    <ol>
+      <li><span class="op">Erläutern Sie</span> den Ankereffekt und die Verlustaversion an je einem selbst gewählten Beispiel aus Prospekten oder Onlineshops.</li>
+      <li><span class="op">Berechnen Sie</span> bei einem Einkauf für drei Produkte, ob die Großpackung wirklich günstiger ist.</li>
+      <li><span class="op">Beurteilen Sie</span>, ob „Mogelpackungen“ (weniger Inhalt zum gleichen Preis) gesetzlich verboten werden sollten.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= K5 ================= -->
+<section class="chapter" id="k5" data-title="Point of Sale: Supermarkt" data-meta="Distributionspolitik" data-group="Marketing-Mix">
+  <div class="kicker">Kapitel 5 · Distributionspolitik</div>
+  <h2>Der Supermarkt als Verführungsmaschine</h2>
+  <p class="lead">Wo und wie ein Produkt angeboten wird, ist kein Zufall. Ein Großteil der Kaufentscheidungen fällt erst im Laden. Deshalb ist jeder Meter im Supermarkt durchgeplant.</p>
+
+  <div class="card" data-ia="markt">
+    <div class="ia-head"><span class="ia-badge">Rundgang 5.1</span><h3>Finde die 17 Verkaufstricks</h3><span class="ia-done">✓ erledigt</span></div>
+    <p class="small muted">Klicke auf die roten Punkte im Grundriss. Überlege zuerst selbst, was die Maßnahme bewirken soll, und wähle eine Antwort. <span id="marktCount" class="score">0 / 17 entdeckt</span></p>
+    <div id="markt"></div>
+  </div>
+
+  <h3>Die Regalzonen</h3>
+  <p>Im Regal gilt: <b>Sichtzone</b> (ca. 120–160 cm) und <b>Greifzone</b> (ca. 80–120 cm) verkaufen am besten. Dort stehen die Produkte, an denen der Händler am meisten verdient. In der <b>Reckzone</b> oben und der <b>Bückzone</b> unten findest du oft die günstigeren Eigenmarken. Bücken und Strecken zahlen sich aus!</p>
+
+  <div class="card" data-ia="regal">
+    <div class="ia-head"><span class="ia-badge">Übung 5.2</span><h3>Spontangriff ins Müsliregal</h3><span class="ia-done">✓ erledigt</span></div>
+    <p class="small muted">Du hast es eilig. Klicke ohne langes Nachdenken auf das Müsli, das du mitnehmen würdest.</p>
+    <div id="regal"></div>
+  </div>
+
+  <div class="card" data-ia="forschung">
+    <div class="ia-head"><span class="ia-badge">Forschungsauftrag</span><h3>Forschungsliste für deinen nächsten Einkauf</h3><span class="ia-done">✓ erledigt</span></div>
+    <p class="small muted">Geh allein oder zu zweit in einen Supermarkt oder ein Kaufhaus. Zähle mit + und −, wie oft du jeden Trick entdeckst. Die Liste lässt sich ausdrucken. Mindestens 5 Einträge zählen als erledigt.</p>
+    <div id="forschung"></div>
+  </div>
+
+  <div class="box task">
+    <strong>Arbeitsaufträge</strong>
+    <ol>
+      <li><span class="op">Ordnen Sie</span> die Supermarkt-Tricks den Sinnen zu, die sie ansprechen (Sehen, Riechen, Hören, Fühlen/Temperatur, Bewegung).</li>
+      <li><span class="op">Erläutern Sie</span>, warum Grundnahrungsmittel wie Milch meist ganz hinten im Markt stehen.</li>
+      <li><span class="op">Entwickeln Sie</span> fünf konkrete Regeln für einen werbe-resistenten Einkauf.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= K6 ================= -->
+<section class="chapter" id="k6" data-title="Online & Dark Patterns" data-meta="Werbung im Netz" data-group="Marketing-Mix">
+  <div class="kicker">Kapitel 6 · Online-Marketing</div>
+  <h2>Dark Patterns: Wenn das Design dich austrickst</h2>
+  <p class="lead">Online laufen alle bisherigen Mechanismen zusammen, nur schneller, persönlicher und messbar. Jeder Klick verrät etwas über dich.</p>
+
+  <h3>Personalisierte Werbung</h3>
+  <p>Plattformen und Werbenetzwerke sammeln Daten über dein Verhalten: Suchen, Likes, Verweildauer, Standort, Uhrzeit. Algorithmen leiten daraus ein <b>Profil</b> ab, und Werbetreibende kaufen gezielt den Zugang zu dir (<b>Targeting</b>). Hast du etwas angeschaut und nicht gekauft, verfolgt dich das Produkt über viele Seiten hinweg (<b>Retargeting</b>).</p>
+
+  <div class="card" data-ia="profil">
+    <div class="ia-head"><span class="ia-badge">Simulation 6.1</span><h3>Was der Algorithmus über dich weiß</h3><span class="ia-done">✓ erledigt</span></div>
+    <p class="small muted">Wähle aus, was du in den letzten Tagen online gemacht hast.</p>
+    <div id="profil"></div>
+  </div>
+
+  <h3>Dark Patterns</h3>
+  <p><b>Dark Patterns</b> sind Gestaltungstricks auf Websites und in Apps, die Nutzerinnen und Nutzer zu Entscheidungen drängen, die sie eigentlich nicht treffen wollen: kaufen, Daten preisgeben, ein Abo abschließen. Der Digital Services Act der EU verbietet Online-Plattformen seit 2024 solche manipulativen Oberflächen. Verbreitet sind sie trotzdem.</p>
+
+  <div class="card" data-ia="shop">
+    <div class="ia-head"><span class="ia-badge">Übung 6.2</span><h3>Manipulations-Jagd im Sneaker-Shop</h3><span class="ia-done">✓ erledigt</span></div>
+    <p class="small muted"><b>1.</b> Sieh dir die (erfundene) Produktseite an und klicke auf „Zur Kasse“. <b>2.</b> Schalte dann den <b>Markier-Modus</b> ein und klicke alle Elemente an, die dich manipulieren wollen. Aber Vorsicht: Nicht alles ist ein Trick! <b>3.</b> Werte aus.</p>
+    <div id="shop"></div>
+  </div>
+
+  <div class="box task">
+    <strong>Arbeitsaufträge</strong>
+    <ol>
+      <li><span class="op">Beschreiben Sie</span> drei Dark Patterns, die Ihnen selbst schon in Apps oder Onlineshops begegnet sind.</li>
+      <li><span class="op">Erläutern Sie</span>, welche psychologischen Prinzipien aus Kapitel 3 und 4 in den Dark Patterns stecken.</li>
+      <li><span class="op">Beurteilen Sie</span> die Aussage: „Personalisierte Werbung ist praktisch. Ich sehe wenigstens, was mich interessiert.“</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= K7 ================= -->
+<section class="chapter" id="k7" data-title="Nudging" data-meta="Auflösung & Debatte" data-group="Vertiefung">
+  <div class="kicker">Kapitel 7 · Verhaltensökonomie</div>
+  <h2>Nudging: der sanfte Stups</h2>
+  <p class="lead">Erinnerst du dich an den Selbsttest am Anfang? Jetzt wird aufgelöst.</p>
+
+  <div class="card" data-ia="aufloesung">
+    <div class="ia-head"><span class="ia-badge">Auflösung</span><h3>Was beim Selbsttest passiert ist</h3><span class="ia-done">✓ erledigt</span></div>
+    <div id="aufloesung"></div>
+  </div>
+
+  <h3>Was ist ein Nudge?</h3>
+  <p>Der Ökonom Richard Thaler (Nobelpreis 2017) und der Jurist Cass Sunstein beschreiben in ihrem Buch „Nudge“ (2008), wie man Entscheidungen durch die Gestaltung der <b>Entscheidungsarchitektur</b> lenken kann, ohne etwas zu verbieten.</p>
+  <div class="box merke">
+    <strong>Ein Nudge (engl. „Stupser“) …</strong>
+    <ul>
+      <li>verändert das Verhalten von Menschen in <b>vorhersagbarer</b> Weise,</li>
+      <li>schließt <b>keine Option aus</b> (kein Verbot),</li>
+      <li>setzt <b>keine starken wirtschaftlichen Anreize</b> (kein Geld, keine Strafe),</li>
+      <li>ist <b>leicht und ohne großen Aufwand zu umgehen</b>,</li>
+      <li>soll nach Thaler/Sunstein im <b>Interesse der Person selbst</b> liegen.</li>
+    </ul>
+    <p style="margin:.6em 0 0">„Das Obst in der Kantine auf Augenhöhe zu drapieren zählt als Nudge. Junkfood aus dem Angebot zu nehmen hingegen nicht.“ <span class="small muted">(Thaler/Sunstein)</span></p>
+  </div>
+  <p>Setzt der <b>Staat</b> Nudges ein, um Menschen zu einem aus ihrer eigenen Sicht besseren Verhalten zu bewegen, sprechen Thaler und Sunstein von <b>libertärem Paternalismus</b>: „libertär“, weil die Wahlfreiheit erhalten bleibt, „paternalistisch“ (väterlich-bevormundend), weil jemand anderes die Richtung vorgibt.</p>
+
+  <div class="grid3">
+    <div class="card" style="margin:0"><h4>Default-Nudge</h4><p class="small">Voreinstellungen: Drucker auf doppelseitig, automatische Altersvorsorge mit Widerspruchsrecht. Die meisten Menschen bleiben einfach beim Standard.</p></div>
+    <div class="card" style="margin:0"><h4>Sozialer Nudge</h4><p class="small">Vergleich mit anderen: „Ihr Stromverbrauch liegt über dem Ihrer Nachbarn.“ Wir orientieren uns an der Mehrheit.</p></div>
+    <div class="card" style="margin:0"><h4>Feedback-Nudge</h4><p class="small">Der Eisbären-Duschkopf zeigt, wie viel Energie man verbraucht. Mit jeder Minute verschwindet ein Eisbär. Ergebnis: rund 22 % weniger Energieverbrauch.</p></div>
+  </div>
+
+  <div class="card" data-ia="nudgeornot">
+    <div class="ia-head"><span class="ia-badge">Übung 7.1</span><h3>Nudge oder kein Nudge?</h3><span class="ia-done">✓ erledigt</span></div>
+    <div id="nudgeornot"></div>
+  </div>
+
+  <h3>Werbung und Nudging: dieselben Werkzeuge, andere Absichten?</h3>
+  <p>Defaults, Hervorhebungen und soziale Vergleiche nutzt nicht nur der Staat. Onlineshops heben „Bestseller“ hervor, Supermärkte platzieren gezielt. Der Unterschied liegt in der Frage, <b>wem der Stupser nützt</b> und ob er <b>erkennbar</b> ist. Kritiker sprechen von „Nudging for Evil“ oder „Sludge“, wenn die Entscheidungsarchitektur gegen die Interessen der Menschen gestaltet wird.</p>
+
+  <div class="card" data-ia="matrix">
+    <div class="ia-head"><span class="ia-badge">Übung 7.2</span><h3>Die Beeinflussungs-Matrix</h3><span class="ia-done">✓ erledigt</span></div>
+    <p class="small muted">Ordne jedes Beispiel einem Feld zu. Waagerecht: Wem nützt es? Senkrecht: Ist die Beeinflussung erkennbar?</p>
+    <div id="matrix"></div>
+  </div>
+
+  <h3>Streitgespräch: Sinnvoller Stups oder Bevormundung?</h3>
+  <div class="grid2">
+    <div class="card" style="margin:0;border-top:5px solid var(--green)"><h4>Pro: „Green Nudging“</h4><p class="small">„Beim Green Nudging wird nichts verboten und nichts belohnt. Man lässt die Leute, wie sie sind, aber ändert die Entscheidungsumgebung.“ Viele Menschen würden sich gern klimafreundlicher verhalten, stecken aber in Routinen fest. Beispiel: Mit eindeutigen Symbolen an Müllbehältern stieg der Anteil korrekt sortierter Müllstationen in einer Firma von 46 auf 71 %.</p><p class="small muted">nach Astrid Stehmeier, Klimaschutzagentur energiekonsens Bremen</p></div>
+    <div class="card" style="margin:0;border-top:5px solid var(--red)"><h4>Contra: „Am Ende lauert eine Glücksdiktatur“</h4><p class="small">Woher weiß der Staat, was das Beste für mich ist? Es kann gute Gründe geben, nicht vorzusorgen. Auch Rauchen kann eine bewusste Entscheidung sein. Nudging bevormundet mit psychologischen Tricks. Wer etwa bei der Organspende-Widerspruchslösung „Nein“ sagt, gerät unter sozialen Druck. Am Ende stehe die Gefahr eines Staates, der die Menschen durch Manipulation „zwangsbeglückt“.</p><p class="small muted">nach Prof. Hanno Beck, Hochschule Pforzheim, in DIE WELT</p></div>
+  </div>
+
+  <div class="card" data-ia="debatte">
+    <div class="ia-head"><span class="ia-badge">Übung 7.3</span><h3>Argumente sortieren und Position beziehen</h3><span class="ia-done">✓ erledigt</span></div>
+    <div id="debatte"></div>
+  </div>
+
+  <div class="box task">
+    <strong>Arbeitsaufträge</strong>
+    <ol>
+      <li><span class="op">Charakterisieren Sie</span> das Konzept des libertären Paternalismus.</li>
+      <li>Sie sind Mitglied einer „Nudging Unit“ der Bundesregierung. <span class="op">Entwickeln Sie</span> drei Nudges, die Bürgerinnen und Bürger zum Energiesparen motivieren.</li>
+      <li><span class="op">Führen Sie</span> in zwei Gruppen ein Streitgespräch zur Frage, ob Nudging ein legitimes Mittel staatlicher Politik ist. Leitfragen: Gibt es objektiv gute Entscheidungen? Woher weiß der Staat, was gut für die Menschen ist? Wirken Nudges dauerhaft?</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= K8 ================= -->
+<section class="chapter" id="k8" data-title="Abschluss & Werkzeuge" data-meta="Quiz · Analyse · Schutzschild" data-group="Vertiefung">
+  <div class="kicker">Kapitel 8 · Abschluss</div>
+  <h2>Jetzt durchschaust du's</h2>
+  <p class="lead">Teste dein Wissen, analysiere eine echte Werbung und stell dir deinen persönlichen Schutzschild zusammen.</p>
+
+  <div class="card" data-ia="final">
+    <div class="ia-head"><span class="ia-badge">Abschlussquiz</span><h3>12 Fragen quer durch alle Kapitel</h3><span class="ia-done">✓ erledigt</span></div>
+    <div id="final"></div>
+  </div>
+
+  <div class="card" data-ia="analyse">
+    <div class="ia-head"><span class="ia-badge">Werkzeug</span><h3>Werbeanalyse-Bogen</h3><span class="ia-done">✓ erledigt</span></div>
+    <p class="small muted">Such dir eine echte Werbung aus (Plakat, Spot, Instagram-Post, Prospekt) und analysiere sie mit allem, was du gelernt hast. Am Ende kannst du die Analyse drucken oder als PDF speichern.</p>
+    <div id="analyse"></div>
+  </div>
+
+  <div class="card" data-ia="schild">
+    <div class="ia-head"><span class="ia-badge">Werkzeug</span><h3>Mein Schutzschild gegen Manipulation</h3><span class="ia-done">✓ erledigt</span></div>
+    <p class="small muted">Wähle mindestens fünf Strategien, die du dir ab jetzt vornimmst.</p>
+    <div id="schild"></div>
+  </div>
+
+  <div class="box merke">
+    <strong>Das Wichtigste in einem Satz</strong>
+    Werbung und Verkaufspsychologie wirken vor allem über unser schnelles, unbewusstes Denken (System 1). Wer die Mechanismen kennt und in den entscheidenden Momenten das langsame Denken (System 2) einschaltet, entscheidet freier.
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer>
+  <b>Durchschaut! – Wie funktioniert Werbung?</b> · Lernplattform für den Unterricht in Wirtschaft &amp; Recht (Sek. II). Grundlagen: Unterrichtsmaterialien zu Werbung &amp; Verkaufstricks, Strategischem Marketing (Institut für Ökonomische Bildung) und Nudging (Joachim Herz Stiftung); Thaler/Sunstein: Nudge; Kahneman: Schnelles Denken, langsames Denken. Alle Produkt- und Firmennamen in den Übungen sind frei erfunden, mit Ausnahme der realen Werbeslogans im Slogan-Quiz und des Fallbeispiels Aldi Süd.
+</footer>
+
+<div class="modal-back" id="modalBack"><div class="modal" id="modal"></div></div>
+<div id="printArea"></div>
+<script>
+/* =========================================================
+   Durchschaut! – Lernplattform „Wie funktioniert Werbung?“
+   ========================================================= */
+(function(){
+"use strict";
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt = n => n.toFixed(2).replace('.', ',');
+const parseNum = v => { if(v==null) return NaN; v = String(v).trim().replace(/€|%|\s/g,'').replace(',', '.'); return v===''?NaN:Number(v); };
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; }
+
+/* ---------------- Speicher (nur lokal, robust) ---------------- */
+const KEY = 'durchschaut-werbung-v1';
+const S = {
+  data: { done:{}, theme:null },
+  load(){ try{ const raw = localStorage.getItem(KEY); if(raw){ const d = JSON.parse(raw); if(d && typeof d==='object') this.data = Object.assign(this.data, d); } }catch(e){} if(!this.data.done) this.data.done={}; },
+  save(){ try{ localStorage.setItem(KEY, JSON.stringify(this.data)); }catch(e){} }
+};
+S.load();
+
+/* ---------------- Theme ---------------- */
+function applyTheme(){ const t = S.data.theme; if(t) document.documentElement.setAttribute('data-theme', t); else document.documentElement.removeAttribute('data-theme'); }
+applyTheme();
+$('#themeBtn').addEventListener('click', () => {
+  const sysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const cur = S.data.theme || (sysDark ? 'dark' : 'light');
+  S.data.theme = cur === 'dark' ? 'light' : 'dark'; S.save(); applyTheme();
+});
+
+/* ---------------- Fortschritt ---------------- */
+const allIA = $$('[data-ia]').map(el => el.dataset.ia);
+function done(key){
+  if(!S.data.done[key]){ S.data.done[key] = true; S.save(); }
+  const card = document.querySelector('[data-ia="'+key+'"]'); if(card) card.classList.add('is-done');
+  updateProgress();
+}
+function updateProgress(){
+  const n = allIA.filter(k => S.data.done[k]).length;
+  $('#progBar').style.width = (100*n/allIA.length) + '%';
+  $('#progLabel').textContent = n + ' von ' + allIA.length + ' Übungen';
+  $$('.chapter').forEach(sec => {
+    const keys = $$('[data-ia]', sec).map(e => e.dataset.ia);
+    const d = keys.filter(k => S.data.done[k]).length;
+    const a = document.querySelector('#navList a[href="#'+sec.id+'"] .chk');
+    if(a) a.textContent = keys.length ? (d===keys.length ? '✓' : d+'/'+keys.length) : '';
+  });
+}
+$('#resetBtn').addEventListener('click', () => {
+  if(!window.confirm('Willst du deinen gesamten Fortschritt wirklich zurücksetzen?')) return;
+  S.data = { done:{}, theme:S.data.theme }; S.save(); location.hash = '#k0'; location.reload();
+});
+
+/* ---------------- Navigation ---------------- */
+const chapters = $$('.chapter');
+(function buildNav(){
+  let lastGroup = null; let html = '';
+  chapters.forEach((c, i) => {
+    if(c.dataset.group !== lastGroup){ html += (lastGroup ? '</ol>' : '') + '<div class="side-group">'+esc(c.dataset.group)+'</div><ol>'; lastGroup = c.dataset.group; }
+    html += '<li><a href="#'+c.id+'"><span class="num">'+i+'</span><span>'+esc(c.dataset.title)+'<span class="meta">'+esc(c.dataset.meta)+'</span></span><span class="chk"></span></a></li>';
+  });
+  $('#navList').innerHTML = html + '</ol>';
+  // Roadmap
+  $('#roadmap').innerHTML = chapters.slice(1).map((c,i) => '<a class="road" href="#'+c.id+'"><b>'+(i+1)+'</b><span>'+esc(c.dataset.title)+'</span><small>'+esc(c.dataset.meta)+'</small></a>').join('');
+  // Kapitel-Navigation unten
+  chapters.forEach((c,i) => {
+    const prev = chapters[i-1], next = chapters[i+1];
+    const div = document.createElement('div'); div.className = 'chap-nav';
+    div.innerHTML = (prev ? '<a class="prev" href="#'+prev.id+'"><small>← zurück</small><b>'+esc(prev.dataset.title)+'</b></a>' : '') +
+                    (next ? '<a class="next" href="#'+next.id+'"><small>weiter →</small><b>'+esc(next.dataset.title)+'</b></a>' : '');
+    c.appendChild(div);
+  });
+})();
+function route(){
+  const id = (location.hash || '#k0').slice(1);
+  const target = document.getElementById(id) && document.getElementById(id).classList.contains('chapter') ? id : 'k0';
+  chapters.forEach(c => c.classList.toggle('active', c.id === target));
+  $$('#navList a').forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#'+target));
+  $('#sidebar').classList.remove('open');
+  window.scrollTo(0, 0);
+  if(target === 'k7') renderAufloesung();
+}
+window.addEventListener('hashchange', route);
+$('#menuBtn').addEventListener('click', () => $('#sidebar').classList.toggle('open'));
+
+/* ---------------- Drucken ---------------- */
+function printHTML(title, inner){
+  const pa = $('#printArea');
+  pa.innerHTML = '<div style="font-family:Arial,Helvetica,sans-serif;max-width:720px;margin:0 auto"><h1 style="font-size:20pt;margin:0 0 4px">'+esc(title)+'</h1><p style="color:#555;margin:0 0 16px;font-size:10pt">Durchschaut! – Wie funktioniert Werbung? · '+new Date().toLocaleDateString('de-DE')+'</p>'+inner+'</div>';
+  document.body.classList.add('printing');
+  const off = () => { document.body.classList.remove('printing'); window.removeEventListener('afterprint', off); };
+  window.addEventListener('afterprint', off);
+  window.print();
+  setTimeout(off, 1500);
+}
+
+/* =========================================================
+   Generischer Quiz-Baustein
+   ========================================================= */
+function quizList(id, items, key, opts={}){
+  const root = document.getElementById(id); if(!root) return;
+  let answered = 0, correct = 0;
+  const shared = opts.options;
+  root.innerHTML = items.map((it, i) => {
+    const options = it.options || shared;
+    return '<div class="q-item" data-i="'+i+'"><div class="q-text">'+(opts.numbered===false?'':(i+1)+'. ')+it.q+'</div><div class="q-opts">'+
+      options.map((o,j) => '<button class="opt" data-j="'+j+'">'+o+'</button>').join('')+'</div><div class="q-fb"></div></div>';
+  }).join('') + '<div class="q-summary" style="margin-top:14px"></div>';
+  root.onclick = e => {
+    if(e.target.closest('.q-retry')){ quizList(id, opts.shuffle ? shuffle(items) : items, key, opts); return; }
+    const b = e.target.closest('.opt'); if(!b || b.disabled) return;
+    const item = b.closest('.q-item'); const i = +item.dataset.i, j = +b.dataset.j; const it = items[i];
+    const corr = Array.isArray(it.correct) ? it.correct : [it.correct];
+    const ok = corr.includes(j);
+    $$('.opt', item).forEach((x,k) => { x.disabled = true; if(corr.includes(k)) x.classList.add('right'); });
+    if(!ok) b.classList.add('wrong');
+    const fb = $('.q-fb', item);
+    fb.className = 'q-fb show ' + (it.neutral ? 'neutral' : (ok ? 'ok' : 'no'));
+    fb.innerHTML = '<b>'+(it.neutral ? 'Einordnung: ' : (ok ? 'Richtig. ' : 'Nicht ganz. '))+'</b>'+it.explain;
+    answered++; if(ok) correct++;
+    if(answered === items.length){
+      $('.q-summary', root).innerHTML = '<span class="score">'+correct+' von '+items.length+' richtig</span> '+(opts.summary ? opts.summary(correct, items.length) : '') +
+        ' <button class="btn ghost small q-retry" style="margin-left:6px">Nochmal</button>';
+      done(key);
+    }
+  };
+}
+
+/* =========================================================
+   K0 – Selbsttest (in Anlehnung an das Konsumspiel)
+   ========================================================= */
+const ST = [
+  { id:'internet', art:'📶', title:'Dein Internetvertrag',
+    text:'Du ziehst in deine erste eigene WG und brauchst einen Internetanschluss. Ihr streamt, zockt ab und zu und habt Videocalls. Welchen Tarif schließt du ab?',
+    options:{
+      A:[{id:'s',name:'Surf S',spec:'50 Mbit/s · 24 Monate',price:'24,99 €/Monat'},{id:'m',name:'Surf M',spec:'100 Mbit/s · 24 Monate',price:'34,99 €/Monat'},{id:'l',name:'Surf L',spec:'250 Mbit/s · 24 Monate',price:'49,99 €/Monat'}],
+      B:[{id:'s',name:'Surf S',spec:'50 Mbit/s · 24 Monate',price:'24,99 €/Monat'},{id:'m',name:'Surf M',spec:'100 Mbit/s · 24 Monate',price:'34,99 €/Monat'},{id:'l',name:'Surf L',spec:'250 Mbit/s · 24 Monate',price:'49,99 €/Monat'}]
+    }, preselect:{ B:'l' } },
+  { id:'power', art:'🔋', title:'Eine neue Powerbank',
+    text:'Dein Handy-Akku hält nicht mehr bis zum Abend. Im Onlineshop findest du diese Powerbanks. Welche legst du in den Warenkorb?',
+    options:{
+      A:[{id:'a',name:'PowerCell 10',spec:'10.000 mAh · USB-C',price:'19,99 €'},{id:'b',name:'PowerCell Slim',spec:'10.000 mAh · USB-C · flaches Design',price:'24,99 €'},{id:'c',name:'PowerCell 20',spec:'20.000 mAh · USB-C',price:'29,99 €'}],
+      B:[{id:'a',name:'PowerCell 10',spec:'10.000 mAh · USB-C',price:'19,99 €'},{id:'b',name:'PowerCell Slim',spec:'10.000 mAh · USB-C · flaches Design',price:'24,99 €',badge:'TOPSELLER · 2.341× gekauft'},{id:'c',name:'PowerCell 20',spec:'20.000 mAh · USB-C',price:'29,99 €'}]
+    } },
+  { id:'pasta', art:'🍝', title:'Pasta, basta!',
+    text:'Auf deinem Einkaufszettel steht eine Packung Spaghetti. Welche nimmst du?',
+    options:{
+      A:[{id:'x',name:'Spaghetti Basic',spec:'500 g',price:'0,79 €'},{id:'y',name:'Spaghetti Classico',spec:'500 g · Hartweizen',price:'1,49 €'}],
+      B:[{id:'x',name:'Spaghetti Basic',spec:'500 g',price:'0,79 €'},{id:'y',name:'Spaghetti Classico',spec:'500 g · Hartweizen',price:'1,49 €'},{id:'z',name:'Spaghetti Gourmet',spec:'500 g · bronzegezogen',price:'3,29 €'}]
+    } }
+];
+if(!S.data.st){ S.data.st = { group: Math.random() < .5 ? 'A' : 'B', answers:{}, step:0, conf:null }; S.save(); }
+function renderSelbsttest(){
+  const st = S.data.st, root = $('#selbsttest');
+  if(st.step >= ST.length + 1){
+    root.innerHTML = '<div class="box merke" style="margin:0"><strong>Gespeichert. Danke!</strong>Deine Entscheidungen sind notiert. Die Auflösung gibt es in <a href="#k7">Kapitel 7</a>. Bitte nicht vorblättern: Lies erst die anderen Kapitel. Dann ist die Auflösung spannender.</div>' +
+      '<div class="btn-row"><a class="btn" href="#k1">Los geht’s mit Kapitel 1 →</a><button class="btn ghost small" id="stRedo">Test wiederholen</button></div>';
+    $('#stRedo').onclick = () => { st.step = 0; st.answers = {}; st.conf = null; S.save(); renderSelbsttest(); };
+    return;
+  }
+  if(st.step === ST.length){
+    root.innerHTML = '<div class="st-step">Letzte Frage</div><h4 style="margin-top:6px">Wie sicher bist du, dass deine drei Entscheidungen von nichts beeinflusst wurden außer von deinen eigenen Vorlieben?</h4>' +
+      '<input type="range" min="0" max="100" step="5" value="50" id="stConf" aria-label="Sicherheit in Prozent"><div class="center"><span class="big-num" id="stConfV">50 %</span></div>' +
+      '<div class="btn-row"><button class="btn red" id="stSave">Speichern</button></div>';
+    const r = $('#stConf'); r.oninput = () => $('#stConfV').textContent = r.value + ' %';
+    $('#stSave').onclick = () => { st.conf = +r.value; st.step++; S.save(); done('selbsttest'); renderSelbsttest(); };
+    return;
+  }
+  const sc = ST[st.step], g = st.group, opts = sc.options[g];
+  if(st.answers[sc.id] == null && sc.preselect && sc.preselect[g]) st.answers[sc.id] = sc.preselect[g];
+  const sel = st.answers[sc.id];
+  root.innerHTML = '<div class="st-step">Entscheidung '+(st.step+1)+' von '+ST.length+'</div><h4 style="margin-top:6px;font-size:1.25rem">'+sc.art+' '+sc.title+'</h4><p>'+sc.text+'</p>' +
+    '<div class="st-options">'+opts.map(o => '<button class="prod'+(sel===o.id?' sel':'')+'" data-id="'+o.id+'">'+(o.badge?'<span class="p-badge">'+o.badge+'</span>':'')+'<span class="p-radio"></span><span class="p-name">'+o.name+'</span><span class="p-spec">'+o.spec+'</span><span class="p-price">'+o.price+'</span></button>').join('')+'</div>' +
+    '<div class="btn-row"><button class="btn" id="stNext" '+(sel?'':'disabled')+'>Weiter →</button></div>';
+  $$('.prod', root).forEach(b => b.onclick = () => { st.answers[sc.id] = b.dataset.id; S.save(); renderSelbsttest(); });
+  $('#stNext').onclick = () => { if(!st.answers[sc.id]) return; st.step++; S.save(); renderSelbsttest(); };
+}
+renderSelbsttest();
+
+/* =========================================================
+   K7 – Auflösung
+   ========================================================= */
+const ST_EXPLAIN = {
+  internet:{ nudge:'Default-Nudge (Voreinstellung)', text:'In Gruppe B war der teuerste Tarif <b>bereits vorausgewählt</b>. Wer nichts aktiv ändert, bleibt beim Standard. Defaults wirken, weil Ändern Mühe kostet, weil eine Voreinstellung wie eine Empfehlung wirkt („Die werden schon wissen, was gut ist“) und weil Abweichen sich wie ein Risiko anfühlt. Brauchst du 250 Mbit/s für eine WG? Meist nicht.', pick:{B:'l'} },
+  power:{ nudge:'Sozialer Nudge (Social Proof)', text:'In Gruppe B trug die Slim-Powerbank das Etikett <b>„TOPSELLER · 2.341× gekauft“</b>. Sie hat dieselbe Kapazität wie die günstigere PowerCell 10, kostet aber 5 € mehr. Wir orientieren uns an anderen: Was viele kaufen, kann nicht schlecht sein. Ob die Zahl stimmt, kannst du nicht prüfen.', pick:{B:'b'} },
+  pasta:{ nudge:'Verfügbarkeit / Kompromisseffekt', text:'Gruppe B hatte eine <b>dritte, sehr teure Option</b> zur Auswahl. Sie wird selten gekauft, verändert aber den Blick: Die mittlere Packung wirkt plötzlich wie der vernünftige Kompromiss. Ohne die teure Packung ist „Classico“ die teurere Wahl, mit ihr die „goldene Mitte“.', pick:{B:'y'} }
+};
+function renderAufloesung(){
+  const root = $('#aufloesung'); const st = S.data.st;
+  if(!st || st.step < ST.length + 1){
+    root.innerHTML = '<p>Du hast den Selbsttest noch nicht abgeschlossen.</p><a class="btn" href="#k0">Zum Selbsttest in Kapitel 0</a>';
+    return;
+  }
+  let nudged = 0;
+  const parts = ST.map(sc => {
+    const ex = ST_EXPLAIN[sc.id], mine = st.answers[sc.id];
+    const col = g => '<div class="reveal-col'+(g===st.group?' mine':'')+'"><h4>Gruppe '+g+(g===st.group?' (deine)':'')+'</h4>' +
+      sc.options[g].map(o => '<div class="mini-prod'+(g===st.group && mine===o.id?' chosen':'')+'"><span>'+o.name+(o.badge?'<em>Topseller</em>':'')+(sc.preselect && sc.preselect[g]===o.id?'<em>vorausgewählt</em>':'')+'</span><b>'+o.price+'</b></div>').join('') + '</div>';
+    const followed = ex.pick[st.group] && ex.pick[st.group] === mine; if(followed) nudged++;
+    let personal = '';
+    if(st.group === 'B') personal = followed ? '<p class="small"><b>Du hast die Option gewählt, in deren Richtung „gestupst“ wurde.</b> Das muss nicht heißen, dass du manipuliert wurdest. Vielleicht wolltest du sie ohnehin. Aber wüsstest du das sicher?</p>' : '<p class="small"><b>Du hast dich nicht in die gestupste Richtung bewegt.</b> Gut! Viele andere tun es.</p>';
+    else personal = '<p class="small">Du warst in der Vergleichsgruppe A <b>ohne</b> diesen Stupser. Deine Wahl zeigt, wofür man sich ohne Beeinflussung entscheidet.</p>';
+    return '<h4 style="margin-top:18px">'+sc.art+' '+sc.title+': <span style="color:var(--red)">'+ex.nudge+'</span></h4><div class="reveal-grid">'+col('A')+col('B')+'</div><p class="small" style="margin-top:10px">'+ex.text+'</p>'+personal;
+  }).join('');
+  const confTxt = st.conf != null ? '<p>Vor der Auflösung warst du dir zu <b>'+st.conf+' %</b> sicher, dass dich nichts beeinflusst hat.' + (st.group==='B' ? ' In 3 Situationen wurdest du gestupst und bist '+nudged+'-mal in die gestupste Richtung gegangen.' : '') + '</p>' : '';
+  root.innerHTML = '<p>Alle, die diese Seite öffnen, werden zufällig einer von zwei Gruppen zugeteilt. <b>Du warst in Gruppe '+st.group+'.</b> Beide Gruppen sahen fast dieselben Angebote, mit einem kleinen Unterschied:</p>' + parts + confTxt +
+    '<div class="box task"><strong>Klassenauswertung</strong>Zählt per Handzeichen: Wer war in Gruppe A, wer in Gruppe B? Wer hat jeweils den Tarif Surf L, die Slim-Powerbank und die Classico-Pasta gewählt? Unterscheiden sich die Anteile der beiden Gruppen?</div>';
+  done('aufloesung');
+}
+
+/* =========================================================
+   K1 – Strategisch / operativ & Marketing-Mix
+   ========================================================= */
+quizList('k1-so', [
+  { q:'Ein Sportartikelhersteller beschließt, in den nächsten fünf Jahren Marktführer bei nachhaltigen Laufschuhen zu werden.', correct:0, explain:'Ein langfristiges Marketingziel, festgelegt von der Unternehmensleitung.' },
+  { q:'Im Sommerschlussverkauf werden alle Laufschuhe zwei Wochen lang um 20 % reduziert.', correct:1, explain:'Eine kurzfristige, konkrete Maßnahme der Preispolitik.' },
+  { q:'Aldi Süd positioniert sich mit der Eigenmarke „Nur Nur Natur“ langfristig als nachhaltiger Discounter.', correct:0, explain:'Positionierungsstrategie: Welches Image soll das Unternehmen auf Dauer haben?' },
+  { q:'Eine Influencerin erhält für drei Instagram-Posts im Mai ein Honorar.', correct:1, explain:'Konkrete Maßnahme der Kommunikationspolitik mit engem Zeitfenster.' },
+  { q:'Mit einer SWOT-Analyse ermittelt ein Unternehmen seine Stärken und Schwächen im Vergleich zur Konkurrenz.', correct:0, explain:'Die SWOT-Analyse ist ein Analyseinstrument des strategischen Marketings. Sie liefert die Datengrundlage für die Strategie.' },
+  { q:'Ein neues Müsli wird im Supermarkt auf Augenhöhe platziert.', correct:1, explain:'Konkrete Maßnahme am Verkaufsort (Distributions- bzw. Platzierungspolitik).' },
+  { q:'Ein Unternehmen entscheidet, sich künftig ganz auf die Zielgruppe der 14- bis 19-Jährigen zu konzentrieren.', correct:0, explain:'Segmentierungsstrategie: Welche Kundengruppe soll langfristig bedient werden?' },
+  { q:'Ein Getränkehersteller verkleinert die Flasche von 0,5 l auf 0,4 l, der Preis bleibt gleich.', correct:1, explain:'Operative Entscheidung der Produkt- und Preispolitik, eine versteckte Preiserhöhung („Shrinkflation“). Mehr dazu in Kapitel 4.' }
+], 'k1-so', { options:['Strategisch','Operativ'] });
+
+quizList('k1-4p', [
+  { q:'Eine Limonade bekommt eine neue Verpackung in Neonfarben.', correct:0, explain:'Verpackung und Design gehören zur Produktpolitik. Verpackungen sind zugleich „stumme Verkäufer“.' },
+  { q:'Ein Smartphone kostet 499 € statt 500 €.', correct:1, explain:'Preispolitik: gebrochener Preis (Charm-Preis), mehr in Kapitel 4.' },
+  { q:'Süßigkeiten werden direkt an der Kasse platziert.', correct:2, explain:'Platzierung am Verkaufsort (Point of Sale) ist Teil der Distributionspolitik. Manche Lehrbücher ordnen sie auch der Kommunikationspolitik zu.' },
+  { q:'Ein Sportler wirbt in einem Fernsehspot mit Jingle für ein Deo.', correct:3, explain:'Werbespot, Testimonial und Jingle: klassische Kommunikationspolitik.' },
+  { q:'Ein Onlineshop bietet Lieferung am nächsten Tag an.', correct:2, explain:'Wie gelangt das Produkt zum Kunden? Das ist Distributionspolitik.' },
+  { q:'„Jetzt kaufen, in 30 Tagen bezahlen“', correct:1, explain:'Zahlungsbedingungen (Konditionenpolitik) gehören zur Preispolitik.' },
+  { q:'Ein Schokoladenhersteller bringt eine „Limited Edition“-Sorte heraus.', correct:0, explain:'Sortiment und Produktvarianten gehören zur Produktpolitik. Die künstliche Begrenzung erzeugt zusätzlich Knappheit.' },
+  { q:'Ein Unternehmen sponsert das Sommerfest einer Schule.', correct:3, explain:'Sponsoring ist ein Instrument der Kommunikationspolitik. Schulsponsoring ist allerdings umstritten.' },
+  { q:'Studierende erhalten 10 % Rabatt.', correct:1, explain:'Preisdifferenzierung nach Zielgruppen: Preispolitik.' },
+  { q:'Eine Modemarke eröffnet für vier Wochen einen Pop-up-Store in der Innenstadt.', correct:2, explain:'Neuer Vertriebsweg auf Zeit: Distributionspolitik. Er wirkt zugleich als Event (Kommunikation).' },
+  { q:'Ein Elektrogerät bekommt 5 Jahre Garantie.', correct:0, explain:'Service und Garantie sind Teil der Produktpolitik.' },
+  { q:'Auf Instagram läuft ein Gewinnspiel: „Markiere drei Freunde!“', correct:3, explain:'Gewinnspiele sollen eine Marke ins Gedächtnis rufen und verbreiten: Kommunikationspolitik.' }
+], 'k1-4p', { options:['Produkt','Preis','Distribution','Kommunikation'] });
+
+/* =========================================================
+   K2 – AIDA-Anzeige
+   ========================================================= */
+const AIDA_EL = [
+  { n:1, label:'Blitz & Dose in Neonfarben', pos:'top:3%;left:50%;width:46%;height:40%', correct:['att'], ex:'<b>Eyecatcher (Blickfang).</b> Starke physische Reize wie intensive Farben, Kontrast und Dynamik ziehen den Blick in Sekundenbruchteilen an. Das läuft über System 1, noch bevor wir „entscheiden“, hinzusehen.' },
+  { n:2, label:'Headline „Schlaf ist was für später.“', pos:'top:45%;left:4%;width:92%;height:14%', correct:['att','int'], ex:'<b>Headline mit Provokation.</b> Sie verstößt gegen unsere Erwartung (eigentlich wissen wir: Schlaf ist wichtig) und weckt so Aufmerksamkeit und Neugier. Zugleich verkauft sie ein Lebensgefühl: wach, wild, unaufhaltsam.' },
+  { n:3, label:'Zitat einer Influencerin mit 1,2 Mio. Followern', pos:'top:60.5%;left:4%;width:58%;height:14%', correct:['des'], ex:'<b>Testimonial / Opinionleader.</b> Eine bekannte Person, die viele Jugendliche als vertrauenswürdig erleben, macht das Produkt begehrenswert. Wir übertragen Sympathie und Status auf das Produkt (Social Proof, Autorität, Identifikation).' },
+  { n:4, label:'Freunde beim Skaten', pos:'top:60.5%;left:64%;width:32%;height:14%', correct:['des'], ex:'<b>Emotionale Ansprache: Zugehörigkeit und Freiheit.</b> Verkauft wird nicht Koffein, sondern das Gefühl, Teil einer coolen Peergroup zu sein.' },
+  { n:5, label:'„Mit Guarana & B-Vitaminen – für Fokus & Energie“', pos:'top:4%;left:4%;width:44%;height:19%', correct:['int'], ex:'<b>Scheinbar sachliche Produktinformation.</b> Sie weckt Interesse und liefert dem Verstand eine Rechtfertigung („Vitamine sind doch gesund“). Dieser „Gesundheits-Heiligenschein“ lenkt vom Zucker- und Koffeingehalt ab.' },
+  { n:6, label:'Störer „LIMITED EDITION – nur bis Sonntag“', pos:'top:25%;left:6%;width:34%;height:16%', correct:['act'], ex:'<b>Künstliche Verknappung.</b> Zeitliche Begrenzung erzeugt Handlungsdruck: Wer jetzt nicht kauft, verpasst etwas (Verlustaversion, FOMO).' },
+  { n:7, label:'„2 Dosen für 3 €* – jetzt im Kühlregal“', pos:'top:76%;left:4%;width:92%;height:11%', correct:['act'], ex:'<b>Call-to-Action mit Mengenrabatt.</b> Eine konkrete Handlungsaufforderung plus Preisvorteil. Ob du zwei Dosen brauchst, fragt die Anzeige nicht.' },
+  { n:8, label:'Kleingedrucktes', pos:'top:88.5%;left:4%;width:92%;height:9%', correct:['none'], ex:'<b>Pflichtangaben, bewusst klein.</b> „Erhöhter Koffeingehalt. Für Kinder und schwangere oder stillende Frauen nicht empfohlen.“ Dieser Hinweis ist gesetzlich vorgeschrieben. Er dient keiner AIDA-Stufe und wird so gestaltet, dass er kaum auffällt.' }
+];
+(function renderAIDA(){
+  const root = $('#aida');
+  const poster = '<div class="poster" aria-label="Erfundene Anzeige für VOLTA Energy">' +
+    '<svg viewBox="0 0 300 420" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">' +
+      '<defs><linearGradient id="vg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE14D"/><stop offset="1" stop-color="#FF3D7F"/></linearGradient></defs>' +
+      '<polygon points="215,10 160,95 200,95 165,180 255,75 212,75 250,10" fill="url(#vg)" opacity=".95"/>' +
+      '<rect x="222" y="95" width="46" height="84" rx="8" fill="#1d1a3a" stroke="#FFE14D" stroke-width="2"/>' +
+      '<text x="245" y="142" fill="#FFE14D" font-size="11" font-weight="900" text-anchor="middle" font-family="Arial">VOLTA</text>' +
+      '<circle cx="232" cy="268" r="9" fill="#ffffff22"/><path d="M222 300 q10 -25 22 -20 l8 22" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/>' +
+      '<circle cx="268" cy="262" r="9" fill="#ffffff22"/><path d="M258 296 q10 -25 22 -20 l6 20" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/>' +
+      '<rect x="212" y="304" width="48" height="5" rx="2.5" fill="#FFE14D"/><circle cx="218" cy="312" r="3" fill="#fff"/><circle cx="254" cy="312" r="3" fill="#fff"/>' +
+    '</svg>' +
+    '<div style="position:absolute;top:5%;left:6%;width:42%"><div style="font-size:1.55rem;font-weight:900;letter-spacing:.04em;line-height:1">VOLTA</div><div style="font-size:.66rem;font-weight:700;opacity:.9;margin-top:6px;font-family:var(--font-body)">Mit Guarana &amp; B-Vitaminen – für Fokus &amp; Energie</div></div>' +
+    '<div style="position:absolute;top:27%;left:8%;width:30%;aspect-ratio:1;border-radius:50%;background:#FF3D7F;transform:rotate(-12deg);display:flex;align-items:center;justify-content:center;text-align:center;font-size:.62rem;font-weight:900;line-height:1.05;padding:6px">LIMITED<br>EDITION<br><span style="font-size:.5rem;font-weight:700">nur bis Sonntag</span></div>' +
+    '<div style="position:absolute;top:46%;left:6%;width:88%;font-size:1.65rem;font-weight:900;line-height:.95;text-transform:uppercase">Schlaf ist was<br><span style="color:#FFE14D">für später.</span></div>' +
+    '<div style="position:absolute;top:62%;left:6%;width:55%;background:#ffffff1a;border-radius:10px;padding:6px 8px;font-family:var(--font-body);font-size:.62rem;line-height:1.25"><b>„Mein Fuel für jede Session.“</b><br>@mia.moves · 1,2 Mio. Follower</div>' +
+    '<div style="position:absolute;top:77.5%;left:6%;width:88%;background:#FFE14D;color:#111;border-radius:8px;padding:6px 10px;font-size:.85rem;font-weight:900;display:flex;justify-content:space-between;align-items:center"><span>2 Dosen für 3 €*</span><span style="font-size:.6rem">Jetzt im Kühlregal →</span></div>' +
+    '<div style="position:absolute;top:90%;left:6%;width:88%;font-family:var(--font-body);font-size:.42rem;opacity:.7;line-height:1.2">*statt 1,99 € je Dose. Erhöhter Koffeingehalt (32 mg/100 ml). Für Kinder und schwangere oder stillende Frauen nicht empfohlen.</div>' +
+    AIDA_EL.map(e => '<button class="hs" data-n="'+e.n+'" style="'+e.pos+'" aria-label="Element '+e.n+': '+esc(e.label)+'"><span class="tagno">'+e.n+'</span></button>').join('') +
+    '</div>';
+  const opts = '<option value="">– Stufe wählen –</option><option value="att">A · Attention</option><option value="int">I · Interest</option><option value="des">D · Desire</option><option value="act">A · Action</option><option value="none">keine (Pflichtangabe)</option>';
+  const rows = AIDA_EL.map(e => '<div class="aida-row" data-n="'+e.n+'"><span class="n">'+e.n+'</span><span class="small">'+esc(e.label)+'</span><select aria-label="AIDA-Stufe für Element '+e.n+'">'+opts+'</select><div class="ex"></div></div>').join('');
+  root.innerHTML = '<div class="aida-wrap">'+poster+'<div>'+rows+'<div class="btn-row"><button class="btn red" id="aidaCheck">Prüfen</button><span id="aidaScore"></span></div></div></div>';
+  const focus = n => { $$('.hs', root).forEach(h => h.classList.toggle('on', h.dataset.n==n)); $$('.aida-row', root).forEach(r => r.classList.toggle('on', r.dataset.n==n)); };
+  $$('.hs', root).forEach(h => h.onclick = () => { focus(h.dataset.n); const r = $('.aida-row[data-n="'+h.dataset.n+'"]', root); r.scrollIntoView({block:'nearest', behavior:'smooth'}); $('select', r).focus(); });
+  $$('.aida-row select', root).forEach(s => s.addEventListener('focus', () => focus(s.closest('.aida-row').dataset.n)));
+  $('#aidaCheck').onclick = () => {
+    let ok = 0, missing = 0;
+    AIDA_EL.forEach(e => {
+      const r = $('.aida-row[data-n="'+e.n+'"]', root), v = $('select', r).value;
+      if(!v){ missing++; return; }
+      const good = e.correct.includes(v); if(good) ok++;
+      r.classList.add('checked'); r.classList.toggle('ok', good); r.classList.toggle('no', !good);
+      $('.ex', r).innerHTML = (good ? '✓ ' : '✗ Gemeint war: <b>'+e.correct.map(c => ({att:'Attention',int:'Interest',des:'Desire',act:'Action',none:'keine Stufe'}[c])).join(' oder ')+'</b>. ') + e.ex;
+    });
+    $('#aidaScore').innerHTML = missing ? '<span class="muted small">Noch '+missing+' Element(e) ohne Zuordnung.</span>' : '<span class="score">'+ok+' von '+AIDA_EL.length+' richtig</span>';
+    if(!missing) done('aida');
+  };
+})();
+
+/* =========================================================
+   K2 – Glossar (Werbe-1x1)
+   ========================================================= */
+const GLOSSAR = [
+  ['Zielgruppe','Grundbegriff','Gruppe von Menschen mit ähnlichen Merkmalen und Interessen. Nur wer seine Zielgruppe genau kennt, kann sie gezielt ansprechen. Deshalb erforscht die Marktforschung Bedürfnisse und Vorlieben.'],
+  ['Werbemittel / Werbeträger','Grundbegriff','Werbemittel sind die gestalteten Werbematerialien (Anzeige, Plakat, Spot). Werbeträger sind die Medien, die sie verbreiten (Zeitung, TV, Website, Bushaltestelle).'],
+  ['Werbeagentur','Grundbegriff','Firma, die für Auftraggeber Werbestrategien entwickelt und Kampagnen gestaltet. Dort arbeiten Marketingfachleute, Grafikerinnen und Texter.'],
+  ['Peergroup','Grundbegriff','Gruppe Gleichaltriger mit ähnlichen Interessen, etwa die Clique. Jugendliche beeinflussen sich gegenseitig stark. Deshalb beschäftigt sich Jugendwerbung intensiv mit Peergroups.'],
+  ['Anzeige','Klassisch','Bezahlte Werbung in Printmedien, die als „Anzeige“ gekennzeichnet sein muss. Sie wird im Schnitt nur ca. 2 Sekunden betrachtet. Deshalb arbeitet sie mit Bildern, Farben und wenig Text.'],
+  ['Plakat / City Light','Klassisch','Großflächige Außenwerbung. City Lights sind hinterleuchtet und stehen an stark frequentierten Orten wie Haltestellen. Die Botschaft wird auf eine zentrale Idee reduziert: großes Bild, kurzer Slogan.'],
+  ['Werbespot / Werbeblock','Klassisch','Kurzer Werbefilm in TV, Kino oder Online. Im Werbeblock laufen mehrere Spots hintereinander. Je höher die Einschaltquote, desto teurer die Sendezeit.'],
+  ['Jingle','Klassisch','Kurze, typische Melodie oder gesungener Text. Als „Ohrwurm“ soll er dauerhaft an eine Marke erinnern (Wiederholungseffekt).'],
+  ['Eyecatcher & Headline','Klassisch','Der Eyecatcher (Blickfang) lenkt die Aufmerksamkeit, die Headline (Schlagzeile) vermittelt in wenigen Worten die Hauptbotschaft und lädt zum Weiterlesen ein.'],
+  ['Logo','Klassisch','Stärkstes Wiedererkennungselement einer Marke: Bild, Schriftzug oder beides. Es soll so einfach sein, dass es auch 20 mm klein noch erkennbar ist.'],
+  ['Direct Mail','Klassisch','Briefwerbung: Prospekte, Kataloge oder persönlich adressierte Werbebriefe. Persönliche Ansprache erhöht die Kaufbereitschaft. Adressen werden dafür gehandelt.'],
+  ['Banner / Pop-up','Online','Grafische Werbeflächen auf Websites, oft animiert. Pop-ups öffnen sich als eigenes Fenster und müssen weggeklickt werden. Pop-unders erscheinen hinter dem Browserfenster.'],
+  ['Social-Media-Marketing','Online','Werbung auf Plattformen wie Instagram, TikTok, YouTube oder Snapchat, also genau dort, wo die Zielgruppe ihre Zeit verbringt. Ziele: Markenbildung, Kundenbindung, Verkauf.'],
+  ['Newsletter','Online','Abonnierte E-Mail mit Infos zu Produkten und Angeboten. Instrument der Kundenbindung, das zugleich Daten über das Leseverhalten liefert.'],
+  ['Influencer / Opinionleader','Versteckt','Meinungsführer mit großer Reichweite, die viele, besonders Jugendliche, als vertrauenswürdig empfinden. Wir richten uns eher nach Menschen als nach Werbeversprechen.'],
+  ['Testimonial','Versteckt','Eine bekannte Person wirbt gegen Bezahlung für ein Produkt. Ihre Sympathie und Glaubwürdigkeit sollen sich auf die Marke übertragen.'],
+  ['Product-Placement','Versteckt','Markenprodukte werden gut erkennbar in Filme, Serien oder Videos eingebaut. Die Grenze zwischen Programm und Werbung verschwimmt.'],
+  ['Advertorial','Versteckt','Werbung, die wie ein redaktioneller Artikel aussieht. Ohne Kennzeichnung als Anzeige ist es unerlaubte Schleichwerbung.'],
+  ['Gewinnspiel','Versteckt','Einfache Frage, attraktiver Preis. Online muss man oft kommentieren oder Freunde markieren. So verbreitet sich die Marke, und das Unternehmen sammelt Daten.'],
+  ['Merchandising','Versteckt','Zusatzprodukte zu Filmen, Serien oder Stars wie Tassen, Shirts oder Figuren. Wer sie trägt, wird selbst zum Werbeträger. Manche Filme verdienen damit mehr als an der Kinokasse.'],
+  ['Schulsponsoring','Versteckt','Ein Unternehmen unterstützt eine Schule mit Geld oder Sachmitteln und wird dafür lobend erwähnt. Ziel: gutes Image und Kundschaft von morgen. Das ist umstritten.'],
+  ['Event / Give-away','Versteckt','Events (Messen, Konzerte, Sportveranstaltungen) sollen eine Marke erlebbar machen. Give-aways sind Werbegeschenke wie Kulis oder Tassen mit Logo, die im Alltag an die Firma erinnern.'],
+  ['Mall Signage / Bandenwerbung','Klassisch','Digitale Bildschirme in Einkaufszentren und Bahnhöfen bzw. Werbung am Spielfeldrand. Sie ist so platziert, dass die Kamera sie ständig im Bild hat.']
+];
+(function renderGlossar(){
+  const root = $('#glossar'); const flipped = new Set(); let cat = 'Alle', q = '';
+  root.innerHTML = '<div class="filters"><input type="search" placeholder="Begriff suchen …" aria-label="Begriff suchen" id="gq">' +
+    ['Alle','Grundbegriff','Klassisch','Online','Versteckt'].map(c => '<button class="opt'+(c==='Alle'?' sel':'')+' small" data-c="'+c+'">'+c+'</button>').join('') + '</div><div class="flip-grid" id="gGrid"></div><p class="small muted" id="gCount" style="margin-top:8px"></p>';
+  const draw = () => {
+    $('#gGrid').innerHTML = GLOSSAR.filter(g => (cat==='Alle' || g[1]===cat) && (g[0]+g[2]).toLowerCase().includes(q)).map(g => {
+      const i = GLOSSAR.indexOf(g);
+      return '<button class="flip'+(flipped.has(i)?' on':'')+'" data-i="'+i+'"><div class="flip-in"><div class="flip-f"><span class="pill">'+g[1]+'</span><b>'+g[0]+'</b><span class="small muted">antippen ↻</span></div><div class="flip-b">'+g[2]+'</div></div></button>';
+    }).join('') || '<p class="muted">Kein Treffer.</p>';
+    $('#gCount').textContent = flipped.size + ' von ' + GLOSSAR.length + ' Karten angesehen';
+  };
+  root.addEventListener('click', e => {
+    const f = e.target.closest('.flip'); if(f){ f.classList.toggle('on'); flipped.add(+f.dataset.i); $('#gCount').textContent = flipped.size + ' von ' + GLOSSAR.length + ' Karten angesehen'; if(flipped.size >= 8) done('glossar'); return; }
+    const c = e.target.closest('[data-c]'); if(c){ cat = c.dataset.c; $$('[data-c]', root).forEach(x => x.classList.toggle('sel', x===c)); draw(); }
+  });
+  $('#gq').addEventListener('input', e => { q = e.target.value.toLowerCase(); draw(); });
+  draw();
+})();
+
+/* =========================================================
+   K2 – Feed: Werbung oder Inhalt?
+   ========================================================= */
+const FEED = [
+  { user:'lena.lifts', sub:'Fitness · 380 Tsd. Follower', col:'#E85D75', img:'🥤', bg:'#FFE3E8', body:'Mein Morgenritual 💪☀️ Ohne meinen Shake geht gar nix! Mit meinem Code <b>LENA20</b> spart ihr 20 % bei ProteinPro 😍 #morningroutine #fit', ans:0, ex:'<b>Werbung, und zwar unzulässige Schleichwerbung.</b> Ein Rabattcode zeigt ein kommerzielles Interesse: Lena verdient an jedem Kauf mit (Affiliate). Der Beitrag müsste deutlich als „Werbung“ oder „Anzeige“ gekennzeichnet sein. Das wirkt besonders stark, weil Follower eine gefühlte Freundschaft zu Influencern haben (parasoziale Beziehung).' },
+  { user:'tom.travels', sub:'Reisen · 95 Tsd. Follower', col:'#3A86FF', img:'✈️', bg:'#E1EEFF', body:'<span class="pill" style="background:#111;color:#fff">Anzeige</span> Mit FlyNow in 2 Stunden nach Lissabon – und das Wetter? Unfassbar! 🌞 Link in Bio.', ans:0, ex:'<b>Werbung, korrekt gekennzeichnet.</b> So soll es sein. Trotzdem wirkt der Post wie ein persönliches Reise-Erlebnis. Die Kennzeichnung steht klein am Anfang und wird beim schnellen Scrollen leicht übersehen.' },
+  { user:'sara_m', sub:'folgst du', col:'#2EC4B6', img:'🏞️', bg:'#DDF5F2', body:'Endlich Ferien!!! Erster Tag am See mit den Mädels 🌞💦', ans:1, ex:'<b>Keine Werbung.</b> Ein privater Beitrag einer Freundin ohne erkennbares Produkt oder kommerzielles Interesse.' },
+  { user:'GesundLeben Magazin', sub:'Gesundheit & Ernährung', col:'#8338EC', img:'🥣', bg:'#EFE5FF', body:'<b>Studie zeigt: Wer frühstückt, lernt besser!</b> Die 5 besten Cerealien für einen starken Schultag. Platz 1 wird dich überraschen … <span class="small muted">in Kooperation mit CrunchyMorning</span>', ans:0, ex:'<b>Werbung: ein Advertorial.</b> Es sieht aus wie ein redaktioneller Artikel mit „Studie“, ist aber vom Cerealien-Hersteller bezahlt. Der Hinweis „in Kooperation mit“ steht klein und grau am Ende. Die „Studie“ soll Autorität vortäuschen.' },
+  { user:'Serienclip: „Campus Life“ S2E4', sub:'Streaming-Ausschnitt', col:'#FB5607', img:'🥫', bg:'#FFE8DA', body:'Die Hauptfigur öffnet nach dem Training in Nahaufnahme eine Dose <b>FIZZ</b>, das Logo ist zwei Sekunden lang perfekt im Bild. Dann geht die Szene normal weiter.', ans:0, ex:'<b>Werbung: Product-Placement.</b> Die Marke wird in die Handlung eingebaut, damit sie positiv mit der Lieblingsfigur verknüpft wird. Im deutschen Fernsehen muss Produktplatzierung durch ein „P“-Symbol gekennzeichnet werden. Bei Streaming-Inhalten fällt sie oft kaum auf.' },
+  { user:'gamegear_official', sub:'Gaming-Zubehör', col:'#06D6A0', img:'🎮', bg:'#DBF8EF', body:'🎁 GEWINNSPIEL 🎁 Wir verlosen eine Konsole! So machst du mit: 1️⃣ Folge uns 2️⃣ Like den Post 3️⃣ <b>Markiere 3 Freunde</b> in den Kommentaren!', ans:0, ex:'<b>Werbung: Gewinnspiel.</b> Ein Gewinnspiel ist immer Werbung. Ziel ist Reichweite: Durch das Markieren machst du deine Freunde zu Werbeempfängern und dich selbst zum Werbeträger. Nebenbei wächst die Followerzahl, und die Firma sammelt Daten.' },
+  { user:'mia_reviews', sub:'Tech · 12 Tsd. Follower', col:'#FFBE0B', img:'🎧', bg:'#FFF4CC', body:'Hab mir die neuen SoundPods <b>selbst gekauft</b>. Ehrliche Meinung nach 2 Wochen: Akku top, Klang eher mittel, für den Preis okay. Nicht gesponsert!', ans:2, ex:'<b>Nicht eindeutig zu beurteilen.</b> Wenn die Angaben stimmen, ist das eine echte, unabhängige Bewertung und keine Werbung. Prüfen kannst du es aber nicht: Vielleicht gab es ein kostenloses Testgerät oder einen versteckten Affiliate-Link. Genau diese Unsicherheit nutzen manche Marken aus. Hinweise: Gibt es Kritik? Einen Link mit Tracking-Code? Wirbt die Person ständig für dieselbe Marke?' },
+  { user:'Deutscher Wetterdienst', sub:'Offizieller Account', col:'#118AB2', img:'⛈️', bg:'#DDF0F7', body:'Unwetterwarnung für Südbayern: Heute ab 16 Uhr Gewitter mit Starkregen und Hagel möglich.', ans:1, ex:'<b>Keine Werbung.</b> Eine öffentliche Information ohne kommerzielles Interesse.' }
+];
+(function renderFeed(){
+  const root = $('#feed'); let answered = 0, right = 0;
+  const labels = ['Werbung','Keine Werbung','Nicht eindeutig'];
+  root.innerHTML = '<div class="feed">' + FEED.map((p,i) => '<article class="post" data-i="'+i+'"><div class="post-head"><span class="avatar" style="background:'+p.col+'">'+esc(p.user[0].toUpperCase())+'</span><span class="post-user">'+esc(p.user)+'<small>'+esc(p.sub)+'</small></span></div><div class="post-img" style="background:'+p.bg+'">'+p.img+'</div><div class="post-body">'+p.body+'</div><div class="post-actions">'+labels.map((l,j) => '<button class="opt small" data-j="'+j+'">'+l+'</button>').join('')+'</div><div class="q-fb" style="margin:0 14px 14px"></div></article>').join('') + '</div><div id="feedSum" style="margin-top:12px"></div>';
+  root.addEventListener('click', e => {
+    const b = e.target.closest('.opt'); if(!b || b.disabled) return;
+    const post = b.closest('.post'), p = FEED[+post.dataset.i], j = +b.dataset.j, ok = j === p.ans;
+    $$('.opt', post).forEach((x,k) => { x.disabled = true; if(k===p.ans) x.classList.add('right'); });
+    if(!ok) b.classList.add('wrong');
+    const fb = $('.q-fb', post); fb.className = 'q-fb show ' + (ok ? 'ok' : 'no'); fb.innerHTML = p.ex;
+    answered++; if(ok) right++;
+    if(answered === FEED.length){ $('#feedSum').innerHTML = '<span class="score">'+right+' von '+FEED.length+' richtig erkannt</span> <span class="small muted">Fünf von acht Beiträgen waren Werbung, aber nur einer war klar und deutlich gekennzeichnet.</span>'; done('feed'); }
+  });
+})();
+
+/* =========================================================
+   K3 – Schläger & Ball
+   ========================================================= */
+(function(){
+  const root = $('#batball');
+  root.innerHTML = '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><label for="bbIn">Der Ball kostet</label><input class="inline-in" id="bbIn" inputmode="decimal" placeholder="0,00"> €<button class="btn small" id="bbBtn">Prüfen</button></div><div class="q-fb" id="bbFb"></div>';
+  $('#bbBtn').onclick = () => {
+    const v = parseNum($('#bbIn').value); const fb = $('#bbFb'); if(isNaN(v)) return;
+    const val = v > 1.2 ? v/100 : v; // Cent-Eingabe tolerieren
+    let msg;
+    if(Math.abs(val - 0.05) < 0.001){ fb.className = 'q-fb show ok'; msg = '<b>Richtig: 5 Cent.</b> Der Schläger kostet dann 1,05 €, zusammen 1,10 €. Respekt! Du hast dein „langsames Denken“ eingeschaltet.'; }
+    else if(Math.abs(val - 0.10) < 0.001){ fb.className = 'q-fb show no'; msg = '<b>10 Cent: die typische Antwort, aber falsch.</b> Dann kostete der Schläger 1,10 € und beide zusammen 1,20 €. Richtig sind <b>5 Cent</b>. Keine Sorge: Auch die Mehrheit der Studierenden an Spitzenuniversitäten antwortet spontan „10 Cent“. Die Antwort „fühlt sich richtig an“. Das ist System 1 bei der Arbeit.'; }
+    else { fb.className = 'q-fb show no'; msg = '<b>Leider nicht.</b> Richtig sind <b>5 Cent</b>: Ball 0,05 € + Schläger 1,05 € = 1,10 €. Die meisten Menschen antworten spontan „10 Cent“, weil sich das sofort richtig anfühlt.'; }
+    fb.innerHTML = msg + '<br><br><b>Was das mit Werbung zu tun hat:</b> Unser schnelles Denken liefert blitzschnell Antworten, die sich richtig anfühlen, und das langsame Denken prüft sie oft nicht nach. Genau diese Lücke nutzt Werbung.';
+    done('batball');
+  };
+})();
+
+/* =========================================================
+   K3 – Emotionen
+   ========================================================= */
+const EMO_OPTS = ['Freiheit','Zugehörigkeit','Sicherheit','Genuss','Erfolg & Ansehen','Schönheit','Beschützerinstinkt'];
+quizList('emo', [
+  { q:'„NORDWIND – Jeans für jeden Weg, den du gehst.“ (Bild: junge Leute im offenen Van an der Küste)', correct:0, explain:'Freiheit, Abenteuer und Unabhängigkeit. Über die Jeans selbst erfährst du nichts.' },
+  { q:'„9 von 10 deiner Freunde sind schon auf Snapzy. Und du?“', correct:1, explain:'Zugehörigkeit und Gruppendruck. Die Angst, ausgeschlossen zu sein, ist für Jugendliche besonders wirksam.' },
+  { q:'Waschmittelwerbung: ein Baby mit großen Kulleraugen kuschelt sich an einen flauschigen Teddy.', correct:6, explain:'Kindchenschema: Großer Kopf, große Augen und runde Formen sind ein Schlüsselreiz, der fast automatisch Zuneigung und den Beschützerinstinkt auslöst.' },
+  { q:'„VELARO. Weil du es dir verdient hast.“ (Bild: Uhr am Handgelenk eines Mannes im Maßanzug vor einer Skyline)', correct:4, explain:'Erfolg, Status und Ansehen. Die Uhr wird zum Symbol für den eigenen sozialen Aufstieg.' },
+  { q:'„Damit deine Familie bei jedem Wetter sicher ankommt.“ (Reifenwerbung)', correct:2, explain:'Sicherheit und Verantwortung. Die Werbung spricht die Angst um Angehörige an.' },
+  { q:'„Zartschmelzend. Dein Moment nur für dich.“ (Schokolade in Zeitlupe)', correct:3, explain:'Genuss und Belohnung. Zeitlupe und Nahaufnahme sprechen alle Sinne an.' },
+  { q:'„Makellose Haut in 7 Tagen.“ (Model mit perfekt retuschierter Haut)', correct:5, explain:'Schönheit. Das unerreichbare Ideal ist oft digital bearbeitet und erzeugt gezielt Unzufriedenheit mit dem eigenen Aussehen.' }
+], 'emo', { options:EMO_OPTS, summary:() => '<span class="small muted">Fällt dir auf, wie selten das eigentliche Produkt eine Rolle spielt?</span>' });
+
+/* =========================================================
+   K3 – Slogans
+   ========================================================= */
+quizList('slogan', [
+  { q:'„Just do it.“', options:['Adidas','Nike','Puma','Reebok'], correct:1, explain:'Nike, seit 1988.' },
+  { q:'„… verleiht Flügel.“', options:['Monster','Red Bull','Rockstar','Coca-Cola'], correct:1, explain:'Red Bull.' },
+  { q:'„Quadratisch. Praktisch. Gut.“', options:['Milka','Lindt','Ritter Sport','Kinder'], correct:2, explain:'Ritter Sport.' },
+  { q:'„Ich liebe es.“', options:['Burger King','KFC','Subway','McDonald’s'], correct:3, explain:'McDonald’s („I’m lovin’ it“), mit dem passenden Jingle „ba-da-ba-ba-ba“.' },
+  { q:'„… macht Kinder froh und Erwachsene ebenso.“', options:['Haribo','Katjes','Trolli','Maoam'], correct:0, explain:'Haribo.' },
+  { q:'„Freude am Fahren.“', options:['Audi','Mercedes-Benz','BMW','VW'], correct:2, explain:'BMW.' },
+  { q:'„Es gibt immer was zu tun.“', options:['OBI','Bauhaus','Hornbach','toom'], correct:2, explain:'Hornbach.' },
+  { q:'„Hier bin ich Mensch, hier kauf ich ein.“', options:['Rossmann','dm','Müller','Edeka'], correct:1, explain:'dm. Der Slogan zitiert sogar Goethes „Faust“ („Hier bin ich Mensch, hier darf ich’s sein“).' },
+  { q:'„Geiz ist geil.“', options:['MediaMarkt','Saturn','Lidl','Aldi'], correct:1, explain:'Saturn (2002–2007). Wird oft fälschlich MediaMarkt zugeschrieben, ist aber trotzdem im Gedächtnis geblieben.' },
+  { q:'„Da weiß man, was man hat.“', options:['IKEA','Persil','Tchibo','Nivea'], correct:1, explain:'Persil. Ein Klassiker der Waschmittelwerbung, der über Jahrzehnte wiederholt wurde. Er wird oft anderen Marken zugeschrieben.' }
+], 'slogan', { summary:(c) => '<span class="small muted">'+(c>=7 ? 'Beeindruckend, und das, obwohl du keinen dieser Sätze je bewusst gelernt hast. Das ist der Wiederholungseffekt.' : 'Auch wenn nicht alles saß: Einige Slogans hat dein Gedächtnis ohne bewusstes Lernen gespeichert. Das ist der Wiederholungseffekt.')+'</span>' });
+
+/* =========================================================
+   K3 – Prinzipien-Karten + Quiz
+   ========================================================= */
+const PRINC = [
+  ['Reziprozität','Wer etwas bekommt, will etwas zurückgeben.','<b>Beispiel:</b> Gratisprobe am Käsestand, kostenloser Kaffee. Wir fühlen uns verpflichtet zu kaufen.<br><b>Gegenstrategie:</b> Ein Geschenk verpflichtet zu nichts.'],
+  ['Ankereffekt','Die erste Zahl prägt das Urteil.','<b>Beispiel:</b> „UVP 3,99 € – jetzt 2,49 €“. Der hohe Preis lässt den Rabatt groß wirken.<br><b>Gegenstrategie:</b> Preise anderer Anbieter vergleichen, nicht den Statt-Preis.'],
+  ['Verlustaversion','Verluste schmerzen stärker, als Gewinne freuen.','<b>Beispiel:</b> „Nur noch heute!“, „Sichere dir deinen Rabatt, bevor er weg ist“.<br><b>Gegenstrategie:</b> Fragen: Hätte ich das auch ohne Zeitdruck gekauft?'],
+  ['Social Proof','Was viele tun, wird schon richtig sein.','<b>Beispiel:</b> „Bestseller“, „Unsere Nr. 1“, „2.341× gekauft“, Sternebewertungen.<br><b>Gegenstrategie:</b> Beliebt heißt nicht passend für mich, und Zahlen können gefälscht sein.'],
+  ['Knappheit','Was selten ist, wirkt wertvoll.','<b>Beispiel:</b> „Limited Edition“, „Nur noch 2 auf Lager“, leer wirkende Regale.<br><b>Gegenstrategie:</b> Knappheit ist oft inszeniert. Abwarten!'],
+  ['Autorität','Expertinnen und Experten vertrauen wir.','<b>Beispiel:</b> „Von Zahnärzten empfohlen“, Menschen im weißen Kittel, „Studien zeigen …“.<br><b>Gegenstrategie:</b> Wer genau? Welche Studie? Wer hat bezahlt?'],
+  ['Sympathie','Von Menschen, die wir mögen, kaufen wir lieber.','<b>Beispiel:</b> Influencer, freundliches Personal, „Produkte aus Ihrer Region“.<br><b>Gegenstrategie:</b> Sympathie für die Person von der Qualität des Produkts trennen.'],
+  ['Farbpsychologie','Farben lösen Gefühle und Assoziationen aus.','<b>Beispiel:</b> Rot signalisiert „Schnäppchen“, Grün „Natur & Frische“, Gold „Premium“.<br><b>Gegenstrategie:</b> Auf den Grundpreis schauen, nicht auf die Farbe des Schilds.'],
+  ['Storytelling','Geschichten bleiben hängen und berühren.','<b>Beispiel:</b> „Traditionell gebacken nach Omas Rezept“, „Handverlesene Bio-Tomaten“.<br><b>Gegenstrategie:</b> Was bleibt übrig, wenn man die Geschichte weglässt?'],
+  ['Priming','Unbewusste Reize bereiten das Verhalten vor.','<b>Beispiel:</b> Brotduft, ruhige Musik, warmes Licht. Wir bleiben länger und kaufen mehr.<br><b>Gegenstrategie:</b> Mit Einkaufsliste und nicht hungrig einkaufen.'],
+  ['Kostenlos-Effekt','„Gratis“ schaltet das Nachdenken ab.','<b>Beispiel:</b> „Kaufe 3, zahle 2“, „Gratis-Versand ab 50 €“: Wir kaufen mehr, als wir wollten.<br><b>Gegenstrategie:</b> Gesamtpreis rechnen: Brauche ich die Menge wirklich?']
+];
+$('#principles').innerHTML = PRINC.map(p => '<button class="flip"><div class="flip-in"><div class="flip-f"><span class="pill">Prinzip</span><b>'+p[0]+'</b><span class="small">'+p[1]+'</span></div><div class="flip-b">'+p[2]+'</div></div></button>').join('');
+$('#principles').addEventListener('click', e => { const f = e.target.closest('.flip'); if(f) f.classList.toggle('on'); });
+
+quizList('princquiz', [
+  { q:'Ein Onlineshop zeigt neben einem Produkt: „Von 94 % der Käufer weiterempfohlen“.', options:['Knappheit','Social Proof','Reziprozität','Priming'], correct:1, explain:'Social Proof: Wir verlassen uns auf das Urteil der Mehrheit.' },
+  { q:'Eine Zahnpasta-Werbung zeigt eine Frau im weißen Kittel: „Empfohlen von Experten“.', options:['Autorität','Sympathie','Ankereffekt','Kostenlos-Effekt'], correct:0, explain:'Autorität. Der Kittel allein erzeugt schon Vertrauen, auch wenn die Person Schauspielerin ist.' },
+  { q:'Beim Elektronikhändler steht ein Fernseher für 1.999 € gleich neben dem eigentlichen Angebot für 899 €.', options:['Reziprozität','Storytelling','Ankereffekt','Social Proof'], correct:2, explain:'Ankereffekt: Neben dem teuren Gerät wirkt das Angebot günstig.' },
+  { q:'Ein Drogeriemarkt verschenkt beim Einkauf eine Mini-Handcreme. Viele kommen bald wieder.', options:['Reziprozität','Knappheit','Autorität','Farbpsychologie'], correct:0, explain:'Reziprozität: Das kleine Geschenk erzeugt ein Gefühl der Verpflichtung und Sympathie.' },
+  { q:'„Diese Sneaker gibt es nur 500-mal weltweit.“', options:['Priming','Knappheit','Sympathie','Kostenlos-Effekt'], correct:1, explain:'Knappheit: Limitierung macht begehrenswert („Drops“ bei Sneakern funktionieren genau so).' },
+  { q:'Auf der Brotverpackung: „Nach dem Rezept der Bäckerfamilie Huber, seit 1893“.', options:['Storytelling','Autorität','Ankereffekt','Verlustaversion'], correct:0, explain:'Storytelling: Tradition und Familiengeschichte schaffen eine emotionale Bindung. Ob das Brot heute industriell gebacken wird, erfährst du nicht.' },
+  { q:'Ein Abo-Dienst schreibt beim Kündigen: „Du verlierst alle deine gespeicherten Playlists und Vorteile!“', options:['Verlustaversion','Social Proof','Storytelling','Sympathie'], correct:0, explain:'Verlustaversion: Der drohende Verlust wird betont, damit man bleibt.' },
+  { q:'„Gratis-Versand ab 50 €“, und du hast Waren für 43 € im Warenkorb.', options:['Kostenlos-Effekt','Autorität','Priming','Reziprozität'], correct:0, explain:'Kostenlos-Effekt: Viele kaufen für 7 € noch etwas dazu, um 4,95 € Versand zu „sparen“.' }
+], 'princquiz', { shuffle:true });
+
+/* =========================================================
+   K3 – Burger-Vergleich
+   ========================================================= */
+(function(){
+  const root = $('#burger');
+  const ad = '<svg viewBox="0 0 520 320" aria-label="Werbebild eines perfekten Burgers"><defs><radialGradient id="bgAd" cx=".5" cy=".4" r=".7"><stop offset="0" stop-color="#FFB547"/><stop offset="1" stop-color="#C2410C"/></radialGradient><linearGradient id="bun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6B64A"/><stop offset="1" stop-color="#C77717"/></linearGradient></defs>' +
+    '<rect width="520" height="320" fill="url(#bgAd)"/>' +
+    '<path d="M215 50 q-10 -20 0 -35 M260 45 q-10 -20 0 -38 M305 50 q-10 -20 0 -35" stroke="#fff" stroke-width="5" fill="none" opacity=".6" stroke-linecap="round"/>' +
+    '<ellipse cx="260" cy="290" rx="170" ry="16" fill="#00000033"/>' +
+    '<rect x="120" y="240" width="280" height="44" rx="20" fill="url(#bun)"/>' +
+    '<rect x="110" y="205" width="300" height="42" rx="18" fill="#5B2E12"/><rect x="118" y="212" width="284" height="6" rx="3" fill="#7A3E19"/>' +
+    '<path d="M110 205 L410 205 L398 228 L370 214 L340 236 L300 214 L262 238 L222 214 L186 236 L150 214 L120 230 Z" fill="#FFC20E"/>' +
+    '<rect x="125" y="186" width="270" height="22" rx="11" fill="#E63B2E"/>' +
+    '<path d="M100 186 q20 -26 40 0 q20 -26 40 0 q20 -26 40 0 q20 -26 40 0 q20 -26 40 0 q20 -26 40 0 q20 -26 40 0 q20 -26 40 0 Z" fill="#53B848"/>' +
+    '<path d="M118 172 Q260 30 402 172 Z" fill="url(#bun)"/>' +
+    '<g fill="#FFF3D6">'+[[190,120],[225,100],[262,92],[300,102],[330,125],[210,145],[250,128],[290,135],[350,150],[170,150]].map(p => '<ellipse cx="'+p[0]+'" cy="'+p[1]+'" rx="6" ry="3" transform="rotate(-20 '+p[0]+' '+p[1]+')"/>').join('')+'</g>' +
+    '<ellipse cx="215" cy="110" rx="40" ry="14" fill="#fff" opacity=".25"/>' +
+    '</svg>';
+  const real = '<svg viewBox="0 0 520 320" aria-label="Realistischer, plattgedrückter Burger"><rect width="520" height="320" fill="#C9C3B8"/>' +
+    '<path d="M60 270 L460 270 L430 300 L90 300 Z" fill="#EDE6D6"/>' +
+    '<ellipse cx="270" cy="268" rx="150" ry="10" fill="#00000022"/>' +
+    '<rect x="135" y="236" width="260" height="30" rx="12" fill="#C99A5B"/>' +
+    '<rect x="150" y="224" width="225" height="18" rx="8" fill="#4A2C1A"/>' +
+    '<path d="M150 224 L370 224 L360 236 L330 228 L300 240 L260 228 L230 238 L190 228 Z" fill="#E8B92C"/>' +
+    '<path d="M160 222 q15 -6 30 0 q15 -4 30 0 q15 -6 30 1 q15 -4 30 -1" stroke="#7FA35B" stroke-width="5" fill="none"/>' +
+    '<rect x="230" y="216" width="50" height="8" rx="4" fill="#B94434"/>' +
+    '<path d="M130 222 Q265 160 400 222 Z" fill="#C99A5B"/>' +
+    '<g fill="#EFE3C5">'+[[220,200],[262,192],[310,198]].map(p => '<ellipse cx="'+p[0]+'" cy="'+p[1]+'" rx="5" ry="2.5"/>').join('')+'</g>' +
+    '<path d="M300 205 l18 -4" stroke="#B89060" stroke-width="3"/>' +
+    '</svg>';
+  root.innerHTML = '<div class="ba" id="ba"><span class="lbl" style="left:10px">WERBUNG</span><span class="lbl" style="right:10px">REALITÄT</span><div style="position:absolute;inset:0">'+real+'</div><div id="baTop" style="position:absolute;inset:0;clip-path:inset(0 50% 0 0)">'+ad+'</div><div id="baLine" style="position:absolute;top:0;bottom:0;left:50%;width:3px;background:#fff;box-shadow:0 0 6px #0008"></div></div>' +
+    '<input type="range" min="0" max="100" value="50" id="baR" aria-label="Vergleichsregler" style="max-width:520px;display:block;margin:12px auto">' +
+    '<div class="grid2" style="margin-top:12px"><div><h4>Typische Tricks beim Food-Styling</h4><ul class="small"><li>Zutaten werden nach vorn an den Rand gesteckt, damit man sie sieht.</li><li>Das Fleisch ist nur kurz angebraten, damit es nicht schrumpft. Glanz kommt von Öl oder Spray.</li><li>Zwischen den Schichten stecken Zahnstocher oder Pappe für die Höhe.</li><li>Sesam wird einzeln aufgeklebt, „Dampf“ wird nachträglich eingefügt.</li></ul></div>' +
+    '<div><h4>Und bei Menschen?</h4><p class="small">Retusche und Beauty-Filter erzeugen Hautbilder und Körper, die es so nicht gibt. Wer sich ständig damit vergleicht, wird unzufriedener mit sich selbst. Diese Unzufriedenheit soll das beworbene Produkt dann „lösen“.</p><p class="small"><b>Rechtlich:</b> Werbung darf idealisieren, aber nicht über wesentliche Eigenschaften eines Produkts täuschen (Irreführungsverbot).</p></div></div>';
+  const r = $('#baR'); let moved = false;
+  r.oninput = () => { $('#baTop').style.clipPath = 'inset(0 '+(100-r.value)+'% 0 0)'; $('#baLine').style.left = r.value+'%'; if(!moved && (r.value < 25 || r.value > 75)){ moved = true; done('burger'); } };
+})();
+
+/* =========================================================
+   K4 – Anker-Experiment
+   ========================================================= */
+if(!S.data.anchor){ S.data.anchor = { g: Math.random() < .5 ? 'hi' : 'lo', v:null }; S.save(); }
+function renderAnker(){
+  const root = $('#anker'), a = S.data.anchor;
+  const uvp = a.g === 'hi' ? '179,00' : '49,00', other = a.g === 'hi' ? '49,00' : '179,00';
+  const product = '<div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;background:var(--surface-2);border-radius:12px;padding:14px"><div style="font-size:3rem">🎧</div><div><b style="font-family:var(--font-head);font-size:1.15rem">SoundPod X</b><div class="small">Kabellose In-Ear-Kopfhörer · Bluetooth 5.3 · 20 h Akku · Ladecase</div><div class="small muted">Unverbindliche Preisempfehlung des Herstellers: <b style="color:var(--ink)">'+uvp+' €</b></div></div></div>';
+  if(a.v == null){
+    root.innerHTML = product + '<p style="margin-top:14px"><b>Was wärst du höchstens bereit, für diese Kopfhörer zu bezahlen?</b></p><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><input class="inline-in" id="ankIn" inputmode="decimal" placeholder="z. B. 60"> €<button class="btn small" id="ankBtn">Abschicken</button></div>';
+    $('#ankBtn').onclick = () => { const v = parseNum($('#ankIn').value); if(isNaN(v) || v < 0) return; a.v = v; S.save(); done('anker'); renderAnker(); };
+  } else {
+    root.innerHTML = product + '<div class="box merke"><strong>Deine Antwort: '+fmt(a.v)+' €</strong>Du gehörst zur Gruppe <b>„'+(a.g==='hi'?'hoher':'niedriger')+' Anker“</b>: Dir wurde eine UVP von '+uvp+' € gezeigt. Die andere Hälfte sah für <b>dasselbe Produkt</b> eine UVP von '+other+' €.</div>' +
+      '<p>Wenn du im Unterricht die Antworten beider Gruppen sammelst, liegen die Werte der „Hoch“-Gruppe fast immer deutlich höher, obwohl alle dieselben Produktinformationen hatten. Die UVP wirkt als <b>Anker</b>: Wir passen unsere Schätzung von dieser Zahl aus an, aber nicht weit genug.</p>' +
+      '<p class="small muted">Der Effekt ist so stark, dass sogar völlig willkürliche Zahlen wirken: In einem berühmten Experiment von Tversky und Kahneman (1974) drehten Versuchspersonen ein manipuliertes Glücksrad, das auf 10 oder 65 stehen blieb. Danach sollten sie schätzen, wie viel Prozent der UN-Mitglieder afrikanische Staaten sind. Die „10er“-Gruppe schätzte im Mittel 25 %, die „65er“-Gruppe 45 %.</p>' +
+      '<div class="box task" style="margin-bottom:0"><strong>Klassenauswertung</strong>Wer hatte 179 €, wer 49 €? Berechnet für beide Gruppen den Durchschnitt eurer Antworten und vergleicht.</div>' +
+      '<div class="btn-row"><button class="btn ghost small" id="ankRedo">Antwort ändern</button></div>';
+    $('#ankRedo').onclick = () => { a.v = null; S.save(); renderAnker(); };
+  }
+}
+renderAnker();
+
+/* =========================================================
+   K4 – Charm-Preise schätzen
+   ========================================================= */
+(function(){
+  const root = $('#charm');
+  const items = [['🍟 Chips','1,99'],['🥤 Cola','1,49'],['🐻 Gummibärchen','0,99'],['🍦 Eis','2,49'],['🥪 Sandwich','3,99'],['📰 Zeitschrift','4,99']];
+  const sum = 15.94;
+  const start = () => {
+    let t = 5;
+    root.innerHTML = '<p class="center"><b>Merk dir die Preise, du hast <span id="chT">5</span> Sekunden!</b></p><div class="tag-grid">'+items.map(i => '<div class="ptag"><div class="small">'+i[0]+'</div><div class="big">'+i[1]+' €</div></div>').join('')+'</div>';
+    const iv = setInterval(() => { t--; const el = $('#chT'); if(el) el.textContent = t; if(t <= 0){ clearInterval(iv); ask(); } }, 1000);
+  };
+  const ask = () => {
+    root.innerHTML = '<p><b>Ohne nachzurechnen:</b> Wie viel kosten alle sechs Produkte zusammen? Schätze spontan.</p><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><input class="inline-in" id="chIn" inputmode="decimal" placeholder="Schätzung"> €<button class="btn small" id="chBtn">Auflösen</button></div>';
+    $('#chBtn').onclick = () => {
+      const v = parseNum($('#chIn').value); if(isNaN(v)) return;
+      const diff = v - sum;
+      root.innerHTML = '<div class="grid2"><div class="center card" style="margin:0"><div class="small muted">Deine Schätzung</div><div class="big-num">'+fmt(v)+' €</div></div><div class="center card" style="margin:0"><div class="small muted">Tatsächlich</div><div class="big-num" style="color:var(--red)">'+fmt(sum)+' €</div></div></div>' +
+        '<p style="margin-top:14px">'+(diff < -0.5 ? 'Du hast um <b>'+fmt(-diff)+' € zu niedrig</b> geschätzt. Damit bist du in guter Gesellschaft.' : diff > 0.5 ? 'Du hast eher zu hoch geschätzt. Vorsichtig! Viele schätzen deutlich zu niedrig.' : 'Ziemlich genau! Hast du heimlich gerechnet?')+'</p>' +
+        '<p><b>Links-Ziffern-Effekt:</b> Bei 4,99 € registriert unser schnelles Denken vor allem die „4“. Sechs Preise mit ,99 bzw. ,49 summieren sich unbemerkt auf: Schon die Nachkommastellen machen hier über 4 € aus. Gebrochene Preise lassen Einzelprodukte und ganze Einkäufe billiger erscheinen, als sie sind.</p>' +
+        '<button class="btn ghost small" id="chRe">Nochmal</button>';
+      $('#chRe').onclick = intro; done('charm');
+    };
+  };
+  const intro = () => { root.innerHTML = '<p>Gleich siehst du für 5 Sekunden sechs Preisschilder. Danach sollst du schätzen, was alles zusammen kostet.</p><button class="btn red" id="chGo">Start</button>'; $('#chGo').onclick = start; };
+  intro();
+})();
+
+/* =========================================================
+   K4 – Preisschild-Detektiv
+   ========================================================= */
+(function(){
+  const root = $('#tags');
+  const tasks = [
+    { head:'1 · „Vorteilspack“ Spaghetti', tags:'<div class="ptag"><div class="small">Spaghetti</div><div class="big">1,19 €</div><div class="tiny">500 g</div></div><div class="ptag yel"><div class="small"><b>VORTEILSPACK!</b> Spaghetti</div><div class="big">2,49 €</div><div class="tiny">1 kg</div></div>',
+      rows:[ ['Grundpreis der 500-g-Packung (€/kg)', 2.38, 0.02], ['Grundpreis des Vorteilspacks (€/kg)', 2.49, 0.02] ],
+      res:'Die kleine Packung kostet <b>2,38 €/kg</b>, der „Vorteilspack“ <b>2,49 €/kg</b>. Zwei kleine Packungen wären also günstiger! Großpackungen werden automatisch für billiger gehalten, ein Fehlschluss, den Händler gezielt mit Schildern wie „Vorteilspack“ verstärken.' },
+    { head:'2 · Gleiche Packung, gleicher Preis?', tags:'<div class="ptag"><div class="small">Chips Paprika · <b>früher</b></div><div class="big">1,99 €</div><div class="tiny">200 g</div></div><div class="ptag"><div class="small">Chips Paprika · <b>heute</b> · „neues Design!“</div><div class="big">1,99 €</div><div class="tiny">175 g</div></div>',
+      rows:[ ['Grundpreis früher (€/kg)', 9.95, 0.02], ['Grundpreis heute (€/kg)', 11.37, 0.02] ],
+      res:'Von 9,95 €/kg auf 11,37 €/kg: eine <b>versteckte Preiserhöhung von gut 14 %</b>. Das nennt man <b>Mogelpackung</b> oder „Shrinkflation“. Die Packung sieht gleich aus oder hat ein „neues Design“, nur die kleine Mengenangabe hat sich geändert. Verbraucherzentralen küren jedes Jahr die „Mogelpackung des Jahres“.' },
+    { head:'3 · Aktion „3 für 2“', tags:'<div class="ptag red"><div class="small"><b>3 FÜR 2!</b> Fruchtjoghurt</div><div class="big">0,89 €</div><div class="tiny">je 150 g · Grundpreis 5,93 €/kg</div></div>',
+      rows:[ ['Grundpreis bei Kauf von 3 Bechern (€/kg)', 3.96, 0.02] ],
+      res:'Du zahlst 1,78 € für 450 g, also <b>3,96 €/kg</b> statt 5,93 €/kg. Ein echter Rabatt, aber nur, wenn du die drei Becher vor dem Mindesthaltbarkeitsdatum wirklich isst. Mengenaktionen sollen dich dazu bringen, mehr zu kaufen, als du geplant hast.' },
+    { head:'4 · „38 % gespart!“', tags:'<div class="ptag red"><div class="small">Waschmittel</div><div><s>statt 3,99 €</s></div><div class="big">2,49 €</div><div class="tiny"><b>Du sparst 38 %!</b></div></div>',
+      rows:[ ['Tatsächliche Ersparnis in Prozent (gerundet auf eine Nachkommastelle)', 37.6, 0.15] ],
+      res:'(3,99 − 2,49) ÷ 3,99 ≈ <b>37,6 %</b>. Das Schild rundet großzügig auf. Wichtiger ist aber: Ist 3,99 € überhaupt ein realistischer Vergleichspreis? Der „Statt“-Preis ist ein <b>Anker</b>. Erst ein Blick auf andere Händler zeigt, ob das Angebot wirklich günstig ist.' }
+  ];
+  let checked = 0, total = 0;
+  root.innerHTML = tasks.map((t,ti) => '<div style="margin:18px 0"><h4>'+t.head+'</h4><div class="tag-grid" style="margin-bottom:12px">'+t.tags+'</div><div class="calc">'+t.rows.map((r,ri) => { total++; return '<div class="calc-row" data-t="'+ti+'" data-r="'+ri+'"><span class="small"><b>'+r[0]+'</b></span><input inputmode="decimal" placeholder="0,00" aria-label="'+esc(r[0])+'"><button class="btn small">Prüfen</button><div class="res"></div></div>'; }).join('')+'</div></div>').join('');
+  root.addEventListener('click', e => {
+    const b = e.target.closest('.calc-row .btn'); if(!b) return;
+    const row = b.closest('.calc-row'), t = tasks[+row.dataset.t], r = t.rows[+row.dataset.r];
+    const v = parseNum($('input', row).value); if(isNaN(v)) return;
+    const ok = Math.abs(v - r[1]) <= r[2];
+    if(!row.classList.contains('done')) checked++;
+    row.classList.add('done');
+    const res = $('.res', row); res.style.background = ok ? 'var(--green-soft)' : 'var(--red-soft)';
+    const isLast = +row.dataset.r === t.rows.length - 1;
+    res.innerHTML = (ok ? '✓ Richtig: ' : '✗ Richtig wäre: ') + '<b>' + fmt(r[1]) + (r[0].includes('Prozent') ? ' %' : ' €/kg') + '</b>' + (isLast ? '<br>' + t.res : '');
+    if(checked >= total) done('tags');
+  });
+})();
+
+/* =========================================================
+   K4 – Decoy Popcorn
+   ========================================================= */
+(function(){
+  const root = $('#decoy');
+  const opts = [['Klein','1,5 l','4,00 €'],['Mittel','3 l','6,50 €'],['Groß','4,5 l','7,00 €']];
+  root.innerHTML = '<p>Du stehst an der Kinokasse. Welche Popcorn-Größe nimmst du?</p><div class="st-options">'+opts.map((o,i) => '<button class="prod" data-i="'+i+'"><span class="p-name">🍿 '+o[0]+'</span><span class="p-spec">'+o[1]+'</span><span class="p-price">'+o[2]+'</span></button>').join('')+'</div><div class="q-fb" id="dcFb"></div>';
+  root.addEventListener('click', e => {
+    const b = e.target.closest('.prod'); if(!b) return;
+    $$('.prod', root).forEach(x => x.classList.toggle('sel', x===b));
+    const i = +b.dataset.i, fb = $('#dcFb'); fb.className = 'q-fb show neutral';
+    fb.innerHTML = (i===2 ? '<b>Du hast „Groß“ gewählt, genau wie vom Kino geplant.</b> ' : i===1 ? '<b>Du hast „Mittel“ gewählt, eher selten.</b> ' : '<b>Du bist bei „Klein“ geblieben, gut widerstanden!</b> ') +
+      'Die mittlere Größe ist ein <b>Lockvogel (Decoy)</b>. Sie soll kaum gekauft werden. Sie existiert nur, damit „Groß“ wie ein Schnäppchen wirkt: „Für nur 50 Cent mehr bekomme ich 50 % mehr!“ Ohne die mittlere Größe würden viel mehr Menschen „Klein“ nehmen.<br><br><span class="small">Der Verhaltensökonom Dan Ariely zeigte den Effekt am Beispiel eines Zeitschriften-Abos: Online-Abo 59 $, Print-Abo 125 $, Print + Online 125 $. Fast niemand wählte nur Print, aber dessen bloße Existenz ließ viel mehr Menschen zum teuren Kombi-Abo greifen.</span>';
+    done('decoy');
+  });
+})();
+
+/* =========================================================
+   K5 – Supermarkt-Rundgang
+   ========================================================= */
+const MARKT = [
+  { x:690, y:378, t:'Obst, Gemüse & Blumen am Eingang', q:'Warum liegen Obst, Gemüse und Blumen direkt am Eingang?', o:['Weil sie dort am kühlsten gelagert werden.','Die bunte, frische Ware hebt die Stimmung und gibt dem ganzen Markt ein Frische-Image.','Damit man sie zuletzt in den Wagen legt und nichts zerdrückt.'], c:1, ex:'Die bunte Vielfalt löst Wohlbefinden aus. Der Eindruck „frisch und natürlich“ überträgt sich auf den ganzen Laden. Gleichzeitig bremst die Abteilung dein Tempo. Oft sind frische Blumen oder Obst überhaupt erst der Anreiz, den Markt zu betreten.', p:'Priming · Farbpsychologie', tip:'Mit Einkaufsliste starten und das eigene Tempo bewusst halten.' },
+  { x:684, y:506, t:'Große Einkaufswagen', q:'Warum sind Einkaufswagen heute oft so groß?', o:['Weil Familien heute größer sind.','Ein halbleerer Wagen sieht nach „zu wenig“ aus, man füllt ihn unbewusst weiter.','Weil große Wagen stabiler und sicherer sind.'], c:1, ex:'Viel Platz verführt dazu, ihn zu füllen. Ein fast leerer Wagen fühlt sich „unfertig“ an. Spezielle Kinderwagen laden schon die Kleinsten zum Einkaufen ein.', p:'Wahrnehmungsverzerrung', tip:'Wenn du nur wenig brauchst: Korb nehmen! Mit der Last sinkt die Kauflust.' },
+  { x:672, y:470, t:'Drehkreuz & Einbahn-Eingang', q:'Am Eingang dreht sich ein Drehkreuz nur in eine Richtung. Wozu?', o:['Nur als Diebstahlschutz.','Die Laufrichtung wird vorgegeben, man muss den ganzen Weg durch den Markt nehmen.','Damit die Besucher gezählt werden können.'], c:1, ex:'Meist gibt es nur einen Ein- und einen Ausgang. Sperren, Drehkreuze und laute Sicherheitssignale geben die Richtung vor. Du läufst durch die langen Gänge und kommst an möglichst vielen Produkten vorbei.', p:'Entscheidungsarchitektur', tip:'Gezielt nur die Gänge ansteuern, die du brauchst.' },
+  { x:600, y:212, t:'Laufweg gegen den Uhrzeigersinn', q:'Der Rundgang führt meist gegen den Uhrzeigersinn. Was hat das mit der rechten Regalseite zu tun?', o:['Die meisten greifen bequemer nach rechts. Dort stehen die Produkte, an denen der Markt am meisten verdient.','Das ist gesetzlich vorgeschrieben.','So ist der Weg kürzer.'], c:0, ex:'Kundinnen und Kunden bevorzugen angeblich die rechte Regalreihe. Dort platzieren Händler bevorzugt Ware mit hoher Gewinnspanne, ebenso in den Regalen kurz vor der Kasse.', p:'Gewohnheit · Bequemlichkeit', tip:'Bewusst auch nach links und in die Tiefe des Regals schauen.' },
+  { x:683, y:92, t:'Duft aus der Backstation', q:'Woher kommt der Duft nach frischem Brot schon kurz nach dem Eingang?', o:['Zufall, Backstationen riechen eben.','Er wird gezielt eingesetzt: Duft macht Appetit und gute Laune, teils helfen Duftanlagen nach.','Der Duft soll Insekten fernhalten.'], c:1, ex:'Die Nase kauft mit! Der Duft von warmem Gebäck löst Wohlbefinden und Appetit aus. Um den Effekt zu verstärken, werden mitunter zusätzlich Duftöle eingesetzt. Wer Hunger hat, kauft mehr und anders ein.', p:'Priming', tip:'Nie hungrig einkaufen gehen.' },
+  { x:432, y:110, t:'Hintergrundmusik', q:'Welche Musik läuft meist im Supermarkt, und warum?', o:['Laute, schnelle Charts, damit man schneller fertig ist.','Ruhige, eher langsame Musik: Man geht langsamer und bleibt länger.','Gar keine, Musik lenkt nur ab.'], c:1, ex:'Hintergrundmusik ist gezielt auf den Einsatz im Supermarkt abgestimmt. Sie soll heiter stimmen und das Tempo drosseln. Wer länger bleibt, sieht mehr Produkte und kauft mehr.', p:'Priming · Atmosphäre', tip:'Kopfhörer mit eigener Musik verändern die Wirkung.' },
+  { x:530, y:186, t:'Angenehme 19 °C', q:'Warum herrscht ganzjährig eine Temperatur von etwa 19 °C?', o:['Wegen der Kühlung der Lebensmittel.','Bei angenehmer Temperatur halten sich Kunden gern länger auf und kaufen mehr.','Um Heizkosten zu sparen.'], c:1, ex:'Studien zufolge sind etwa 19 Grad ideal, damit man sich gern im Geschäft aufhält. Wer gern und lange bleibt, nimmt in der Regel mehr mit.', p:'Wohlfühl-Atmosphäre', tip:'Zeitlimit für den Einkauf setzen.' },
+  { x:540, y:55, t:'Milch, Käse & Wurst ganz hinten', q:'Warum stehen Milch, Butter und Käse meist ganz hinten im Markt?', o:['Weil die Kühlregale an der Wand angeschlossen werden müssen.','Wer nur Milch braucht, muss an vielen anderen Regalen vorbei: Spontankäufe!','Weil diese Produkte selten gekauft werden.'], c:1, ex:'Vielgekaufte Grundnahrungsmittel stehen im hinteren Bereich. Abkürzungen gibt es in der Regel keine. Jeder Meter Weg ist eine Chance für einen Impulskauf.', p:'Entscheidungsarchitektur', tip:'Weg im Kopf planen und gezielt zur Kühlwand gehen.' },
+  { x:293, y:262, t:'Teure Ware auf Augenhöhe', q:'Was steht im Regal auf Augenhöhe?', o:['Die günstigsten Produkte, weil sie am meisten gekauft werden.','Produkte mit der höchsten Gewinnspanne und teure Markenware.','Zufällig verteilte Ware.'], c:1, ex:'Die teuren Produkte stehen häufig in Augenhöhe (Sichtzone). Die günstigere, oft gleichwertige Ware findet man in den Regalen darüber und darunter. Hersteller bezahlen sogar dafür, gut platziert zu werden.', p:'Bequemlichkeit (System 1)', tip:'Bücken und Strecken zahlt sich aus.' },
+  { x:442, y:404, t:'Aufbau („Stopper“) im Gang', q:'Mitten im Gang steht ein Aufbau mit riesigem Preisschild. Was ist der Trick?', o:['Die Ware ist immer stark reduziert.','Sie wirkt wie ein Sonderangebot, ist es aber oft nicht. Vergleichsprodukte stehen weit weg.','Der Aufbau ist nur Dekoration.'], c:1, ex:'Stopper und Angebotsaufbauten stehen mitten im Laufweg und wirken wie Sonderangebote, was sie nicht immer sind. Ein Preisvergleich ist schwierig, weil die Konkurrenzprodukte weit entfernt im Regal stehen.', p:'Salienz · Ankereffekt', tip:'Preis merken und im regulären Regal vergleichen.' },
+  { x:266, y:400, t:'Berg aus Großpackungen', q:'Ein riesiger Berg XXL-Chipstüten. Was soll er vermitteln?', o:['„Viele kaufen das, und groß ist günstig.“','Dass der Markt zu viel bestellt hat.','Dass das Produkt bald ausläuft.'], c:0, ex:'Großpackungen gelten als besonders günstig. Das kann stimmen, muss aber nicht. Rechnet man nach, ist oft die kleine Packung günstiger. Der Berg suggeriert außerdem, dass viele das Produkt kaufen. Oft findet man denselben Artikel unauffällig im Regal.', p:'Social Proof · Mengen-Heuristik', tip:'Grundpreis (€/kg) am Regalschild vergleichen.' },
+  { x:213, y:150, t:'Rote und gelbe Preisschilder', q:'Warum sind Angebotsschilder fast immer rot oder gelb?', o:['Weil das die billigsten Druckfarben sind.','Signalfarben ziehen den Blick an und rufen „Schnäppchen!“, egal ob es eins ist.','Damit Farbenblinde sie besser sehen.'], c:1, ex:'Farben werden gezielt eingesetzt. Rote, große, auffällige Preisschilder wecken Aufmerksamkeit und vermitteln den Eindruck, dass die Ware günstiger ist. Grün und Gelb signalisieren bei Obst und Gemüse Frische und Natürlichkeit.', p:'Farbpsychologie', tip:'Nicht die Farbe zählt, sondern der Grundpreis.' },
+  { x:497, y:323, t:'„Nur noch heute!“', q:'„Nur noch heute! Solange der Vorrat reicht!“ Was passiert, wenn der Tisch leer ist?', o:['Das Angebot ist wirklich vorbei.','Er wird meist schnell wieder aufgefüllt, die Knappheit war inszeniert.','Der Markt bestellt nie wieder nach.'], c:1, ex:'Verknappung ist ein uralter Verkaufstrick, der zum schnellen Zugreifen verleiten soll. Ist der Verkaufstisch leer, wird er meist rasch wieder aufgefüllt. Wirkt besonders bei Schlussverkäufen.', p:'Knappheit · Verlustaversion', tip:'Hätte ich das auch ohne Zeitdruck gekauft?' },
+  { x:54, y:262, t:'„To go“-Kühlregal', q:'Geschnittenes Obst im Becher, fertige Salate, Smoothies. Wo ist der Haken?', o:['Es gibt keinen, das ist einfach praktisch.','Verarbeitete „To go“-Ware ist pro Kilo meist viel teurer und erzeugt viel Verpackungsmüll.','Die Produkte sind weniger frisch.'], c:1, ex:'Lebensmittel im Naturzustand sind in der Regel deutlich günstiger als mundgerecht geschnittene, gemixte und schön verpackte. Bezahlt wird die Bequemlichkeit, und der Müll kommt dazu.', p:'Bequemlichkeit', tip:'Grundpreis von Apfel vs. Apfelschnitzen vergleichen.' },
+  { x:373, y:300, t:'Mogelpackung im Regal', q:'Eine Packung sieht groß aus, ist aber nur halb voll. Worauf solltest du achten?', o:['Auf die Größe der Packung.','Auf die Füllmenge und den Grundpreis am Regalschild.','Auf das Gewicht der leeren Packung.'], c:1, ex:'Oft ist viel weniger drin, als die Packung verspricht. Entscheidend ist die Mengenangabe. Der Grundpreis am Regalschild (Preis pro kg oder Liter, in Deutschland Pflicht) macht Packungen unterschiedlicher Größe vergleichbar.', p:'Täuschung über die Menge', tip:'Immer auf das Kleingedruckte am Regalschild achten.' },
+  { x:236, y:490, t:'Quengelware an der Kasse', q:'Was liegt an der Kasse, und warum gerade dort?', o:['Süßigkeiten, Kaugummi, Batterien: Wer wartet, langweilt sich, und Kinder quengeln.','Nur Ware, die sonst keinen Platz hat.','Pflichtprodukte, die jeder Markt anbieten muss.'], c:0, ex:'Die Regale vor den Kassen stehen ganz bewusst dort: In der Warteschlange kauft man aus Langeweile, Kinder betteln. In der Kassenzone werden bis zu 7 % des Umsatzes erzielt.', p:'Impulskauf · Langeweile', tip:'Blick aufs Handy oder die Einkaufsliste statt aufs Regal.' },
+  { x:618, y:246, t:'Probierstand', q:'Am Probierstand bekommst du gratis ein Stück Käse. Was passiert psychologisch?', o:['Nichts, geschenkt ist geschenkt.','Wir fühlen uns verpflichtet, etwas zurückzugeben, und kaufen eher.','Man wird satt und kauft weniger.'], c:1, ex:'Wer eine kostenlose Probe erhält, empfindet eine Art Dankbarkeit und fühlt sich verpflichtet, das Produkt zu kaufen. Zusätzlich macht der Geschmack Appetit.', p:'Reziprozität', tip:'Probieren ja, aber eine Probe verpflichtet zu nichts.' }
+];
+(function renderMarkt(){
+  const root = $('#markt'); const found = new Set();
+  const svg = '<svg viewBox="0 0 800 560" role="img" aria-label="Grundriss eines Supermarkts mit 17 markierten Stellen">' +
+    '<defs><marker id="arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker></defs>' +
+    '<g style="color:var(--muted)">' +
+    '<path d="M640 540 L20 540 L20 20 L780 20 L780 540 L760 540" fill="var(--surface-2)" stroke="var(--ink)" stroke-width="4"/>' +
+    '<rect x="90" y="32" width="470" height="44" rx="6" fill="#BFE3F2" stroke="#7FB6CF"/><text x="325" y="59" text-anchor="middle" font-size="14" font-weight="700" fill="#245">Kühlwand: Milch · Käse · Wurst</text>' +
+    '<rect x="600" y="32" width="166" height="110" rx="8" fill="#F5D9A8" stroke="#C99A5B"/><text x="683" y="125" text-anchor="middle" font-size="14" font-weight="700" fill="#6b4">Backstation</text>' +
+    '<rect x="32" y="110" width="44" height="300" rx="6" fill="#D6ECD2" stroke="#8DBB86"/><text x="54" y="380" text-anchor="middle" font-size="12" font-weight="700" fill="#363" transform="rotate(-90 54 380)">To-go &amp; Kühlung</text>' +
+    [110,190,270,350,430].map(x => '<rect x="'+x+'" y="140" width="46" height="250" rx="5" fill="var(--surface)" stroke="var(--line)" stroke-width="2"/><rect x="'+(x+4)+'" y="140" width="38" height="14" rx="3" fill="#E8261C" opacity=".85"/>').join('') +
+    '<text x="290" y="410" text-anchor="middle" font-size="12" fill="currentColor">Regalgänge</text>' +
+    '<rect x="618" y="300" width="150" height="150" rx="10" fill="#CDEBC0" stroke="#7FB06A"/><text x="693" y="440" text-anchor="middle" font-size="13" font-weight="700" fill="#363">Obst &amp; Gemüse</text><text x="650" y="330" font-size="22">🍎🥕💐</text>' +
+    '<rect x="500" y="330" width="62" height="34" rx="5" fill="#E8261C"/><text x="531" y="352" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">NUR HEUTE</text>' +
+    '<rect x="560" y="250" width="52" height="34" rx="5" fill="#F7E3B5" stroke="#C99A5B"/><text x="586" y="271" text-anchor="middle" font-size="10" font-weight="700" fill="#653">Probieren</text>' +
+    '<rect x="445" y="410" width="58" height="36" rx="5" fill="#FFD23F"/><text x="474" y="432" text-anchor="middle" font-size="11" font-weight="800" fill="#111">AKTION</text>' +
+    '<rect x="270" y="405" width="72" height="40" rx="5" fill="#F4A259"/><text x="306" y="430" text-anchor="middle" font-size="12" font-weight="800" fill="#111">XXL</text>' +
+    [150,260,370].map(x => '<rect x="'+x+'" y="470" width="70" height="40" rx="5" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/><text x="'+(x+35)+'" y="495" text-anchor="middle" font-size="11" fill="currentColor">Kasse</text><rect x="'+(x+74)+'" y="470" width="20" height="40" rx="3" fill="#F28AB2"/>').join('') +
+    '<line x1="650" y1="470" x2="700" y2="470" stroke="var(--ink)" stroke-width="4"/><text x="700" y="555" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">↑ Eingang</text><text x="300" y="530" text-anchor="middle" font-size="12" fill="currentColor">↓ Ausgang nur über die Kassen</text>' +
+    '<rect x="700" y="492" width="54" height="30" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><text x="727" y="512" text-anchor="middle" font-size="16">🛒</text>' +
+    '<text x="400" y="112" text-anchor="middle" font-size="18">🔊</text><text x="530" y="170" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">🌡 19 °C</text>' +
+    '<path d="M720 470 C720 330 600 280 590 170 L 140 108 C 92 108 92 200 92 300 L 92 430 L 140 455" fill="none" stroke="var(--teal)" stroke-width="3" stroke-dasharray="8 7" marker-end="url(#arr)" style="color:var(--teal)" opacity=".8"/>' +
+    '</g>' +
+    MARKT.map((m,i) => '<g class="hot" tabindex="0" role="button" data-i="'+i+'" aria-label="Stelle '+(i+1)+': '+esc(m.t)+'"><circle cx="'+m.x+'" cy="'+m.y+'" r="16"/><text x="'+m.x+'" y="'+(m.y+5)+'" text-anchor="middle">'+(i+1)+'</text></g>').join('') +
+    '</svg>';
+  root.innerHTML = '<div class="market-wrap"><div class="market">'+svg+'<p class="small muted" style="margin-top:6px">Gestrichelt: der typische Laufweg gegen den Uhrzeigersinn.</p></div><div class="panel" id="mPanel"><p class="pz">Rundgang starten</p><p class="small">Klicke auf eine Nummer im Grundriss. Du bekommst zuerst eine Frage. Wenn du antwortest, erfährst du, welcher Trick dahintersteckt.</p></div></div>';
+  const panel = $('#mPanel');
+  const open = i => {
+    const m = MARKT[i];
+    $$('.hot', root).forEach(h => h.classList.toggle('cur', +h.dataset.i === i));
+    panel.innerHTML = '<p class="pz">Trick '+(i+1)+' von '+MARKT.length+'</p><h4>'+m.t+'</h4><p class="small"><b>'+m.q+'</b></p><div class="q-opts" style="flex-direction:column">'+m.o.map((o,j) => '<button class="opt small" data-j="'+j+'">'+o+'</button>').join('')+'</div><div id="mEx"></div>';
+    $$('.opt', panel).forEach(b => b.onclick = () => {
+      const j = +b.dataset.j;
+      $$('.opt', panel).forEach((x,k) => { x.disabled = true; if(k===m.c) x.classList.add('right'); });
+      if(j !== m.c) b.classList.add('wrong');
+      found.add(i); $('.hot[data-i="'+i+'"]', root).classList.add('found');
+      $('#mEx').innerHTML = '<p class="small" style="margin-top:12px">'+(j===m.c?'✓ ':'✗ ')+m.ex+'</p><span class="princ">'+m.p+'</span><div class="tip"><b>Gegenstrategie:</b> '+m.tip+'</div>' + (found.size < MARKT.length ? '<div class="btn-row"><button class="btn small" id="mNext">Nächster Trick →</button></div>' : '');
+      $('#marktCount').textContent = found.size + ' / ' + MARKT.length + ' entdeckt';
+      if(found.size === MARKT.length){ done('markt'); $('#mEx').insertAdjacentHTML('beforeend','<div class="box merke" style="margin-bottom:0"><strong>Alle 17 Tricks entdeckt!</strong>Beim nächsten Einkauf siehst du den Supermarkt mit anderen Augen.</div>'); }
+      const nx = $('#mNext'); if(nx) nx.onclick = () => { let k = (i+1) % MARKT.length; let guard = 0; while(found.has(k) && guard++ < MARKT.length) k = (k+1) % MARKT.length; open(k); if(window.innerWidth < 980) panel.scrollIntoView({behavior:'smooth', block:'start'}); };
+    });
+  };
+  $$('.hot', root).forEach(h => {
+    h.addEventListener('click', () => { open(+h.dataset.i); if(window.innerWidth < 980) panel.scrollIntoView({behavior:'smooth', block:'start'}); });
+    h.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(+h.dataset.i); } });
+  });
+})();
+
+/* =========================================================
+   K5 – Müsliregal
+   ========================================================= */
+(function(){
+  const root = $('#regal');
+  const rows = [
+    { z:'Reckzone<br><span style="font-weight:400">ab 160 cm</span>', p:[['Haferflocken Basic','1 kg · 1,29 €','1,29 €/kg','#B08D57'],['Früchte-Müsli (Eigenmarke)','750 g · 1,99 €','2,65 €/kg','#C9844B'],['Dinkel-Crisp','500 g · 2,29 €','4,58 €/kg','#9C7A4B']] },
+    { z:'Sichtzone<br><span style="font-weight:400">120–160 cm</span>', p:[['Choco Crunch Deluxe','375 g · 3,99 €','10,64 €/kg','#5B2E12'],['Granola Premium Honig','400 g · 4,49 €','11,23 €/kg','#C8901B'],['Protein-Müsli FIT','350 g · 4,99 €','14,26 €/kg','#1F3A93']] },
+    { z:'Greifzone<br><span style="font-weight:400">80–120 cm</span>', p:[['Knusper-Müsli (Marke)','500 g · 3,29 €','6,58 €/kg','#B23A48'],['Bircher-Müsli','750 g · 3,49 €','4,65 €/kg','#6A994E'],['Kinder-Cerealien mit Comicfigur','375 g · 3,79 €','10,11 €/kg','#F15BB5']] },
+    { z:'Bückzone<br><span style="font-weight:400">unter 80 cm</span>', p:[['Knusper-Müsli (Eigenmarke)','750 g · 1,89 €','2,52 €/kg','#8D6E63'],['Haferflocken XXL','2 kg · 2,69 €','1,35 €/kg','#A1887F'],['Schoko-Müsli (Eigenmarke)','750 g · 2,19 €','2,92 €/kg','#6D4C41']] }
+  ];
+  root.innerHTML = '<div class="shelf" id="shelf">'+rows.map((r,ri) => '<div class="shelf-row"><div class="zone">'+r.z+'</div>'+r.p.map((p,pi) => '<button class="box-prod" style="background:'+p[3]+'" data-r="'+ri+'" data-p="'+pi+'"><b>'+p[0]+'</b><span>'+p[1]+'</span><span class="gp">'+p[2]+'</span></button>').join('')+'</div>').join('')+'</div><div class="q-fb" id="rgFb"></div>';
+  root.addEventListener('click', e => {
+    const b = e.target.closest('.box-prod'); if(!b) return;
+    $$('.box-prod', root).forEach(x => x.classList.toggle('picked', x===b));
+    $('#shelf').classList.add('revealed');
+    const r = +b.dataset.r, fb = $('#rgFb'); fb.className = 'q-fb show neutral';
+    fb.innerHTML = (r===1||r===2 ? '<b>Typisch!</b> Du hast in die '+(r===1?'Sichtzone':'Greifzone')+' gegriffen. Genau dort stehen die Produkte mit der höchsten Gewinnspanne. ' : '<b>Gut gemacht!</b> Du hast die '+(r===0?'Reckzone':'Bückzone')+' gewählt, wo die günstigen Eigenmarken stehen. ') +
+      'Vergleiche die Grundpreise: Das Knusper-Müsli der Marke (Greifzone) kostet <b>6,58 €/kg</b>, das der Eigenmarke (Bückzone) nur <b>2,52 €/kg</b>, also mehr als das 2,5-Fache. Kinderprodukte stehen übrigens gern auf Kinder-Augenhöhe, damit die Kleinen sie sehen und quengeln.';
+    done('regal');
+  });
+})();
+
+/* =========================================================
+   K5 – Forschungsliste
+   ========================================================= */
+(function(){
+  const root = $('#forschung');
+  const list = ['Obst & Gemüse im Eingangsbereich','Gleicher Preis für weniger Menge','Sonderangebote, Aktionen, Schlussverkauf','Großpackungen','Große Preisschilder, bunte Hinweise','Einbahn-Eingang und lange Wege','Musik','Große Einkaufswagen','Angenehme Temperatur','Quengelware im Kassenbereich','Düfte','Teure Artikel auf Augenhöhe','„To go“-Produkte','Aufbauten / Stopper im Gang','Probierstand / Gratisproben'];
+  if(!S.data.tally) S.data.tally = {};
+  const T = S.data.tally;
+  const draw = () => {
+    root.innerHTML = '<div style="margin-bottom:8px"><label class="small"><b>Geschäft:</b> <input class="inline-in" style="width:220px" id="fShop" value="'+esc(T._shop||'')+'" placeholder="Name des Geschäfts"></label></div>' +
+      list.map((l,i) => '<div class="tally"><span>'+l+'</span><button data-i="'+i+'" data-d="-1" aria-label="weniger">−</button><span class="cnt">'+(T[i]||0)+'</span><button data-i="'+i+'" data-d="1" aria-label="mehr">+</button></div>').join('') +
+      '<div class="btn-row"><button class="btn ghost small" id="fPrint">Liste drucken</button><button class="btn ghost small" id="fClear">Zurücksetzen</button></div>';
+  };
+  draw();
+  root.addEventListener('click', e => {
+    const b = e.target.closest('[data-d]');
+    if(b){ const i = +b.dataset.i; T[i] = Math.max(0, (T[i]||0) + (+b.dataset.d)); S.save(); b.parentNode.querySelector('.cnt').textContent = T[i];
+      const sum = list.reduce((s,_,k) => s + (T[k]||0), 0); if(sum >= 5) done('forschung'); return; }
+    if(e.target.id === 'fClear'){ Object.keys(T).forEach(k => delete T[k]); S.save(); draw(); }
+    if(e.target.id === 'fPrint'){
+      printHTML('Forschungsliste Verkaufstricks', '<p><b>Geschäft:</b> '+esc(T._shop||'________________')+' &nbsp; <b>Name:</b> ________________</p><table style="width:100%;border-collapse:collapse;font-size:11pt"><tr><th style="text-align:left;border-bottom:2px solid #000;padding:6px">Verkaufstrick</th><th style="border-bottom:2px solid #000;padding:6px">Entdeckt?</th><th style="border-bottom:2px solid #000;padding:6px">Strichliste</th><th style="border-bottom:2px solid #000;padding:6px">Gesamt</th></tr>' +
+        list.map((l,i) => '<tr><td style="border-bottom:1px solid #999;padding:8px">'+l+'</td><td style="border-bottom:1px solid #999;padding:8px;text-align:center">☐ ja ☐ nein</td><td style="border-bottom:1px solid #999;padding:8px;width:30%"></td><td style="border-bottom:1px solid #999;padding:8px;text-align:center">'+(T[i]||'')+'</td></tr>').join('') + '</table>');
+    }
+  });
+  root.addEventListener('input', e => { if(e.target.id === 'fShop'){ T._shop = e.target.value; S.save(); } });
+})();
+
+/* =========================================================
+   K6 – Profil-Simulation
+   ========================================================= */
+(function(){
+  const root = $('#profil');
+  const B = [
+    { t:'„Laufschuhe Test“ gegoogelt', tags:['sportinteressiert','Kaufabsicht: Schuhe'], ad:'👟 „Nur heute: Laufschuhe −30 %“ auf jeder dritten Website, die du besuchst (Retargeting)' },
+    { t:'Drei Fitness-Influencern gefolgt', tags:['körperbewusst','offen für Vorbilder'], ad:'💪 Proteinpulver mit Influencer-Rabattcode' },
+    { t:'Nachts um 2 Uhr noch auf Shopping-Seiten unterwegs', tags:['Impulskäufer:in','nachts weniger Selbstkontrolle'], ad:'🌙 „Jetzt bestellen, in 30 Tagen bezahlen!“' },
+    { t:'Videos zu „Prüfungsangst“ angesehen', tags:['gestresst','Schüler:in'], ad:'⚡ Energy-Drink „für deine Lernsession“ und ein Nachhilfe-Abo' },
+    { t:'Warenkorb mit Kopfhörern abgebrochen', tags:['Kaufabsicht: Elektronik','preissensibel'], ad:'🎧 E-Mail: „Du hast etwas vergessen! Hier sind 10 % Rabatt.“' },
+    { t:'Standort: oft im Einkaufszentrum', tags:['mobil','kauft auch im Laden'], ad:'📍 Push-Nachricht: „Du bist ganz in der Nähe! Gutschein für unsere Filiale.“' },
+    { t:'Jeden Tag ein Mobile-Game gespielt', tags:['Gamer:in','zahlt für In-App-Käufe'], ad:'💎 „Limitiertes Skin-Paket, nur 24 Stunden!“' }
+  ];
+  root.innerHTML = '<div class="checks" style="flex-direction:column;align-items:flex-start">'+B.map((b,i) => '<label><input type="checkbox" data-i="'+i+'"> '+b.t+'</label>').join('')+'</div><div id="pfOut" style="margin-top:14px"></div>';
+  root.addEventListener('change', () => {
+    const sel = $$('input:checked', root).map(x => B[+x.dataset.i]);
+    if(!sel.length){ $('#pfOut').innerHTML = ''; return; }
+    const tags = [...new Set(sel.flatMap(s => s.tags))];
+    $('#pfOut').innerHTML = '<div class="grid2"><div class="card" style="margin:0;background:var(--ink);color:var(--paper)"><div class="small" style="opacity:.7">Dein Werbeprofil (Beispiel)</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">'+tags.map(t => '<span class="pill" style="background:#ffffff22;color:inherit">'+t+'</span>').join('')+'</div><div class="small" style="margin-top:10px;opacity:.85">Werbetreibende ersteigern in Millisekunden den Werbeplatz vor deinen Augen. Je genauer das Profil, desto teurer.</div></div>' +
+      '<div><b>Diese Werbung bekommst du jetzt:</b>'+sel.map(s => '<div class="dp-item" style="margin-top:6px">'+s.ad+'</div>').join('')+'</div></div>' +
+      (sel.length >= 3 ? '<div class="box warn"><strong>Fällt dir etwas auf?</strong>Das Profil kennt nicht nur deine Interessen, sondern auch deine <b>schwachen Momente</b>: Müdigkeit, Stress, Unsicherheit. Werbung kann genau dann ausgespielt werden, wenn deine Selbstkontrolle am geringsten ist.</div>' : '');
+    if(sel.length >= 3) done('profil');
+  });
+})();
+
+/* =========================================================
+   K6 – Dark-Pattern-Shop
+   ========================================================= */
+const DP = {
+  countdown:{ name:'Fake-Countdown', ex:'Der Countdown erzeugt Zeitdruck. Lädst du die Seite neu, beginnt er wieder bei 09:59. Das Angebot endet gar nicht.', p:'Verlustaversion' },
+  stock:{ name:'Künstliche Verknappung', ex:'„Nur noch 2 Paar“ lässt sich nicht überprüfen und wird oft automatisch angezeigt, egal wie viele es wirklich gibt.', p:'Knappheit' },
+  viewers:{ name:'Aktivitätsmeldung', ex:'„23 Personen sehen sich das gerade an“ erzeugt Konkurrenzdruck und Social Proof. Solche Zahlen sind häufig erfunden oder zufällig generiert.', p:'Social Proof · Knappheit' },
+  strike:{ name:'Mondpreis-Anker', ex:'Der durchgestrichene „Statt“-Preis von 149,99 € wurde vielleicht nie verlangt. Er dient als Anker, damit 89,99 € billig wirkt.', p:'Ankereffekt' },
+  badge:{ name:'Bestseller-Siegel ohne Beleg', ex:'Wer hat das festgestellt? Wie viele wurden verkauft? „Bestseller“ ist ein Werbeversprechen ohne Nachweis.', p:'Social Proof' },
+  care:{ name:'Untergeschobener Artikel', ex:'Das Pflegeset (9,99 €) ist <b>vorausgewählt</b>. Wer nicht aufpasst, kauft es mit („Sneak into Basket“).', p:'Default' },
+  newsletter:{ name:'Vorausgewählte Datenfreigabe', ex:'Newsletter und personalisierte Werbung sind voreingestellt. Datenschutzfreundlich wäre: nichts angekreuzt.', p:'Default' },
+  bnpl:{ name:'„Später bezahlen“', ex:'Bezahlen tut weh, später bezahlen nicht. Der Knopf ist auffällig gestaltet und senkt die Hemmschwelle. Wer die Frist verpasst, zahlt Mahngebühren. Viele Jugendliche verschulden sich so.', p:'Verschiebung des Zahlungsschmerzes' },
+  shipping:{ name:'Versteckte Kosten (Drip Pricing)', ex:'„zzgl. Versand“ steht winzig da. Erst an der Kasse kommen Versand (4,95 €) und eine „Servicegebühr“ (1,99 €) dazu. Wer schon so weit ist, bricht selten ab.', p:'Commitment · Salami-Taktik' },
+  shame:{ name:'Confirmshaming', ex:'„Nein danke, ich zahle gern mehr“: Die Ablehnung wird so formuliert, dass man sich dumm oder schuldig fühlt.', p:'Emotionaler Druck' }
+};
+const DP_FAKE = { size:'Größentabelle: eine sachliche Hilfe, kein Trick.', material:'Materialangabe: eine sachliche Produktinformation.', returns:'30 Tage kostenlose Rückgabe: eine echte Serviceleistung. Prüfe aber trotzdem die Bedingungen.' };
+(function renderShop(){
+  const root = $('#shop'); let flagMode = false, evaluated = false, cdTimer = null, seconds = 599;
+  root.innerHTML = '<div class="btn-row" style="margin:0 0 12px"><button class="btn" id="flagBtn">🚩 Markier-Modus: AUS</button><button class="btn red" id="evalBtn">Auswerten</button><button class="btn ghost small" id="resetShop">Zurücksetzen</button></div>' +
+  '<div class="shop" id="shopEl">' +
+    '<div class="shop-top"><span>KICKZONE</span><span style="font-size:13px;font-weight:400">🔍 &nbsp; ♡ &nbsp; 🛒</span></div>' +
+    '<div class="shop-banner dp" data-dp="countdown">⏰ SUMMER DEAL endet in <b id="cd">09:59</b><span class="flagno">🚩</span></div>' +
+    '<div class="shop-main">' +
+      '<div class="shoe"><span class="dp" data-dp="badge" style="position:absolute;top:12px;left:12px;background:#111;color:#fff;font-size:12px;font-weight:800;padding:3px 8px;border-radius:6px">★ BESTSELLER<span class="flagno">🚩</span></span><svg viewBox="0 0 220 120" width="80%"><path d="M10 90 Q20 60 60 55 L95 30 Q110 25 120 40 L135 60 Q175 62 205 80 Q212 95 200 100 L20 102 Q8 100 10 90Z" fill="#ff4d6d"/><path d="M10 95 L205 95 L203 104 L14 106Z" fill="#fff"/><path d="M70 55 L80 70 M85 47 L95 64 M100 40 L110 58" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg></div>' +
+      '<div>' +
+        '<div style="font-size:13px;color:#666">KICKZONE Running</div><div style="font-size:22px;font-weight:800;margin:2px 0">Aero Run 2</div>' +
+        '<div class="row"><span class="dp" data-dp="strike" style="color:#888">statt <s>149,99 €</s><span class="flagno">🚩</span></span> <span style="font-size:26px;font-weight:900;color:#E8261C">89,99 €</span> <span class="dp" data-dp="shipping" style="font-size:10px;color:#999">inkl. MwSt. zzgl. Versand<span class="flagno">🚩</span></span></div>' +
+        '<div class="row dp" data-dp="viewers" style="font-size:13px;color:#c2410c">🔥 23 Personen sehen sich diesen Artikel gerade an<span class="flagno">🚩</span></div>' +
+        '<div class="row" style="display:flex;gap:6px;flex-wrap:wrap">'+['40','41','42','43','44'].map(s => '<span style="border:1px solid #ccc;border-radius:6px;padding:4px 10px;font-size:13px'+(s==='42'?';border-color:#111;font-weight:800':'')+'">'+s+'</span>').join('')+' <span class="dp" data-dp="size" style="font-size:12px;text-decoration:underline;color:#555;align-self:center">Größentabelle<span class="flagno">🚩</span></span></div>' +
+        '<div class="row dp" data-dp="stock" style="font-size:13px;color:#E8261C;font-weight:700">⚠️ Nur noch 2 Paar in Größe 42!<span class="flagno">🚩</span></div>' +
+        '<div class="row dp" data-dp="material" style="font-size:12px;color:#555">Obermaterial: 70 % recyceltes Polyester<span class="flagno">🚩</span></div>' +
+        '<div class="row dp" data-dp="care"><label><input type="checkbox" id="careCb" checked> Schuhpflege-Set für nur <b>9,99 €</b> hinzufügen</label><span class="flagno">🚩</span></div>' +
+        '<div class="row dp" data-dp="newsletter"><label><input type="checkbox" id="nlCb" checked> Ja, ich möchte Angebote per E-Mail und personalisierte Werbung erhalten</label><span class="flagno">🚩</span></div>' +
+        '<button class="buy" id="buyBtn">In den Warenkorb &amp; zur Kasse</button>' +
+        '<button class="bnpl dp" data-dp="bnpl" id="bnplBtn">Jetzt kaufen – in 30 Tagen bezahlen<span class="flagno">🚩</span></button>' +
+        '<div class="row dp" data-dp="returns" style="font-size:12px;color:#2E7D32;margin-top:10px">✓ 30 Tage kostenlose Rückgabe<span class="flagno">🚩</span></div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="dp" data-dp="shame" style="margin:0 18px 18px;border:2px dashed #E8261C;border-radius:12px;padding:12px;text-align:center"><b>Moment! Sichere dir 10 % Extra-Rabatt mit unserem Newsletter.</b><div style="margin-top:8px"><button style="background:#E8261C;color:#fff;border:0;padding:8px 14px;border-radius:8px;font-weight:800" class="fakebtn">Ja, ich will sparen!</button><br><button style="background:none;border:0;color:#999;font-size:11px;text-decoration:underline;margin-top:4px" class="fakebtn">Nein danke, ich zahle gern mehr.</button></div><span class="flagno">🚩</span></div>' +
+  '</div><div id="shopResult"></div>';
+  const shopEl = $('#shopEl');
+  const tick = () => { seconds--; if(seconds < 0) seconds = 599; const m = Math.floor(seconds/60), s = seconds%60; const cd = $('#cd'); if(cd) cd.textContent = '0'+m+':'+(s<10?'0':'')+s; };
+  cdTimer = setInterval(tick, 1000);
+  $('#flagBtn').onclick = () => { flagMode = !flagMode; shopEl.classList.toggle('flagmode', flagMode); $('#flagBtn').textContent = '🚩 Markier-Modus: ' + (flagMode ? 'AN' : 'AUS'); $('#flagBtn').classList.toggle('red', flagMode); };
+  shopEl.addEventListener('click', e => {
+    if(flagMode){
+      const d = e.target.closest('.dp'); if(!d) return;
+      e.preventDefault(); e.stopPropagation(); if(evaluated) return;
+      d.classList.toggle('flagged'); return;
+    }
+    if(e.target.closest('#buyBtn') || e.target.closest('#bnplBtn')) checkout();
+    if(e.target.closest('.fakebtn')) e.preventDefault();
+  }, true);
+  function checkout(){
+    const care = $('#careCb').checked;
+    const total = 89.99 + (care ? 9.99 : 0) + 4.95 + 1.99;
+    showModal('<div style="font-weight:800;font-size:18px;margin-bottom:10px">Dein Warenkorb</div><table style="width:100%;font-size:14px;text-align:left"><tr><td>Aero Run 2, Gr. 42</td><td style="text-align:right">89,99 €</td></tr>'+(care?'<tr><td>Schuhpflege-Set <span style="color:#E8261C">(vorausgewählt!)</span></td><td style="text-align:right">9,99 €</td></tr>':'')+'<tr><td>Versand</td><td style="text-align:right">4,95 €</td></tr><tr><td>Servicegebühr</td><td style="text-align:right">1,99 €</td></tr><tr><td style="border-top:2px solid #111;font-weight:800;padding-top:6px">Gesamt</td><td style="border-top:2px solid #111;font-weight:800;text-align:right;padding-top:6px">'+fmt(total)+' €</td></tr></table><p style="font-size:13px;color:#666;margin:10px 0">Angezeigt waren 89,99 €, jetzt sind es '+fmt(total)+' €.</p><button class="yes" id="mYes">Kostenpflichtig bestellen</button><br><button class="no" id="mNo">Nein, ich verzichte auf meinen Rabatt und das Angebot</button>');
+    $('#mYes').onclick = () => { showModal('<div style="font-size:40px">✋</div><p style="font-weight:800">Stopp! Das ist nur eine Übung.</p><p style="font-size:14px">Es wurde nichts bestellt. Schalte jetzt den Markier-Modus ein und finde die Tricks.</p><button class="yes" id="mOk">Verstanden</button>'); $('#mOk').onclick = hideModal; };
+    $('#mNo').onclick = () => { showModal('<div style="font-size:40px">😢</div><p style="font-weight:800">Wirklich? Dein exklusiver Summer Deal verfällt dann für immer!</p><button class="yes" id="mBack">Nein, ich will mein Schnäppchen behalten!</button><br><button class="no" id="mLeave">Ja, ich will lieber den vollen Preis zahlen</button><p style="font-size:12px;color:#666;margin-top:12px">Auch das ist ein Trick: <b>Confirmshaming</b>.</p>'); $('#mBack').onclick = hideModal; $('#mLeave').onclick = hideModal; };
+  }
+  $('#evalBtn').onclick = () => {
+    evaluated = true; let found = 0, wrong = 0;
+    $$('.dp', shopEl).forEach(d => {
+      const k = d.dataset.dp, isDP = !!DP[k], f = d.classList.contains('flagged');
+      if(isDP && f) found++;
+      if(isDP && !f) d.classList.add('missed');
+      if(!isDP && f){ wrong++; d.classList.add('wrongflag'); }
+    });
+    const flaggedKeys = new Set($$('.dp.flagged', shopEl).map(d => d.dataset.dp));
+    $('#shopResult').innerHTML = '<div style="margin-top:16px"><span class="score">'+found+' von '+Object.keys(DP).length+' Dark Patterns gefunden</span>'+(wrong?' <span class="small muted">· '+wrong+'× harmlose Information markiert</span>':'')+'</div><div class="dp-list">' +
+      Object.entries(DP).map(([k,v]) => '<div class="dp-item '+(flaggedKeys.has(k)?'found':'miss')+'"><b>'+(flaggedKeys.has(k)?'✓ ':'○ übersehen: ')+v.name+'</b> <span class="princ">'+v.p+'</span><br><span class="small">'+v.ex+'</span></div>').join('') +
+      Object.entries(DP_FAKE).filter(([k]) => flaggedKeys.has(k)).map(([k,v]) => '<div class="dp-item"><b>✗ Kein Trick:</b> <span class="small">'+v+'</span></div>').join('') +
+      '</div><p class="small muted" style="margin-top:10px">Orange gestrichelt im Shop: übersehene Tricks. Grau: fälschlich markiert.</p>';
+    done('shop');
+  };
+  $('#resetShop').onclick = () => { clearInterval(cdTimer); renderShop(); };
+})();
+function showModal(html){ $('#modal').innerHTML = html; $('#modalBack').classList.add('show'); }
+function hideModal(){ $('#modalBack').classList.remove('show'); }
+$('#modalBack').addEventListener('click', e => { if(e.target.id === 'modalBack') hideModal(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') hideModal(); });
+
+/* =========================================================
+   K7 – Nudge oder kein Nudge
+   ========================================================= */
+quizList('nudgeornot', [
+  { q:'Vergünstigte Monatskarten für den öffentlichen Nahverkehr.', correct:1, explain:'Kein Nudge: Es handelt sich um einen <b>ökonomischen Anreiz</b> (Geld). Nudges verändern die Entscheidungsarchitektur, nicht die Preise.' },
+  { q:'Das vegetarische Gericht steht in der Mensa ganz oben auf der Speisekarte.', correct:0, explain:'Nudge: Die Reihenfolge lenkt die Aufmerksamkeit. Alle Gerichte bleiben wählbar, nichts wird teurer.' },
+  { q:'In der Kantine gibt es fleischfreie Tage.', correct:1, explain:'Kein Nudge: Eine Option (Fleisch) wird <b>ausgeschlossen</b>. Das ist ein Verbot bzw. eine Einschränkung.' },
+  { q:'Die Standardeinstellung des Druckers ist doppelseitiger Druck.', correct:0, explain:'Nudge (Default): Wer einseitig drucken will, kann es mit einem Klick ändern. Die meisten bleiben aber beim Standard.' },
+  { q:'Ein Mitarbeiter erhält zur Steigerung der Motivation 10 % mehr Gehalt.', correct:1, explain:'Kein Nudge: Das ist ein starker <b>finanzieller Anreiz</b>.' },
+  { q:'Ein Schild am Aufzug zeigt, wie viele Kalorien Treppensteigen verbrennt.', correct:0, explain:'Nudge: Eine Information im richtigen Moment, und der Aufzug bleibt verfügbar.' },
+  { q:'Widerspruchslösung bei der Organspende: Wer nicht ausdrücklich widerspricht, gilt als Spender.', correct:0, explain:'Nudge (Default), aber hoch umstritten. In Österreich gilt diese Regel, in Deutschland wird seit Jahren darüber diskutiert. Kritiker wie Hanno Beck sehen darin großen sozialen Druck auf alle, die widersprechen.' },
+  { q:'Ein Cookie-Banner: „Alle akzeptieren“ als großer bunter Button, „Ablehnen“ versteckt in den Einstellungen.', correct:1, explain:'Kein Nudge im Sinne von Thaler/Sunstein: Die Gestaltung dient <b>nicht dem Interesse der Nutzerinnen und Nutzer</b> und ist nicht leicht zu umgehen. Das ist „Sludge“ bzw. ein Dark Pattern, „Nudging for Evil“.' }
+], 'nudgeornot', { options:['Nudge','Kein Nudge'] });
+
+/* =========================================================
+   K7 – Matrix
+   ========================================================= */
+(function(){
+  const root = $('#matrix');
+  const Q = { 1:'Offen · nützt mir', 2:'Verdeckt · nützt mir', 3:'Offen · nützt Anbieter', 4:'Verdeckt · nützt Anbieter' };
+  const QN = { 1:'Transparenter Nudge', 2:'Klassischer Nudge (umstritten)', 3:'Offene Werbung', 4:'Manipulation / Dark Pattern' };
+  const QC = { 1:'var(--green-soft)', 2:'var(--teal-soft)', 3:'var(--yellow-soft)', 4:'var(--red-soft)' };
+  const items = [
+    { t:'Eisbären-Duschkopf zeigt den Energieverbrauch', q:1, ex:'Sichtbares Feedback, das beim Sparen hilft und das man jederzeit ignorieren kann.' },
+    { t:'Schild am Aufzug: „Treppe = gesünder“', q:1, ex:'Offener Hinweis im eigenen Interesse.' },
+    { t:'Obst in der Mensa auf Augenhöhe', q:2, ex:'Wirkt eher unbemerkt, soll aber der eigenen Gesundheit dienen. Ein klassischer Nudge, über den man streiten kann.' },
+    { t:'Drucker ist auf doppelseitig voreingestellt', q:2, ex:'Den Default bemerkt man kaum. Er spart Papier, Geld und Ressourcen.' },
+    { t:'Werbespot im TV, als Werbung gekennzeichnet', q:3, ex:'Jeder weiß, dass es Werbung ist. Ziel ist der Verkauf, also der Nutzen des Anbieters.' },
+    { t:'Großes Schild „3 für 2“', q:3, ex:'Offen kommuniziertes Angebot, das aber Mehrkäufe auslösen soll.' },
+    { t:'Vorausgewählte Zusatzversicherung im Onlineshop', q:4, ex:'Versteckt untergeschoben und gegen das Interesse der Kunden: ein Dark Pattern.' },
+    { t:'Duftöl in der Bäckereiabteilung', q:4, ex:'Wirkt unbewusst und soll mehr Umsatz bringen.' },
+    { t:'Cookie-Banner mit großem „Alle akzeptieren“', q:4, ex:'Die Gestaltung drängt zur Datenfreigabe. Ablehnen wird absichtlich mühsam gemacht.' }
+  ];
+  const ans = {};
+  root.innerHTML = items.map((it,i) => '<div class="q-item" data-i="'+i+'"><div class="q-text">'+it.t+'</div><div class="q-opts">'+[1,2,3,4].map(q => '<button class="opt small" data-q="'+q+'">'+Q[q]+'</button>').join('')+'</div></div>').join('') + '<div id="mxOut"></div>';
+  root.addEventListener('click', e => {
+    const b = e.target.closest('.opt'); if(!b) return;
+    const item = b.closest('.q-item'), i = +item.dataset.i;
+    ans[i] = +b.dataset.q; $$('.opt', item).forEach(x => x.classList.toggle('sel', x===b));
+    if(Object.keys(ans).length === items.length) show();
+  });
+  function show(){
+    let ok = 0;
+    const cell = q => '<div class="mq" style="background:'+QC[q]+'"><h5>'+QN[q]+'</h5><div class="dots">'+items.map((it,i) => it.q===q ? '<span class="dot" title="'+esc(it.ex)+'">'+(ans[i]===q?'✓ ':'✗ ')+esc(it.t)+'</span>' : '').join('')+'</div></div>';
+    items.forEach((it,i) => { if(ans[i]===it.q) ok++; });
+    $('#mxOut').innerHTML = '<h4 style="margin-top:18px">Vorschlag zur Einordnung <span class="score">'+ok+' von '+items.length+' wie im Vorschlag</span></h4>' +
+      '<div class="matrix"><div class="ax-y"><span>verdeckt</span><span>erkennbar</span></div>'+cell(1)+cell(3)+cell(2)+cell(4)+'<div class="ax-x"><span>← nützt mir</span><span>nützt dem Anbieter →</span></div></div>' +
+      '<div class="dp-list">'+items.map((it,i) => '<div class="dp-item '+(ans[i]===it.q?'found':'miss')+'"><b>'+esc(it.t)+'</b> → '+QN[it.q]+'<br><span class="small">'+it.ex+'</span></div>').join('')+'</div>' +
+      '<p class="small muted" style="margin-top:10px">Die Einordnung ist nicht immer eindeutig. Gerade darüber lohnt es sich zu diskutieren.</p>';
+    done('matrix');
+  }
+})();
+
+/* =========================================================
+   K7 – Debatte
+   ========================================================= */
+(function(){
+  const host = $('#debatte');
+  host.innerHTML = '<div id="debQ"></div><div id="debPos" style="display:none;margin-top:20px"><h4>Und du? Wo stehst du?</h4><div style="display:flex;justify-content:space-between" class="small muted"><span>Nudging ist Bevormundung</span><span>Nudging ist ein sinnvoller Stups</span></div><input type="range" min="0" max="100" value="50" id="debR" aria-label="Position"><label class="small"><b>Begründe deine Position mit mindestens zwei Argumenten:</b><textarea id="debT" rows="4" style="width:100%;padding:8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);margin-top:4px"></textarea></label><div class="btn-row"><button class="btn ghost small" id="debPrint">Position drucken</button></div></div>';
+  quizList('debQ', [
+    { q:'„Die Wahlfreiheit bleibt vollständig erhalten. Niemand wird zu etwas gezwungen.“', correct:0, explain:'Pro: Das ist das „libertäre“ Element des Konzepts.' },
+    { q:'„Woher soll der Staat wissen, was für mich das Beste ist?“', correct:1, explain:'Contra: Kernargument von Hanno Beck. Es kann viele gute Gründe für eine scheinbar „falsche“ Entscheidung geben.' },
+    { q:'„Menschen handeln oft gegen ihre eigenen Ziele. Nudges helfen, die Lücke zwischen Absicht und Verhalten zu schließen.“', correct:0, explain:'Pro: Viele wollen gesünder leben oder Energie sparen, schaffen es aber im Alltag nicht.' },
+    { q:'„Nudges wirken unbewusst, an unserem Verstand vorbei. Das ist Manipulation.“', correct:1, explain:'Contra: Kritiker sehen darin eine Verletzung der Autonomie, ja sogar der Menschenwürde.' },
+    { q:'„Green Nudging ist günstig und kommt ohne neue Verbote oder Steuern aus.“', correct:0, explain:'Pro: „Nudging ist ein schlankes Instrument für Klimaschutz, da muss kein großes Rad gedreht werden“ (Stehmeier).' },
+    { q:'„Wer einmal anfängt, Menschen zu ihrem Glück zu stupsen, landet auf einem abschüssigen Hang, bis hin zur Glücksdiktatur.“', correct:1, explain:'Contra: Das „Slippery-Slope“-Argument von Hanno Beck.' },
+    { q:'„Eine Entscheidungsarchitektur gibt es sowieso. Irgendein Gericht steht immer oben auf der Karte. Dann besser bewusst gestalten.“', correct:0, explain:'Pro: Thaler und Sunstein argumentieren, dass es keine „neutrale“ Gestaltung gibt.' },
+    { q:'„Wer bei der Organspende-Widerspruchslösung ‚Nein‘ sagt, gerät unter sozialen Druck.“', correct:1, explain:'Contra: Ein Default kann gesellschaftlichen Erwartungsdruck erzeugen.' },
+    { q:'„Die Eisbären-Dusche spart nachweislich rund 22 % Energie.“', correct:0, explain:'Pro: Nudges haben messbare Wirkungen.' },
+    { q:'„Unternehmen nutzen dieselben Techniken gegen die Interessen ihrer Kunden.“', correct:1, explain:'Contra: Das Konzept kann leicht zum „Nudging for Evil“ werden, etwa bei Dark Patterns.' }
+  ], 'debatte', { options:['Pro Nudging','Contra Nudging'], summary:() => { $('#debPos').style.display = 'block'; return ''; } });
+  host.addEventListener('click', e => {
+    if(e.target.id !== 'debPrint') return;
+    const v = +$('#debR').value;
+    printHTML('Meine Position zum Nudging', '<p><b>Name:</b> ________________</p><p><b>Position auf der Skala</b> (0 = Bevormundung, 100 = sinnvoller Stups): <b>'+v+'</b></p><div style="border:1px solid #999;height:14px;position:relative;margin:6px 0 18px"><div style="position:absolute;left:'+v+'%;top:-4px;width:4px;height:22px;background:#000"></div></div><p><b>Begründung:</b></p><p style="white-space:pre-wrap;border:1px solid #ccc;padding:10px;min-height:120px">'+esc($('#debT').value || '')+'</p>');
+  });
+})();
+
+/* =========================================================
+   K8 – Abschlussquiz (Stepper)
+   ========================================================= */
+const FINAL = [
+  { q:'Welche Maßnahme gehört zum <b>operativen</b> Marketing?', o:['SWOT-Analyse','Festlegung der Zielgruppe für die nächsten fünf Jahre','Preisaktion „3 für 2“ im Mai','Portfolioanalyse'], c:2, ex:'Operatives Marketing ist kurzfristig und konkret: die Instrumente des Marketing-Mix. Die anderen drei sind strategisch.' },
+  { q:'Wofür steht das „D“ im AIDA-Modell?', o:['Decision','Desire','Distribution','Demand'], c:1, ex:'Desire, der Kaufwunsch. Die Reihenfolge ist Attention, Interest, Desire, Action.' },
+  { q:'Eine Influencerin zeigt ein Produkt mit Rabattcode, ohne „Werbung“ zu schreiben. Das ist …', o:['erlaubt, solange sie es selbst gut findet','unzulässige Schleichwerbung','ein Advertorial','Product-Placement im rechtlichen Sinne'], c:1, ex:'Der Rabattcode zeigt ein kommerzielles Interesse. Ohne Kennzeichnung ist das Schleichwerbung.' },
+  { q:'Warum stehen Grundnahrungsmittel wie Milch oft ganz hinten im Supermarkt?', o:['Wegen der Kühlung','Damit Kunden an vielen Regalen vorbeilaufen und spontan mehr kaufen','Aus Platzgründen','Weil es gesetzlich vorgeschrieben ist'], c:1, ex:'Lange Wege bedeuten mehr Kontakte mit Produkten und mehr Impulskäufe.' },
+  { q:'500 g für 1,40 € oder 1 kg für 2,90 €. Was ist günstiger?', o:['Die 1-kg-Packung','Die 500-g-Packung','Beide kosten gleich viel','Das lässt sich nicht berechnen'], c:1, ex:'500 g für 1,40 € entspricht 2,80 €/kg, die Großpackung kostet 2,90 €/kg.' },
+  { q:'Der Ankereffekt beschreibt, dass …', o:['Kunden immer wieder in denselben Laden zurückkehren','wir uns stark an der ersten Zahl orientieren, die wir sehen','Produkte am Regal befestigt werden','Werbespots am Anfang des Werbeblocks am besten wirken'], c:1, ex:'Statt-Preise und UVP setzen einen Anker, neben dem der Verkaufspreis günstig wirkt.' },
+  { q:'Welches Prinzip nutzt ein Stand mit Gratisproben?', o:['Knappheit','Reziprozität','Autorität','Ankereffekt'], c:1, ex:'Reziprozität: Wer etwas geschenkt bekommt, fühlt sich verpflichtet, etwas zurückzugeben.' },
+  { q:'Ein Countdown, der nach dem Neuladen wieder bei 09:59 beginnt, ist …', o:['ein Default','ein Dark Pattern (falscher Zeitdruck)','ein Nudge im Sinne von Thaler/Sunstein','Retargeting'], c:1, ex:'Falscher Zeitdruck soll über Verlustaversion zu einer schnellen Entscheidung drängen.' },
+  { q:'Welche Maßnahme ist ein Nudge nach Thaler und Sunstein?', o:['Verbot von Süßigkeiten in Schulen','Zuckersteuer','Obst auf Augenhöhe in der Mensa','10 % Gehaltsbonus für gesunde Ernährung'], c:2, ex:'Keine Option wird ausgeschlossen, und es gibt keinen finanziellen Anreiz. Nur die Anordnung ändert sich.' },
+  { q:'„Libertärer Paternalismus“ bedeutet, dass …', o:['der Staat ungesundes Verhalten verbietet','der Staat sanft lenkt, die Wahlfreiheit aber erhalten bleibt','Unternehmen für ihre Kunden entscheiden','der Staat auf jeden Einfluss verzichtet'], c:1, ex:'„Libertär“ heißt, die Freiheit bleibt. „Paternalistisch“ heißt, jemand gibt eine Richtung vor.' },
+  { q:'System 1 nach Kahneman ist …', o:['langsam, logisch und anstrengend','schnell, automatisch und intuitiv','ein Instrument des Marketing-Mix','die strategische Planungsebene'], c:1, ex:'System 1 trifft die meisten Alltagsentscheidungen, und genau dort setzt Werbung an.' },
+  { q:'Was ist die zentrale Kritik von Hanno Beck am Nudging?', o:['Nudging ist zu teuer','Nudges wirken überhaupt nicht','Der Staat maßt sich an zu wissen, was gut für die Menschen ist (Bevormundung)','Nur Unternehmen sollten Nudges einsetzen dürfen'], c:2, ex:'Beck warnt vor Bevormundung mit psychologischen Tricks und im Extremfall vor einer „Glücksdiktatur“.' }
+];
+(function(){
+  const root = $('#final'); let i = 0, res = [];
+  const draw = () => {
+    if(i >= FINAL.length){
+      const ok = res.filter(Boolean).length;
+      const grade = ok >= 11 ? 'Hervorragend, du hast die Mechanismen der Werbung durchschaut!' : ok >= 8 ? 'Gut gemacht! Ein paar Lücken kannst du in den Kapiteln schließen.' : 'Schau dir die Kapitel noch einmal an. Du schaffst das!';
+      root.innerHTML = '<div class="qs-progress">'+FINAL.map((_,k) => '<i class="'+(res[k]?'ok':'no')+'"></i>').join('')+'</div><div class="center"><div class="big-num">'+ok+' / '+FINAL.length+'</div><p>'+grade+'</p></div>' +
+        '<details><summary class="small"><b>Alle Antworten ansehen</b></summary>'+FINAL.map((f,k) => '<p class="small" style="margin:10px 0"><b>'+(k+1)+'. '+f.q+'</b><br>'+(res[k]?'✓':'✗')+' '+f.o[f.c]+'. '+f.ex+'</p>').join('')+'</details>' +
+        '<div class="btn-row"><button class="btn ghost small" id="fqRe">Quiz wiederholen</button></div>';
+      $('#fqRe').onclick = () => { i = 0; res = []; draw(); };
+      done('final'); return;
+    }
+    const f = FINAL[i];
+    root.innerHTML = '<div class="qs-progress">'+FINAL.map((_,k) => '<i class="'+(k<i?(res[k]?'ok':'no'):(k===i?'cur':''))+'"></i>').join('')+'</div><p class="small muted">Frage '+(i+1)+' von '+FINAL.length+'</p><div class="q-text" style="font-size:1.1rem">'+f.q+'</div><div class="q-opts" style="flex-direction:column">'+f.o.map((o,j) => '<button class="opt" data-j="'+j+'">'+o+'</button>').join('')+'</div><div class="q-fb" id="fqFb"></div>';
+    $$('.opt', root).forEach(b => b.onclick = () => {
+      const j = +b.dataset.j, ok = j === f.c; res[i] = ok;
+      $$('.opt', root).forEach((x,k) => { x.disabled = true; if(k===f.c) x.classList.add('right'); });
+      if(!ok) b.classList.add('wrong');
+      const fb = $('#fqFb'); fb.className = 'q-fb show '+(ok?'ok':'no'); fb.innerHTML = '<b>'+(ok?'Richtig. ':'Nicht ganz. ')+'</b>'+f.ex+'<div class="btn-row"><button class="btn small" id="fqNext">'+(i===FINAL.length-1?'Ergebnis anzeigen':'Nächste Frage →')+'</button></div>';
+      $('#fqNext').onclick = () => { i++; draw(); };
+    });
+  };
+  draw();
+})();
+
+/* =========================================================
+   K8 – Werbeanalyse-Bogen
+   ========================================================= */
+(function(){
+  const root = $('#analyse');
+  const emos = ['Freiheit','Zugehörigkeit','Sicherheit','Genuss','Erfolg & Ansehen','Schönheit','Kindchenschema','Humor','Angst'];
+  const prs = ['Reziprozität','Ankereffekt','Verlustaversion','Social Proof','Knappheit','Autorität','Sympathie','Farbpsychologie','Storytelling','Priming','Kostenlos-Effekt','Testimonial / Influencer','Wiederholung / Jingle'];
+  const sel4 = (id, label, a, b) => '<label>'+label+'<select id="'+id+'"><option value="">–</option><option value="0">'+a+'</option><option value="0.5">teils</option><option value="1">'+b+'</option></select></label>';
+  root.innerHTML = '<div class="form-grid">' +
+    '<label>Produkt / Marke<input id="aP" placeholder="z. B. Sportschuh von …"></label>' +
+    '<label>Werbemittel &amp; Werbeträger<input id="aM" placeholder="z. B. Video-Ad auf TikTok"></label>' +
+    '<label class="full">Zielgruppe (Alter, Interessen, Lebensstil) – woran erkennst du sie?<input id="aZ"></label>' +
+    '<label>A – Attention: Womit wird Aufmerksamkeit erregt?<textarea id="a1" rows="2"></textarea></label>' +
+    '<label>I – Interest: Wie wird Interesse geweckt?<textarea id="a2" rows="2"></textarea></label>' +
+    '<label>D – Desire: Welcher Wunsch wird erzeugt?<textarea id="a3" rows="2"></textarea></label>' +
+    '<label>A – Action: Wozu wird aufgefordert?<textarea id="a4" rows="2"></textarea></label>' +
+    '<div class="full"><b class="small">Welche Gefühle werden angesprochen?</b><div class="checks" id="aE">'+emos.map(e => '<label><input type="checkbox" value="'+e+'"> '+e+'</label>').join('')+'</div></div>' +
+    '<div class="full"><b class="small">Welche psychologischen Prinzipien erkennst du?</b><div class="checks" id="aPr">'+prs.map(e => '<label><input type="checkbox" value="'+e+'"> '+e+'</label>').join('')+'</div></div>' +
+    '<label class="full">Welche Informationen über das Produkt selbst (Preis, Qualität, Inhalt) enthält die Werbung?<textarea id="aI" rows="2"></textarea></label>' +
+    '<div class="full"><b class="small">Die vier Prüffragen</b></div>' +
+    sel4('q1','1. Ist die Beeinflussung erkennbar?','ja, klar erkennbar','nein, verdeckt') +
+    sel4('q2','2. Spricht sie den Verstand an?','ja, bewusst','nein, unbewusst') +
+    sel4('q3','3. Wem nützt sie?','eher mir','eher dem Anbieter') +
+    sel4('q4','4. Kann ich leicht anders entscheiden?','ja, kein Druck','nein, Druck') +
+    '<label class="full">Fazit: Wie manipulativ ist diese Werbung? Begründe.<textarea id="aF" rows="3"></textarea></label>' +
+    '</div><div id="aIdx" style="margin-top:12px"></div><div class="btn-row"><button class="btn red" id="aPrint">Analyse drucken / als PDF speichern</button></div>';
+  const idx = () => {
+    const vals = ['q1','q2','q3','q4'].map(id => $('#'+id).value).filter(v => v !== '');
+    if(vals.length < 4){ $('#aIdx').innerHTML = ''; return null; }
+    const s = vals.reduce((a,b) => a + Number(b), 0);
+    const lvl = s <= 1 ? ['eher informativ','var(--green)'] : s <= 2.5 ? ['beeinflussend','#E0A100'] : ['stark manipulativ','var(--red)'];
+    $('#aIdx').innerHTML = '<div class="card" style="margin:0"><b>Manipulations-Einschätzung:</b> '+s+' von 4 Punkten → <b style="color:'+lvl[1]+'">'+lvl[0]+'</b><div class="progress" style="margin-top:8px"><i style="width:'+(s/4*100)+'%;background:'+lvl[1]+'"></i></div></div>';
+    return [s, lvl[0]];
+  };
+  root.addEventListener('change', idx);
+  $('#aPrint').onclick = () => {
+    const v = id => esc($('#'+id).value || '');
+    const checked = id => $$('#'+id+' input:checked').map(x => x.value).join(', ') || '–';
+    const r = idx();
+    const filled = ['aP','aM','aZ','a1','a2','a3','a4','aF'].filter(id => $('#'+id).value.trim()).length;
+    if(filled >= 4) done('analyse');
+    const row = (k, val) => '<tr><td style="border:1px solid #999;padding:6px;width:32%;vertical-align:top"><b>'+k+'</b></td><td style="border:1px solid #999;padding:6px;white-space:pre-wrap">'+(val||'&nbsp;')+'</td></tr>';
+    const qs = ['q1','q2','q3','q4'].map(id => { const s = $('#'+id); return s.options[s.selectedIndex].text; });
+    printHTML('Werbeanalyse', '<p><b>Name:</b> ________________</p><table style="border-collapse:collapse;width:100%;font-size:11pt">' +
+      row('Produkt / Marke', v('aP')) + row('Werbemittel & -träger', v('aM')) + row('Zielgruppe', v('aZ')) +
+      row('A – Attention', v('a1')) + row('I – Interest', v('a2')) + row('D – Desire', v('a3')) + row('A – Action', v('a4')) +
+      row('Angesprochene Gefühle', checked('aE')) + row('Psychologische Prinzipien', checked('aPr')) + row('Sachinformationen', v('aI')) +
+      row('Prüffragen', '1. Erkennbar: '+qs[0]+'\n2. Verstand: '+qs[1]+'\n3. Nutzen: '+qs[2]+'\n4. Ausweg: '+qs[3]) +
+      row('Einschätzung', r ? r[0]+' / 4 Punkte – '+r[1] : '–') + row('Fazit', v('aF')) + '</table>');
+  };
+})();
+
+/* =========================================================
+   K8 – Schutzschild
+   ========================================================= */
+(function(){
+  const root = $('#schild');
+  const L = ['Mit Einkaufsliste einkaufen und mich daran halten.','Nie hungrig einkaufen.','Korb statt Wagen, wenn ich nur wenig brauche.','Den Grundpreis (€/kg) vergleichen statt der Packungsgröße.','Bücken und Strecken: Reck- und Bückzone checken.','„Statt“-Preise und UVP hinterfragen und woanders vergleichen.','24-Stunden-Regel: Bei Spontanwünschen über 20 € eine Nacht drüber schlafen.','Countdowns und „Nur noch 2 auf Lager“ ignorieren, meist sind sie inszeniert.','Vorausgewählte Häkchen im Checkout immer prüfen.','Bei Influencer-Posts nach „Werbung/Anzeige“ und Rabattcodes suchen.','Personalisierte Werbung und Tracking in Apps und Browser einschränken.','„Später bezahlen“ meiden und die Kosten jetzt ehrlich durchrechnen.','„Bitte keine Werbung“-Aufkleber an den Briefkasten.','Mich fragen: Brauche ich das, oder will ich nur ein Gefühl kaufen?'];
+  if(!S.data.schild) S.data.schild = [];
+  const sel = new Set(S.data.schild);
+  root.innerHTML = '<div class="checks" style="flex-direction:column;align-items:flex-start">'+L.map((l,i) => '<label><input type="checkbox" data-i="'+i+'"'+(sel.has(i)?' checked':'')+'> '+l+'</label>').join('')+'</div><p id="shCnt" class="small muted" style="margin-top:8px"></p><div class="btn-row"><input class="inline-in" id="shName" placeholder="Dein Name" style="width:200px"><button class="btn red" id="shPrint">Schutzschild drucken</button></div>';
+  const upd = () => { $('#shCnt').textContent = sel.size + ' Strategien gewählt' + (sel.size < 5 ? ' (mindestens 5)' : ' ✓'); if(sel.size >= 5) done('schild'); };
+  root.addEventListener('change', e => { const c = e.target.closest('input[type=checkbox]'); if(!c) return; const i = +c.dataset.i; c.checked ? sel.add(i) : sel.delete(i); S.data.schild = [...sel]; S.save(); upd(); });
+  $('#shPrint').onclick = () => {
+    const name = esc($('#shName').value || '________________');
+    printHTML('Mein Schutzschild gegen Manipulation', '<div style="border:4px solid #000;border-radius:0 0 50% 50% / 0 0 30% 30%;padding:24px 28px 60px"><p style="font-size:13pt">Ich, <b>'+name+'</b>, nehme mir vor:</p><ol style="font-size:12pt;line-height:1.7">'+[...sel].sort((a,b)=>a-b).map(i => '<li>'+L[i]+'</li>').join('')+'</ol><p style="margin-top:30px">Unterschrift: ______________________</p></div>');
+  };
+  upd();
+})();
+
+/* ---------------- Start ---------------- */
+allIA.forEach(k => { if(S.data.done[k]){ const c = document.querySelector('[data-ia="'+k+'"]'); if(c) c.classList.add('is-done'); } });
+updateProgress();
+route();
+})();
+</script>
+</body></html>
